@@ -12,6 +12,11 @@ public class StateMachine {
 
     private static List<Transition> EmptyTransitions = new List<Transition>(0);
 
+    /**
+     * Initialize the state machine by setting its initial state.
+     * If you have anyTransitions, you can skip this init. But the state machine
+     * won't do anything until one of the anyTransition conditions is met.
+     */
     public void Init(IState initialState) {
         SetState(initialState);
     }
@@ -25,6 +30,10 @@ public class StateMachine {
         
         // Tick current state
         _currentState.Tick();
+    }
+    
+    public void FixedTick() {
+        _currentState.FixedTick();
     }
 
     private Transition getTransition() {
