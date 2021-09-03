@@ -7,15 +7,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     private StateMachine _stateMachine = new StateMachine();
 
+    [SerializeField] private Animator playerSpriteAnimator;
     [SerializeField] private float speed;
     public float Speed {
         get => speed;
-        private set => speed = value;
     }
-    
+
+    public Vector2 Facing { get; set; }
+
     private void Awake() {
-        IState idle = new PlayerStateIdle();
-        IState moving = new PlayerStateMoving(this);
+        IState idle = new PlayerStateIdle(playerSpriteAnimator);
+        IState moving = new PlayerStateMoving(this, playerSpriteAnimator);
         
         _stateMachine.AddTransition(idle, moving,
             () => Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0);
