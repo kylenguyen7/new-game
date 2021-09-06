@@ -3,14 +3,16 @@ using UnityEngine;
 namespace _Game.Player.PlayerStates {
     public class PlayerStateMoving : IState {
         private PlayerController _playerController;
-        private Animator _animator;
         private Rigidbody2D _rb;
-
+        private BowController _bowController;
+        private Animator _animator;
+        
         private Vector2 _direction;
 
-        public PlayerStateMoving(PlayerController playerController, Animator animator) {
+        public PlayerStateMoving(PlayerController playerController, Rigidbody2D rb, BowController bowController, Animator animator) {
             _playerController = playerController;
-            _rb = playerController.GetComponent<Rigidbody2D>();
+            _rb = rb;
+            _bowController = bowController;
             _animator = animator;
         }
 
@@ -21,7 +23,7 @@ namespace _Game.Player.PlayerStates {
         
         public void FixedTick() {
             UpdateFacing();
-            _rb.velocity = _direction.normalized * _playerController.Speed;
+            _rb.velocity = _direction.normalized * _playerController.Speed + _bowController.Pull;
         }
 
         private void UpdateFacing() {
@@ -33,12 +35,12 @@ namespace _Game.Player.PlayerStates {
                 _playerController.Facing = new Vector2(0, 1);
             }
             
-            _animator.SetFloat("facingX", _playerController.Facing.x);
-            _animator.SetFloat("facingY", _playerController.Facing.y);
+            // _animator.SetFloat("facingX", _playerController.Facing.x);
+            // _animator.SetFloat("facingY", _playerController.Facing.y);
         }
 
         public void OnEnter() {
-            _animator.SetTrigger("moving"); 
+            //_animator.SetTrigger("moving"); 
         }
 
         public void OnExit() {
