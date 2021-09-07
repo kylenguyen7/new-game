@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CyclopsController : MonoBehaviour {
+public class CyclopsController : Pullable {
     private Vector2 movement;
     private Rigidbody2D _rb;
     [SerializeField] private float _speed;
@@ -20,7 +20,7 @@ public class CyclopsController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        _rb.velocity = movement * _speed;
+        _rb.velocity = movement * _speed + CalculatePull();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {

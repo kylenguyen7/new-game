@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using _Game.Player.PlayerStates;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : Pullable {
     private StateMachine _stateMachine = new StateMachine();
 
     [SerializeField] private Rigidbody2D _rb;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
     public Vector2 Facing { get; set; }
 
     private void Awake() {
-        IState idle = new PlayerStateIdle(_rb, _bowController, _playerSpriteAnimator);
+        IState idle = new PlayerStateIdle(this, _rb, _playerSpriteAnimator);
         IState moving = new PlayerStateMoving(this, _rb, _bowController, _playerSpriteAnimator);
         
         _stateMachine.AddTransition(idle, moving,

@@ -33,15 +33,15 @@ public class SpearController : MonoBehaviour {
     }
 
     private void Start() {
-        _spearBarbController.onHitSomething += HandleCollision;
+        _spearBarbController.onHitSomething += HandlePullableCollision;
         Invoke("DestroyMe", _despawnTime);
     }
 
-    private void HandleCollision(Rigidbody2D hit) {
+    private void HandlePullableCollision(Pullable pullable) {
         _rb.velocity = Vector2.zero;
         _rb.mass = 0;
         _fixedJoint2D.enabled = true;
-        _fixedJoint2D.connectedBody = hit;
+        _fixedJoint2D.connectedBody = pullable.gameObject.GetComponent<Rigidbody2D>();
         _spriteRenderer.sortingOrder = -1;
         CancelInvoke("DestroyMe");
     }

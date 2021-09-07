@@ -23,7 +23,7 @@ namespace _Game.Player.PlayerStates {
         
         public void FixedTick() {
             UpdateFacing();
-            _rb.velocity = _direction.normalized * _playerController.Speed + _bowController.Pull;
+            _rb.velocity = _direction.normalized * _playerController.Speed + _playerController.CalculatePull();
         }
 
         private void UpdateFacing() {
@@ -35,12 +35,12 @@ namespace _Game.Player.PlayerStates {
                 _playerController.Facing = new Vector2(0, 1);
             }
             
-            // _animator.SetFloat("facingX", _playerController.Facing.x);
-            // _animator.SetFloat("facingY", _playerController.Facing.y);
+            _animator.SetFloat("facingX", _playerController.Facing.x);
+            _animator.SetFloat("facingY", _playerController.Facing.y);
         }
 
         public void OnEnter() {
-            //_animator.SetTrigger("moving"); 
+            _animator.SetTrigger("moving"); 
         }
 
         public void OnExit() {

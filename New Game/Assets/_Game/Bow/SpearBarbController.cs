@@ -12,7 +12,7 @@ public class SpearBarbController : MonoBehaviour {
     [SerializeField] private SpearController _spearController;
     [SerializeField] private LayerMask _targetLayerMask;
 
-    public Action<Rigidbody2D> onHitSomething;
+    public Action<Pullable> onHitSomething;
 
     private Collider2D _collider;
 
@@ -25,11 +25,11 @@ public class SpearBarbController : MonoBehaviour {
         if ((1 << other.gameObject.layer & _targetLayerMask) == 0) {
             return;
         }
-        
-        Rigidbody2D hit = other.GetComponent<Rigidbody2D>();
+
+        Pullable pullable = other.gameObject.GetComponent<Pullable>();
         
         if (onHitSomething != null) {
-            onHitSomething.Invoke(hit);
+            onHitSomething.Invoke(pullable);
         }
     }
 }
