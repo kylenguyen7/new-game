@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4486744643827253029}
   - component: {fileID: 4051080416094513092}
   - component: {fileID: 5998951075524794722}
+  - component: {fileID: 5929681382831634805}
   m_Layer: 7
   m_Name: Spear 2
   m_TagString: Untagged
@@ -67,7 +68,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed348b2a96761f5458ccd214007bb794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialForce: 1500
+  _initialForce: 1750
+  _retractionSpeed: 35
+--- !u!61 &5929681382831634805
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3637497735404715364}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0017831326, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3031116, y: 0.4365697}
+  m_EdgeRadius: 0
 --- !u!1 &4395766931395112146
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +134,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4395766931395112146}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

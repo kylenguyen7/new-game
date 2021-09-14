@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 516520000}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 530779709}
   m_Layer: 8
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -437,6 +437,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _hp: 10
+  _spriteRenderer: {fileID: 1907068342}
+  _initialColor: {r: 1, g: 0.058823533, b: 0.058823533, a: 1}
+  _damagedColor: {r: 1, g: 1, b: 1, a: 1}
+  _damagedColorFadeTime: 0.25
 --- !u!4 &530779708
 Transform:
   m_ObjectHideFlags: 0
@@ -670,7 +675,7 @@ GameObject:
   - component: {fileID: 1907068341}
   m_Layer: 8
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
