@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using _Game.Player.PlayerStates;
 using UnityEngine;
 
-public class PlayerController : Pullable {
+public class PlayerController {
     private StateMachine _stateMachine = new StateMachine();
 
     [SerializeField] private Rigidbody2D _rb;

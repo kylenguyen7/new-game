@@ -23,7 +23,7 @@ namespace _Game.Player.PlayerStates {
         
         public void FixedTick() {
             UpdateFacing();
-            _rb.velocity = _direction.normalized * _playerController.Speed + _playerController.CalculatePull();
+            // _rb.velocity = _direction.normalized * _playerController.Speed + _playerController.CalculatePull();
         }
 
         private void UpdateFacing() {

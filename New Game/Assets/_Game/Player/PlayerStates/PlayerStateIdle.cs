@@ -15,7 +15,7 @@ namespace _Game.Player.PlayerStates {
         public void Tick() { }
 
         public void FixedTick() {
-            _rb.velocity = _playerController.CalculatePull();
+            // _rb.velocity = _playerController.CalculatePull();
         }
 
         public void OnEnter() { _animator.SetTrigger("idle"); }

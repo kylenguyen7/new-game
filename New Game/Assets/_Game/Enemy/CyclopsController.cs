@@ -20,7 +20,7 @@ public class CyclopsController : Pullable {
     }
 
     private void FixedUpdate() {
-        _rb.velocity = movement * _speed + CalculatePull();
+        _rb.velocity = movement * _speed; // + CalculatePull();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
