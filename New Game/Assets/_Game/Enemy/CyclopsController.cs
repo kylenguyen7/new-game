@@ -33,10 +33,6 @@ public class CyclopsController : MonoBehaviour {
         _rb.velocity = movement * _speed; // + CalculatePull();
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        Debug.Log($"Hit by {other.gameObject.name}");
-    }
-
     public void TakeDamage() {
         if (_damageCouritine != null) {
             StopCoroutine(_damageCouritine);

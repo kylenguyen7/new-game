@@ -19,7 +19,10 @@ namespace _Game.Player.PlayerStates {
             // _rb.velocity = _playerController.CalculatePull();
         }
 
-        public void OnEnter() { _animator.SetTrigger("idle"); }
+        public void OnEnter() {
+            _rb.velocity = Vector2.zero;
+            _animator.SetTrigger("idle");
+        }
 
         public void OnExit() { }
     }

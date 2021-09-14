@@ -279,7 +279,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 516520001}
   _playerSpriteAnimator: {fileID: 1801287114}
-  speed: 5
+  _speed: 5
+  _dashSpeed: 10
+  _dashTime: 0.5
 --- !u!4 &516520003
 Transform:
   m_ObjectHideFlags: 0

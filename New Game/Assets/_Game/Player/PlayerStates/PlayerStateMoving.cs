@@ -21,6 +21,7 @@ namespace _Game.Player.PlayerStates {
         
         public void FixedTick() {
             UpdateFacing();
+            UpdateHeading();
             _rb.velocity = _direction.normalized * _playerController.Speed; // + _playerController.CalculatePull();
         }
 
@@ -37,12 +38,14 @@ namespace _Game.Player.PlayerStates {
             _animator.SetFloat("facingY", _playerController.Facing.y);
         }
 
+        private void UpdateHeading() {
+            _playerController.Heading = _direction.normalized;
+        }
+
         public void OnEnter() {
             _animator.SetTrigger("moving"); 
         }
 
-        public void OnExit() {
-            _rb.velocity = Vector2.zero;
-        }
+        public void OnExit() { }
     }
 }
