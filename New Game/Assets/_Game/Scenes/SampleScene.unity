@@ -164,11 +164,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 48743262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e83839e41a634cd69c87fce23ca1787, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fd069b888c96de46b389a14bd7e5249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _owner: {fileID: 516520002}
-  _spearPrefab: {fileID: 2483258391493375808, guid: cb013c0d595f845f1860cb23965c65a7, type: 3}
+  _spearPrefab: {fileID: 3637497735404715364, guid: 1fa5ac27c17753941b00310e13fe5e18, type: 3}
 --- !u!1 &235732069
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,9 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de1c312a28acc43fe926e3839b89870d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pullPower: 10
   _rb: {fileID: 516520001}
-  _bowController: {fileID: 48743264}
   _playerSpriteAnimator: {fileID: 1801287114}
   speed: 5
 --- !u!4 &516520003
@@ -439,7 +436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c9d7c69541e4e918977b591824b556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pullPower: 1
   _speed: 5
 --- !u!4 &530779708
 Transform:
@@ -468,7 +464,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0

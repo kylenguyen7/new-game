@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using _Game.Player.PlayerStates;
 using UnityEngine;
 
-public class PlayerController {
+public class PlayerController : MonoBehaviour {
     private StateMachine _stateMachine = new StateMachine();
 
     [SerializeField] private Rigidbody2D _rb;
-    [SerializeField] private BowController _bowController;
     [SerializeField] private Animator _playerSpriteAnimator;
     [SerializeField] private float speed;
     public float Speed {
@@ -19,7 +18,7 @@ public class PlayerController {
 
     private void Awake() {
         IState idle = new PlayerStateIdle(this, _rb, _playerSpriteAnimator);
-        IState moving = new PlayerStateMoving(this, _rb, _bowController, _playerSpriteAnimator);
+        IState moving = new PlayerStateMoving(this, _rb, _playerSpriteAnimator);
         
         _stateMachine.AddTransition(idle, moving,
             () => Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0);

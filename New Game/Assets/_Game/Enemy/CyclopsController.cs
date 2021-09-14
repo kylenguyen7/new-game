@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CyclopsController : Pullable {
+public class CyclopsController : MonoBehaviour {
     private Vector2 movement;
     private Rigidbody2D _rb;
     [SerializeField] private float _speed;
