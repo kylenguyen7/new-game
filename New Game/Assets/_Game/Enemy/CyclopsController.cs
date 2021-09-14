@@ -15,6 +15,7 @@ public class CyclopsController : MonoBehaviour {
     [SerializeField] private Color _initialColor;
     [SerializeField] private Color _damagedColor;
     [SerializeField] private float _damagedColorFadeTime;
+    [SerializeField] private GameObject _deathParticlesPrefab;
     private Coroutine _damageCouritine;
 
     private void Awake() {
@@ -43,7 +44,7 @@ public class CyclopsController : MonoBehaviour {
     private IEnumerator DamageCoroutine() {
         _hp--;
         if (_hp <= 0) {
-            Destroy(gameObject);
+            DestroyMe();
             yield break;
         }
         
@@ -61,5 +62,10 @@ public class CyclopsController : MonoBehaviour {
         }
 
         _spriteRenderer.color = _initialColor;
+    }
+
+    private void DestroyMe() {
+        Instantiate(_deathParticlesPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
