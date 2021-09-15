@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -46,8 +47,8 @@ public class SpearController2 : MonoBehaviour {
         }
 
         if (other.CompareTag("Enemy")) {
-            CyclopsController _enemy = other.GetComponent<CyclopsController>();
-            _enemy.TakeDamage();
+            CyclopsController enemy = other.GetComponent<CyclopsController>();
+            enemy.TakeDamage();
         }
     }
 }

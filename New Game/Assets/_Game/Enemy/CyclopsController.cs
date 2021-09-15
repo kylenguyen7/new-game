@@ -15,8 +15,11 @@ public class CyclopsController : MonoBehaviour {
     [SerializeField] private Color _initialColor;
     [SerializeField] private Color _damagedColor;
     [SerializeField] private float _damagedColorFadeTime;
-    [SerializeField] private GameObject _deathParticlesPrefab;
     private Coroutine _damageCouritine;
+    
+    // Dying
+    [SerializeField] private GameObject _deathParticlesPrefab;
+    [SerializeField] private GameObject _itemPrefab;
 
     private void Awake() {
         _rb = GetComponent<Rigidbody2D>();
@@ -65,7 +68,14 @@ public class CyclopsController : MonoBehaviour {
     }
 
     private void DestroyMe() {
+        SpawnItem();
         Instantiate(_deathParticlesPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    private void SpawnItem() {
+        ItemController item = Instantiate(_itemPrefab, transform.position, Quaternion.identity)
+            .GetComponent<ItemController>();
+        item.Scatter();
     }
 }
