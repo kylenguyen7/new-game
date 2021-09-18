@@ -31,5 +31,7 @@ public class PlayerStateDashing : IState {
         _dashTime = 0f;
     }
 
-    public void OnExit() { }
+    public void OnExit() {
+        _rb.velocity = Vector2.zero;
+    }
 }

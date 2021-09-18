@@ -46,6 +46,8 @@ namespace _Game.Player.PlayerStates {
             _animator.SetTrigger("moving"); 
         }
 
-        public void OnExit() { }
+        public void OnExit() {
+            // Velocity not set to 0 since Dash state needs access to that info onEnter.
+        }
     }
 }

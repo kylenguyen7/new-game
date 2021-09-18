@@ -20,7 +20,6 @@ namespace _Game.Player.PlayerStates {
         }
 
         public void OnEnter() {
-            _rb.velocity = Vector2.zero;
             _animator.SetTrigger("idle");
         }
 
