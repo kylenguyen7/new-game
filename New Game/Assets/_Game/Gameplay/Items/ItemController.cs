@@ -47,7 +47,7 @@ public class ItemController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            Debug.Log("PIcked up an item!");
+            Debug.Log("Picked up an item!");
             Destroy(gameObject);
         }
     }

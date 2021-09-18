@@ -175,6 +175,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4458279201772228313, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458279201772228314, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5546671543968653177, guid: 45695024b8de446ba9453efabdd4b81b, type: 3}
     - target: {fileID: 4458279202477428048, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -347,7 +355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516519999}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.64, y: 1.248, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1801287112}
@@ -366,6 +374,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -381,6 +390,21 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdcad73939b7524f92560877ada1b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _followTarget: {fileID: 516520003}
+  _followSpeed: 0.9
+  _mouseTracking: 0.1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -445,6 +469,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4458279201772228313, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458279201772228314, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5546671543968653177, guid: 45695024b8de446ba9453efabdd4b81b, type: 3}
     - target: {fileID: 4458279202477428048, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -502,6 +534,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4458279201772228313, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458279201772228314, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5546671543968653177, guid: 45695024b8de446ba9453efabdd4b81b, type: 3}
     - target: {fileID: 4458279202477428048, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -769,7 +809,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801287111}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5a8548f9a93314276a09c902465f53be, type: 2}
   m_CullingMode: 0
@@ -787,6 +827,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4458279201772228313, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458279201772228314, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5546671543968653177, guid: 45695024b8de446ba9453efabdd4b81b, type: 3}
     - target: {fileID: 4458279202477428048, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
       propertyPath: m_RootOrder
       value: 4

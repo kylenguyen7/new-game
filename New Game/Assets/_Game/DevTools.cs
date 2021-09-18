@@ -1,8 +1,8 @@
 ﻿
 using System;
 using _Common;
-using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DevTools : MonoBehaviour {
     [SerializeField] private GameObject _itemPrefab;
@@ -13,6 +13,10 @@ public class DevTools : MonoBehaviour {
                 .GetComponent<ItemController>();
             
             item.Scatter();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R)) {
+            SceneManager.LoadScene(0);
         }
     }
 }

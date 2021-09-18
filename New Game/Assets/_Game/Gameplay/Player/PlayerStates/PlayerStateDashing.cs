@@ -27,7 +27,6 @@ public class PlayerStateDashing : IState {
     public void OnEnter() {
         _playerController.Dashing = true;
         
-        Debug.Log(_rb.velocity.magnitude);
         _dashDir = _rb.velocity.magnitude == 0 ? _playerController.Facing : _playerController.Heading;
         _dashTime = 0f;
     }

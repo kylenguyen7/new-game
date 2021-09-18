@@ -47,7 +47,7 @@ public class SpearController2 : MonoBehaviour {
         }
 
         if (other.CompareTag("Enemy")) {
-            CyclopsController enemy = other.GetComponent<CyclopsController>();
+            EnemyBase enemy = other.GetComponent<EnemyBase>();
             enemy.TakeDamage();
         }
     }
