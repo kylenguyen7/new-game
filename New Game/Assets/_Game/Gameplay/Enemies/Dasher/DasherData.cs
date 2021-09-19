@@ -17,5 +17,13 @@ public class DasherData : ScriptableObject {
     public float chaseStartRadius;
     public float chaseFinishedRadius;
 
-    // Prepare radius
+    // Preparing
+    public float prepTime;
+    
+    // Dashing
+    public float dashSpeed;
+    public float dashTime;
+    
+    // Recovering
+    public float recoverTime;
 }

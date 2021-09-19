@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -8,6 +9,10 @@ public class DasherController : EnemyBase {
     private StateMachine _stateMachine = new StateMachine();
     private Rigidbody2D _rb;
     [SerializeField] private DasherData _dasherData;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
+    public Transform Target { get; private set; }
+    public Vector2 DashDir { get; private set; }
 
     private new void Awake() {
         base.Awake();
@@ -16,11 +21,18 @@ public class DasherController : EnemyBase {
         var roam = new DasherStateRoam(this, _dasherData, _rb);
         var wait = new DasherStateWait(_dasherData, _rb);
         var chase = new DasherStateChase(this, _dasherData, _rb);
-        
+        var prep = new DasherStatePrepare(_dasherData, _rb, _spriteRenderer);
+        var dash = new DasherStateDash(this, _dasherData, _rb, _spriteRenderer);
+        var recover = new DasherStateRecover(_dasherData, _rb, _spriteRenderer);
+
         _stateMachine.AddTransition(roam, wait, () => roam.RoamFinished);
         _stateMachine.AddTransition(wait, roam, () => wait.WaitFinished);
         _stateMachine.AddTransition(roam, chase, () => GetDistanceToClosestPlayer() <= _dasherData.chaseStartRadius);
         _stateMachine.AddTransition(wait, chase, () => GetDistanceToClosestPlayer() <= _dasherData.chaseStartRadius);
+        _stateMachine.AddTransition(chase, prep, () => GetDistanceToTarget() <= _dasherData.chaseFinishedRadius);
+        _stateMachine.AddTransition(prep, dash, () => prep.PrepFinished);
+        _stateMachine.AddTransition(dash, recover, () => dash.DashFinished);
+        _stateMachine.AddTransition(recover, roam, () => recover.RecoverFinished);
         _stateMachine.Init(roam);
     }
 
@@ -28,20 +40,37 @@ public class DasherController : EnemyBase {
         _stateMachine.Tick();
     }
 
-    private void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(transform.position, _dasherData.chaseStartRadius);
-        Gizmos.DrawWireSphere(transform.position, _dasherData.roamDestinationRadius);
-    }
+    // private void OnDrawGizmos() {
+    //     Gizmos.DrawWireSphere(transform.position, _dasherData.chaseStartRadius);
+    //     Gizmos.DrawWireSphere(transform.position, _dasherData.roamDestinationRadius);
+    //     Gizmos.DrawWireSphere(transform.position, _dasherData.chaseFinishedRadius);
+    // }
 
     private void FixedUpdate() {
         _stateMachine.FixedTick();
+    }
+    
+    /**
+     * Target and DashDir are maintained in DasherController since they are accessed
+     * across multiple states.
+     */
+    public void SetTarget() {
+        Target = GetClosestPlayer();
+    }
+
+    public void SetDashDir() {
+        DashDir = (Target.position - transform.position).normalized;
+    }
+
+    private float GetDistanceToTarget() {
+        return Vector2.Distance(Target.position, transform.position);
     }
 
     private float GetDistanceToClosestPlayer() {
         return Vector2.Distance(GetClosestPlayer().position, transform.position);
     }
 
-    public Transform GetClosestPlayer() {
+    private Transform GetClosestPlayer() {
         PlayerController closest = null;
         float minDist = float.MaxValue;
         foreach (var player in FindObjectsOfType<PlayerController>()) {

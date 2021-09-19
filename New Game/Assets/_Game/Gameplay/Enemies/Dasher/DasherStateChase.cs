@@ -6,7 +6,6 @@ public class DasherStateChase : IState {
     private DasherController _dasherController;
     private DasherData _dasherData;
     private Rigidbody2D _rb;
-    private Transform _target;
 
     private bool _chaseFinished;
     public bool ChaseFinished => _chaseFinished;
@@ -18,23 +17,24 @@ public class DasherStateChase : IState {
     }
     
     public void Tick() {
-        if (Vector2.Distance(_target.position, _dasherController.transform.position) < _dasherData.chaseFinishedRadius) {
+        if (Vector2.Distance(_dasherController.Target.position, _dasherController.transform.position) < _dasherData.chaseFinishedRadius) {
             _chaseFinished = true;
         }
         
-        Debug.DrawLine(_dasherController.transform.position, _target.position);
+        Debug.DrawLine(_dasherController.transform.position, _dasherController.Target.position);
     }
 
     public void FixedTick() {
-        Vector2 toTarget = _target.position - _dasherController.transform.position;
+        Vector2 toTarget = _dasherController.Target.position - _dasherController.transform.position;
         _rb.velocity = toTarget.normalized * _dasherData.chaseSpeed;
     }
 
     public void OnEnter() {
-        _target = _dasherController.GetClosestPlayer();
+        _dasherController.SetTarget();
     }
 
     public void OnExit() {
+        _dasherController.SetDashDir();
         _rb.velocity = Vector2.zero;
     }
 }
