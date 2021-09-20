@@ -2,35 +2,20 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class EnemyBase : MonoBehaviour {
-    [SerializeField] private int _hp = 10;
-    
+public class EnemyBase : Damageable {
     // Taking damage
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Color _initialColor = Color.white;
     [SerializeField] private Color _damagedColor = Color.red;
     [SerializeField] private float _damagedColorFadeTime = 0.25f;
-    private Coroutine _damageCouritine;
-    
+
     // Dying
     [SerializeField] private GameObject _deathParticlesPrefab;
     [SerializeField] private GameObject _itemPrefab;
 
-    protected void Awake() {
+    protected new void Awake() {
+        base.Awake();
         _spriteRenderer.color = _initialColor;
-    }
-
-    public void TakeDamage() {
-        if (_damageCouritine != null) {
-            StopCoroutine(_damageCouritine);
-        }
-        _damageCouritine = StartCoroutine(DamageCoroutine());
-    }
-    
-    private void DestroyMe() {
-        SpawnItem();
-        SpawnDeathEffects();
-        Destroy(gameObject);
     }
 
     private void SpawnItem() {
@@ -42,14 +27,14 @@ public class EnemyBase : MonoBehaviour {
     private void SpawnDeathEffects() {
         Instantiate(_deathParticlesPrefab, transform.position, Quaternion.identity);
     }
-    
-    private IEnumerator DamageCoroutine() {
-        _hp--;
-        if (_hp <= 0) {
-            DestroyMe();
-            yield break;
-        }
-        
+
+    protected override void Die() {
+        SpawnItem();
+        SpawnDeathEffects();
+        Destroy(gameObject);
+    }
+
+    protected override IEnumerator DamageCoroutine() {
         _spriteRenderer.color = _damagedColor;
         float time = 0;
         float lastTime = Time.time;

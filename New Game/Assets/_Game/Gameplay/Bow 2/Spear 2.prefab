@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7410323861362831261
 Transform:
   m_ObjectHideFlags: 0
@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed348b2a96761f5458ccd214007bb794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 1
+  _kbMagnitude: 3
   _initialForce: 1750
   _retractionSpeed: 25
 --- !u!61 &5929681382831634805

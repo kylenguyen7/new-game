@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e755e9c6c1eda43d59be970ea30e832b, type: 3}
+  m_Sprite: {fileID: 5546671543968653177, guid: 45695024b8de446ba9453efabdd4b81b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,7 +91,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4458279201772228319}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2a1137de19e7a4ee8986278b4c721a52, type: 2}
   m_CullingMode: 0
@@ -174,14 +174,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c9d7c69541e4e918977b591824b556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
   _hp: 10
+  knockbackDecayPerFrame: 1
   _spriteRenderer: {fileID: 4458279201772228314}
   _initialColor: {r: 1, g: 1, b: 1, a: 1}
   _damagedColor: {r: 1, g: 0, b: 0, a: 1}
   _damagedColorFadeTime: 0.25
   _deathParticlesPrefab: {fileID: 3422884608894595234, guid: e70afb6716f79894393dae073c0ab357, type: 3}
   _itemPrefab: {fileID: 1574369818119889862, guid: 81c55ad6c650b8743951db3844b6aaad, type: 3}
+  _speed: 5
 --- !u!50 &4458279202477428049
 Rigidbody2D:
   serializedVersion: 4

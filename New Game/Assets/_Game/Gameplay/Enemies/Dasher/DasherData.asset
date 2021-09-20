@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: DasherData
   m_EditorClassIdentifier: 
   roamSpeed: 1
-  roamDestinationRadius: 3
+  roamDestinationRadius: 5
   roamArrivedRange: 0.1
   waitTime: 5
   chaseSpeed: 2
-  chaseStartRadius: 5
+  chaseStartRadius: 5.5
   chaseFinishedRadius: 4
+  prepTime: 0.25
+  dashSpeed: 20
+  dashTime: 0.23
+  recoverTime: 3

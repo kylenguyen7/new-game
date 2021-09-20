@@ -4,29 +4,27 @@ using Random = UnityEngine.Random;
 public class DasherStateRoam : IState {
     private DasherController _dasherController;
     private DasherData _dasherData;
-    private Rigidbody2D _rb;
     private Vector2 _destination;
 
     private bool _roamFinished;
     public bool RoamFinished => _roamFinished;
 
-    public DasherStateRoam(DasherController dasherController, DasherData dasherData, Rigidbody2D rb) {
+    public DasherStateRoam(DasherController dasherController, DasherData dasherData) {
         _dasherController = dasherController;
         _dasherData = dasherData;
-        _rb = rb;
     }
 
     public void Tick() {
-        if (Vector2.Distance(_rb.position, _destination) < _dasherData.roamArrivedRange) {
+        if (Vector2.Distance(_dasherController.transform.position, _destination) < _dasherData.roamArrivedRange) {
             _roamFinished = true;
         }
         
-        Debug.DrawLine(_rb.position, _destination);
+        Debug.DrawLine(_dasherController.transform.position, _destination);
     }
 
     public void FixedTick() {
-        Vector2 toDestination = _destination - _rb.position;
-        _rb.velocity = toDestination.normalized * _dasherData.roamSpeed;
+        Vector2 toDestination = _destination - (Vector2)_dasherController.transform.position;
+        _dasherController.Velocity = toDestination.normalized * _dasherData.roamSpeed;
     }
 
     public void OnEnter() {
@@ -34,11 +32,11 @@ public class DasherStateRoam : IState {
     }
 
     public void OnExit() {
-        _rb.velocity = Vector2.zero;
+        _dasherController.Velocity = Vector2.zero;
         _roamFinished = false;
     }
 
     private Vector2 ChooseDestination() {
-        return _rb.position + Random.insideUnitCircle * _dasherData.roamDestinationRadius;
+        return (Vector2)_dasherController.transform.position + Random.insideUnitCircle * _dasherData.roamDestinationRadius;
     }
 }

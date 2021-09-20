@@ -6,6 +6,10 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SpearController2 : MonoBehaviour {
+    // Dealing damage
+    [SerializeField] private float _damage;
+    [SerializeField] private float _kbMagnitude;
+    
     // Movement
     [SerializeField] private float _initialForce;
     [SerializeField] private float _retractionSpeed;
@@ -47,8 +51,8 @@ public class SpearController2 : MonoBehaviour {
         }
 
         if (other.CompareTag("Enemy")) {
-            EnemyBase enemy = other.GetComponent<EnemyBase>();
-            enemy.TakeDamage();
+            Damageable enemy = other.GetComponent<Damageable>();
+            enemy.TakeDamage(_damage, transform.right, _kbMagnitude);
         }
     }
 }

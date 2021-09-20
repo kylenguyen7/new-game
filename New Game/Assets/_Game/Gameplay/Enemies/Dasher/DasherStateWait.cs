@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DasherStateWait : IState {
+    private DasherController _dasherController;
     private DasherData _dasherData;
-    private Rigidbody2D _rb;
     private float _waitTime;
 
     private bool _waitFinished;
     public bool WaitFinished => _waitFinished;
 
-    public DasherStateWait(DasherData dasherData, Rigidbody2D rb) {
-        _rb = rb;
+    public DasherStateWait(DasherController dasherController, DasherData dasherData) {
+        _dasherController = dasherController;
         _dasherData = dasherData;
     }
     
@@ -23,7 +23,7 @@ public class DasherStateWait : IState {
     }
 
     public void FixedTick() {
-        _rb.velocity = Vector2.zero;
+        _dasherController.Velocity = Vector2.zero;
     }
 
     public void OnEnter() {
