@@ -20,19 +20,19 @@ public class DasherController : EnemyBase {
         
         var roam = new DasherStateRoam(this, _dasherData);
         var wait = new DasherStateWait(this, _dasherData);
-        // var chase = new DasherStateChase(this, _dasherData, _rb);
-        // var prep = new DasherStatePrepare(_dasherData, _rb, _spriteRenderer);
-        // var dash = new DasherStateDash(this, _dasherData, _rb, _spriteRenderer);
-        // var recover = new DasherStateRecover(_dasherData, _rb, _spriteRenderer);
+        var chase = new DasherStateChase(this, _dasherData, _rb);
+        var prep = new DasherStatePrepare(_dasherData, _rb, _spriteRenderer);
+        var dash = new DasherStateDash(this, _dasherData, _rb, _spriteRenderer);
+        var recover = new DasherStateRecover(_dasherData, _rb, _spriteRenderer);
 
         _stateMachine.AddTransition(roam, wait, () => roam.RoamFinished);
         _stateMachine.AddTransition(wait, roam, () => wait.WaitFinished);
-        // _stateMachine.AddTransition(roam, chase, () => GetDistanceToClosestPlayer() <= _dasherData.chaseStartRadius);
-        // _stateMachine.AddTransition(wait, chase, () => GetDistanceToClosestPlayer() <= _dasherData.chaseStartRadius);
-        // _stateMachine.AddTransition(chase, prep, () => GetDistanceToTarget() <= _dasherData.chaseFinishedRadius);
-        // _stateMachine.AddTransition(prep, dash, () => prep.PrepFinished);
-        // _stateMachine.AddTransition(dash, recover, () => dash.DashFinished);
-        // _stateMachine.AddTransition(recover, roam, () => recover.RecoverFinished);
+        _stateMachine.AddTransition(roam, chase, () => GetDistanceToClosestPlayer() <= _dasherData.chaseStartRadius);
+        _stateMachine.AddTransition(wait, chase, () => GetDistanceToClosestPlayer() <= _dasherData.chaseStartRadius);
+        _stateMachine.AddTransition(chase, prep, () => GetDistanceToTarget() <= _dasherData.chaseFinishedRadius);
+        _stateMachine.AddTransition(prep, dash, () => prep.PrepFinished);
+        _stateMachine.AddTransition(dash, recover, () => dash.DashFinished);
+        _stateMachine.AddTransition(recover, roam, () => recover.RecoverFinished);
         _stateMachine.Init(roam);
     }
 
@@ -41,11 +41,11 @@ public class DasherController : EnemyBase {
         _stateMachine.Tick();
     }
 
-    // private void OnDrawGizmos() {
-    //     Gizmos.DrawWireSphere(transform.position, _dasherData.chaseStartRadius);
-    //     Gizmos.DrawWireSphere(transform.position, _dasherData.roamDestinationRadius);
-    //     Gizmos.DrawWireSphere(transform.position, _dasherData.chaseFinishedRadius);
-    // }
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(transform.position, _dasherData.chaseStartRadius);
+        Gizmos.DrawWireSphere(transform.position, _dasherData.roamDestinationRadius);
+        Gizmos.DrawWireSphere(transform.position, _dasherData.chaseFinishedRadius);
+    }
 
     private new void FixedUpdate() {
         base.FixedUpdate();

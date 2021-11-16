@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 48743263}
   - component: {fileID: 48743264}
   m_Layer: 6
-  m_Name: Bow
+  m_Name: Spear Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 48743262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fd069b888c96de46b389a14bd7e5249, type: 3}
+  m_Script: {fileID: 11500000, guid: 65950c9edc9340afa9d2c7eb600e6590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _spearPrefab: {fileID: 3637497735404715364, guid: 1fa5ac27c17753941b00310e13fe5e18, type: 3}
@@ -222,10 +222,6 @@ PrefabInstance:
     - target: {fileID: 4458279202477428053, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
       propertyPath: m_Name
       value: Enemy (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4458279202477428055, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
-      propertyPath: knockbackDecayPerFrame
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
@@ -465,14 +461,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4458279201772228313, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4458279201772228314, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 5546671543968653177, guid: 45695024b8de446ba9453efabdd4b81b, type: 3}
     - target: {fileID: 4458279202477428048, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -521,10 +509,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4458279202477428055, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
-      propertyPath: knockbackDecayPerFrame
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
 --- !u!1001 &1036989892
@@ -534,14 +518,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4458279201772228313, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4458279201772228314, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 5546671543968653177, guid: 45695024b8de446ba9453efabdd4b81b, type: 3}
     - target: {fileID: 4458279202477428048, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -589,10 +565,6 @@ PrefabInstance:
     - target: {fileID: 4458279202477428053, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
       propertyPath: m_Name
       value: Enemy (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4458279202477428055, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
-      propertyPath: knockbackDecayPerFrame
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
@@ -831,14 +803,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4458279201772228313, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4458279201772228314, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 5546671543968653177, guid: 45695024b8de446ba9453efabdd4b81b, type: 3}
     - target: {fileID: 4458279202477428048, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -886,10 +850,6 @@ PrefabInstance:
     - target: {fileID: 4458279202477428053, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4458279202477428055, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}
-      propertyPath: knockbackDecayPerFrame
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a129ec2af14ff1940ad102ba5cbe1bc0, type: 3}

@@ -41,8 +41,15 @@ public class ItemController : MonoBehaviour {
         if (_attached) return;
         
         _attached = true;
+        disableRigidbody();
         _fixedJoint2D.enabled = true;
         _fixedJoint2D.connectedBody = target;
+    }
+
+    private void disableRigidbody() {
+        _rb.mass = 0;
+        _rb.drag = 0;
+        _rb.angularDrag = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

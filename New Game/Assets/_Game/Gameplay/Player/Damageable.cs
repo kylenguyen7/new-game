@@ -36,7 +36,7 @@ public abstract class Damageable : MonoBehaviour {
         _damageCoroutine = StartCoroutine(DamageCoroutine());
     }
 
-    protected virtual void DepleteHealth(float damage) {
+    private void DepleteHealth(float damage) {
         _hp -= damage;
         if (_hp <= 0) {
             Die();
