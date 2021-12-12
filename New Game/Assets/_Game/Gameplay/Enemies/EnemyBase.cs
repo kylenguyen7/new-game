@@ -9,29 +9,9 @@ public class EnemyBase : Damageable {
     [SerializeField] private Color _damagedColor = Color.red;
     [SerializeField] private float _damagedColorFadeTime = 0.25f;
 
-    // Dying
-    [SerializeField] private GameObject _deathParticlesPrefab;
-    [SerializeField] private GameObject _itemPrefab;
-
     protected new void Awake() {
         base.Awake();
         _spriteRenderer.color = _initialColor;
-    }
-
-    private void SpawnItem() {
-        ItemController item = Instantiate(_itemPrefab, transform.position, Quaternion.identity)
-            .GetComponent<ItemController>();
-        item.Scatter();
-    }
-
-    private void SpawnDeathEffects() {
-        Instantiate(_deathParticlesPrefab, transform.position, Quaternion.identity);
-    }
-
-    protected override void Die() {
-        SpawnItem();
-        SpawnDeathEffects();
-        Destroy(gameObject);
     }
 
     protected override IEnumerator DamageCoroutine() {
