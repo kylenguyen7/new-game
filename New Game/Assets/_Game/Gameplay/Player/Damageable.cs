@@ -15,10 +15,17 @@ public abstract class Damageable : MonoBehaviour {
     [SerializeField] private GameObject _itemPrefab;
     [SerializeField] float knockbackDecayPerFrame;
     
+    // Taking damage
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    private Color _initialColor = Color.white;
+    private Color _damagedColor = Color.red;
+    private float _damagedColorFadeTime = 0.25f;
+    
     public Vector2 Velocity { get; set; }
     
     protected void Awake() {
         _rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer.color = _initialColor;
     }
 
     protected void Update() {
@@ -40,9 +47,6 @@ public abstract class Damageable : MonoBehaviour {
         _damageCoroutine = StartCoroutine(DamageCoroutine());
     }
     
-    protected abstract IEnumerator DamageCoroutine();
-    
-    
     // BEGIN PRIVATE HELPER FUNCTIONS
     private void DepleteHealth(float damage) {
         _hp -= damage;
@@ -51,7 +55,23 @@ public abstract class Damageable : MonoBehaviour {
         }
     }
     
-    #region DYING
+    private IEnumerator DamageCoroutine() {
+        _spriteRenderer.color = _damagedColor;
+        float time = 0;
+        float lastTime = Time.time;
+        yield return new WaitForEndOfFrame();
+        
+        while (time < _damagedColorFadeTime) {
+            time += (Time.time - lastTime);
+            lastTime = Time.time;
+            
+            _spriteRenderer.color = Color.Lerp(_damagedColor, _initialColor, time / _damagedColorFadeTime);
+            yield return new WaitForEndOfFrame();
+        }
+        _spriteRenderer.color = _initialColor;
+    }
+
+    #region Dying
     private void SpawnItem() {
         ItemController item = Instantiate(_itemPrefab, transform.position, Quaternion.identity)
             .GetComponent<ItemController>();
@@ -69,7 +89,7 @@ public abstract class Damageable : MonoBehaviour {
     }
     #endregion
     
-    #region KNOCKBACK
+    #region Knockback
     private void AddKnockback(Vector2 kbDirection, float kbMagnitude) {
         _knockback += kbDirection.normalized * kbMagnitude;
     }
