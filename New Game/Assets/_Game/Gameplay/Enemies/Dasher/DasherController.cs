@@ -12,8 +12,10 @@ public class DasherController : EnemyBase {
     [SerializeField] private float _damage;
     [SerializeField] private float _kbMagnitude;
 
+    // These variables have to be in this function since they require a MonoBehaviour
     public Transform Target { get; private set; }
     public Vector2 DashDir { get; private set; }
+    public bool DealtDamage { get; private set; }
 
     private new void Awake() {
         base.Awake();
@@ -34,6 +36,16 @@ public class DasherController : EnemyBase {
         _stateMachine.AddTransition(prep, dash, () => prep.PrepFinished);
         _stateMachine.AddTransition(dash, recover, () => dash.DashFinished);
         _stateMachine.AddTransition(recover, roam, () => recover.RecoverFinished);
+        
+        _stateMachine.AddAnyTransition(recover, () => {
+            // Start recover state if dealt damage last frame
+            if (DealtDamage) {
+                DealtDamage = false;
+                return true;
+            }
+            return false;
+        });
+        
         _stateMachine.Init(roam);
     }
 
@@ -90,13 +102,16 @@ public class DasherController : EnemyBase {
         return closest.transform;
     }
     
-    /*
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Player")) {
+    private void OnCollisionStay2D(Collision2D other) {
+        // Deal damage only while dashing
+        if (!(_stateMachine.getCurrentState() is DasherStateDash)) return;
+        
+        if (other.gameObject.CompareTag("Player")) {
             Vector2 dir = other.transform.position - transform.position;
             PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
             playerController.TakeDamage(_damage, dir, _kbMagnitude);
         }
+
+        DealtDamage = true;
     }
-    */
 }

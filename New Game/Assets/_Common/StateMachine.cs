@@ -2,12 +2,18 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using Random = UnityEngine.Random;
 
 public class StateMachine {
     private IState _currentState;
     
+    // Dict: state -> transitions out of that state
     private Dictionary<Type, List<Transition>> _allTransitions = new Dictionary<Type, List<Transition>>();
+    
+    // Transitions out of current state
     private List<Transition> _currentTransitions = new List<Transition>();
+    
+    // Transitions out of any state
     private List<Transition> _anyTransitions = new List<Transition>();
 
     private static List<Transition> EmptyTransitions = new List<Transition>(0);
@@ -37,6 +43,7 @@ public class StateMachine {
     }
 
     private Transition getTransition() {
+        // Any transitions are checked before state-specific transitions
         foreach (Transition t in _anyTransitions) {
             if (t.Condition()) {
                 return t;
@@ -64,7 +71,7 @@ public class StateMachine {
     public void AddAnyTransition(IState to, Func<bool> condition) {
         _anyTransitions.Add(new Transition(to, condition));
     }
-
+    
     private void SetState(IState newState) {
         if (newState == _currentState) return;
         
@@ -77,6 +84,10 @@ public class StateMachine {
         }
         
         _currentState.OnEnter();
+    }
+
+    public IState getCurrentState() {
+        return _currentState;
     }
 }
 
