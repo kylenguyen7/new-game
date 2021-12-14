@@ -16,7 +16,7 @@ public abstract class Damageable : MonoBehaviour {
     [SerializeField] float knockbackDecayPerFrame;
     
     // Taking damage
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] protected SpriteRenderer _spriteRenderer;
     private Color _initialColor = Color.white;
     private Color _damagedColor = Color.red;
     private float _damagedColorFadeTime = 0.25f;
@@ -33,7 +33,8 @@ public abstract class Damageable : MonoBehaviour {
     }
 
     protected void FixedUpdate() {
-        _rb.velocity = Velocity + _knockback;
+        // Removed knockback for now, since I don't think it feels good right now
+        _rb.velocity = Velocity; // + _knockback;
     }
 
     public void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
@@ -83,7 +84,7 @@ public abstract class Damageable : MonoBehaviour {
     }
 
     private void Die() {
-        SpawnItem();
+        if (_itemPrefab) SpawnItem();
         SpawnDeathEffects();
         Destroy(gameObject);
     }
@@ -95,7 +96,7 @@ public abstract class Damageable : MonoBehaviour {
     }
 
     /**
-     * Right now, all Damageables take damage in the same way.
+     * Right now, all Damageables decay knockback in the same way.
      * Can be made into protected virtual function if some Damageables want to decay
      * knockback differently.
      */

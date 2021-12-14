@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using _Game.Player.PlayerStates;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : Damageable {
     private StateMachine _stateMachine = new StateMachine();
 
     [SerializeField] private Rigidbody2D _rb;
@@ -21,13 +21,17 @@ public class PlayerController : MonoBehaviour {
     public float Speed => _speed;
     public float DashSpeed => _dashSpeed;
 
+    // Cardinal direction (up, left, right, down)
     public Vector2 Facing { get; set; }
+    // True direction
     public Vector2 Heading { get; set; }
 
     private void Awake() {
-        IState idle = new PlayerStateIdle(this, _rb, _playerSpriteAnimator);
-        IState move = new PlayerStateMoving(this, _rb, _playerSpriteAnimator);
-        IState dash = new PlayerStateDashing(this, _rb);
+        base.Awake();
+        
+        IState idle = new PlayerStateIdle(this, _playerSpriteAnimator);
+        IState move = new PlayerStateMoving(this, _playerSpriteAnimator);
+        IState dash = new PlayerStateDashing(this);
         
         _stateMachine.AddTransition(idle, move,
             () => Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0);
@@ -43,10 +47,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
+        base.Update();
         _stateMachine.Tick();
     }
 
     private void FixedUpdate() {
+        base.FixedUpdate();
         _stateMachine.FixedTick();
     }
 }

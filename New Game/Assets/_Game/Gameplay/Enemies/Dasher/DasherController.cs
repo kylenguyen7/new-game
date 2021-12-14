@@ -9,7 +9,8 @@ public class DasherController : EnemyBase {
     private StateMachine _stateMachine = new StateMachine();
     private Rigidbody2D _rb;
     [SerializeField] private DasherData _dasherData;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private float _damage;
+    [SerializeField] private float _kbMagnitude;
 
     public Transform Target { get; private set; }
     public Vector2 DashDir { get; private set; }
@@ -88,4 +89,14 @@ public class DasherController : EnemyBase {
         }
         return closest.transform;
     }
+    
+    /*
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.CompareTag("Player")) {
+            Vector2 dir = other.transform.position - transform.position;
+            PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
+            playerController.TakeDamage(_damage, dir, _kbMagnitude);
+        }
+    }
+    */
 }

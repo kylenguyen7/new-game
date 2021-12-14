@@ -7,16 +7,14 @@ namespace _Game.Player.PlayerStates {
         private Rigidbody2D _rb;
         private PlayerController _playerController;
         
-        public PlayerStateIdle(PlayerController playerController, Rigidbody2D rb, Animator animator) {
-            _rb = rb;
+        public PlayerStateIdle(PlayerController playerController, Animator animator) {
             _playerController = playerController;
             _animator = animator;
         }
         public void Tick() { }
 
         public void FixedTick() {
-            _rb.velocity = Vector2.zero;
-            // _rb.velocity = _playerController.CalculatePull();
+            _playerController.Velocity = Vector2.zero;
         }
 
         public void OnEnter() {

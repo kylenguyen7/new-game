@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 48743263}
   - component: {fileID: 48743264}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Spear Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 235732070}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 516520002}
   - component: {fileID: 516520001}
   - component: {fileID: 516520000}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -334,6 +334,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de1c312a28acc43fe926e3839b89870d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hp: 10
+  _deathParticlesPrefab: {fileID: 3422884608894595234, guid: e70afb6716f79894393dae073c0ab357, type: 3}
+  _itemPrefab: {fileID: 0}
+  knockbackDecayPerFrame: 3
+  _spriteRenderer: {fileID: 1801287113}
   _rb: {fileID: 516520001}
   _playerSpriteAnimator: {fileID: 1801287114}
   _speed: 5
@@ -578,7 +583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1382447565}
   - component: {fileID: 1382447566}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +710,7 @@ GameObject:
   - component: {fileID: 1801287112}
   - component: {fileID: 1801287113}
   - component: {fileID: 1801287114}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -863,6 +868,14 @@ PrefabInstance:
     - target: {fileID: 8045688400319738624, guid: 8c9e3b04f62632849b879fe6fe19bd8a, type: 3}
       propertyPath: m_Name
       value: Dasher
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045688400319738625, guid: 8c9e3b04f62632849b879fe6fe19bd8a, type: 3}
+      propertyPath: _damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045688400319738625, guid: 8c9e3b04f62632849b879fe6fe19bd8a, type: 3}
+      propertyPath: _kbMagnitude
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8045688400319738625, guid: 8c9e3b04f62632849b879fe6fe19bd8a, type: 3}
       propertyPath: knockbackDecayPerFrame

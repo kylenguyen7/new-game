@@ -3,14 +3,12 @@ using UnityEngine;
 namespace _Game.Player.PlayerStates {
     public class PlayerStateMoving : IState {
         private PlayerController _playerController;
-        private Rigidbody2D _rb;
         private Animator _animator;
         
         private Vector2 _direction;
 
-        public PlayerStateMoving(PlayerController playerController, Rigidbody2D rb, Animator animator) {
+        public PlayerStateMoving(PlayerController playerController, Animator animator) {
             _playerController = playerController;
-            _rb = rb;
             _animator = animator;
         }
 
@@ -22,7 +20,7 @@ namespace _Game.Player.PlayerStates {
         public void FixedTick() {
             UpdateFacing();
             UpdateHeading();
-            _rb.velocity = _direction.normalized * _playerController.Speed; // + _playerController.CalculatePull();
+            _playerController.Velocity = _direction.normalized * _playerController.Speed; // + _playerController.CalculatePull();
         }
 
         private void UpdateFacing() {
