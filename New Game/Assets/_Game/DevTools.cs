@@ -18,5 +18,9 @@ public class DevTools : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.R)) {
             SceneManager.LoadScene(0);
         }
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            TimeStop._instance.StopTime(1);
+        }
     }
 }
