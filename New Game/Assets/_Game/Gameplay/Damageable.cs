@@ -8,7 +8,7 @@ public abstract class Damageable : MonoBehaviour {
     [SerializeField] private float _hp;
     private Vector2 _knockback;
     private Coroutine _damageCoroutine;
-    private Rigidbody2D _rb;
+    protected Rigidbody2D _rb;
     
     // Dying
     [SerializeField] private GameObject _deathParticlesPrefab;
@@ -37,10 +37,10 @@ public abstract class Damageable : MonoBehaviour {
         _rb.velocity = Velocity; // + _knockback;
     }
 
-    public void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
+    public virtual void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
         DepleteHealth(damage);
         AddKnockback(kbDirection, kbMagnitude);
-        
+
         // Start damage coroutine
         if (_damageCoroutine != null) {
             StopCoroutine(_damageCoroutine);

@@ -7,7 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class DasherController : EnemyBase {
     private StateMachine _stateMachine = new StateMachine();
-    private Rigidbody2D _rb;
     [SerializeField] private DasherData _dasherData;
     [SerializeField] private float _damage;
     [SerializeField] private float _kbMagnitude;
@@ -19,7 +18,6 @@ public class DasherController : EnemyBase {
 
     private new void Awake() {
         base.Awake();
-        _rb = GetComponent<Rigidbody2D>();
         
         var roam = new DasherStateRoam(this, _dasherData);
         var wait = new DasherStateWait(this, _dasherData);

@@ -7,7 +7,9 @@ using UnityEngine;
 public class TimeStop : MonoBehaviour {
     public static TimeStop _instance;
     private Coroutine _coroutine;
-    private void Awake() {
+    [SerializeField] private float _delay;
+
+private void Awake() {
         if (_instance) {
             Debug.LogWarning($"Found more than one instance of singleton: {_instance}");
             Destroy(this);
@@ -16,13 +18,13 @@ public class TimeStop : MonoBehaviour {
         _instance = this;
     }
     
-    public void StopTime(float delay) {
+    public void StopTime() {
         Time.timeScale = 0f;
 
         if (_coroutine != null) {
             StopCoroutine(_coroutine);
         }
-        _coroutine = StartCoroutine(RestoreTime(delay));
+        _coroutine = StartCoroutine(RestoreTime(_delay));
     }
     
     private IEnumerator RestoreTime(float delay) {

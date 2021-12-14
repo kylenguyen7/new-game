@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class PlayerController : Damageable {
     private StateMachine _stateMachine = new StateMachine();
-
-    [SerializeField] private Rigidbody2D _rb;
+    
     [SerializeField] private Animator _playerSpriteAnimator;
     [SerializeField] private float _speed;
     
@@ -26,7 +25,7 @@ public class PlayerController : Damageable {
     // True direction
     public Vector2 Heading { get; set; }
 
-    private void Awake() {
+    private new void Awake() {
         base.Awake();
         
         IState idle = new PlayerStateIdle(this, _playerSpriteAnimator);
@@ -46,13 +45,18 @@ public class PlayerController : Damageable {
         _stateMachine.Init(idle);
     }
 
-    private void Update() {
+    private new void Update() {
         base.Update();
         _stateMachine.Tick();
     }
 
-    private void FixedUpdate() {
+    private new void FixedUpdate() {
         base.FixedUpdate();
         _stateMachine.FixedTick();
+    }
+
+    public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
+        base.TakeDamage(damage, kbDirection, kbMagnitude);
+        TimeStop._instance.StopTime();
     }
 }
