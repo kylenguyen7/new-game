@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerStateDashing : IState {
@@ -24,6 +25,7 @@ public class PlayerStateDashing : IState {
 
     public void OnEnter() {
         _playerController.Dashing = true;
+        _playerController.gameObject.layer = 6;
         
         _dashDir = _playerController.Velocity.magnitude == 0 ? _playerController.Facing : _playerController.Heading;
         _dashTime = 0f;
@@ -31,5 +33,6 @@ public class PlayerStateDashing : IState {
 
     public void OnExit() {
         _playerController.Velocity = Vector2.zero;
+        _playerController.gameObject.layer = 7;
     }
 }

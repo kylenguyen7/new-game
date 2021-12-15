@@ -14,7 +14,7 @@ public class DasherController : EnemyBase {
     // These variables have to be in this function since they require a MonoBehaviour
     public Transform Target { get; private set; }
     public Vector2 DashDir { get; private set; }
-    public bool DealtDamage { get; private set; }
+    public bool Collided { get; set; }
 
     private new void Awake() {
         base.Awake();
@@ -35,10 +35,10 @@ public class DasherController : EnemyBase {
         _stateMachine.AddTransition(dash, recover, () => dash.DashFinished);
         _stateMachine.AddTransition(recover, roam, () => recover.RecoverFinished);
         
-        _stateMachine.AddAnyTransition(recover, () => {
-            // Start recover state if dealt damage last frame
-            if (DealtDamage) {
-                DealtDamage = false;
+        _stateMachine.AddTransition(dash, recover, () => {
+            // Start recover state if collided with something last frame
+            if (Collided) {
+                Collided = false;
                 return true;
             }
             return false;
@@ -110,6 +110,6 @@ public class DasherController : EnemyBase {
             playerController.TakeDamage(_damage, dir, _kbMagnitude);
         }
 
-        DealtDamage = true;
+        Collided = true;
     }
 }

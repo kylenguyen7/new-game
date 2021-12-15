@@ -5,6 +5,11 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Damageable : MonoBehaviour {
+    // Delegate specifies a function prototype (here it is a void func with no parameters)
+    public delegate void OnDeath();
+    // Event specifies a subscription list of OnDeath type functions to call when death occurs
+    public event OnDeath OnDeathCallback;
+    
     [SerializeField] private float _hp;
     private Vector2 _knockback;
     private Coroutine _damageCoroutine;
@@ -34,7 +39,7 @@ public abstract class Damageable : MonoBehaviour {
 
     protected void FixedUpdate() {
         // Removed knockback for now, since I don't think it feels good right now
-        _rb.velocity = Velocity; // + _knockback;
+        _rb.velocity = Velocity + _knockback;
     }
 
     public virtual void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
@@ -86,6 +91,7 @@ public abstract class Damageable : MonoBehaviour {
     private void Die() {
         if (_itemPrefab) SpawnItem();
         SpawnDeathEffects();
+        OnDeathCallback?.Invoke();
         Destroy(gameObject);
     }
     #endregion
