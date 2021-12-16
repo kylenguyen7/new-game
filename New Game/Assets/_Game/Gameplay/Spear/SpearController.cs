@@ -11,7 +11,7 @@ public class SpearController : MonoBehaviour {
     [SerializeField] private float _kbMagnitude;
     
     // Movement
-    [SerializeField] private float _initialForce;
+    [SerializeField] private float _initialSpeed;
     [SerializeField] private float _retractionSpeed;
     private Rigidbody2D _rb;
 
@@ -39,10 +39,24 @@ public class SpearController : MonoBehaviour {
 
     public void Init(Vector2 initialDirection, Transform owner) {
         var dir = initialDirection.normalized;
-        transform.right = dir;
-        _rb.AddForce(dir * _initialForce);
-
+        SetFacing(dir);
+        SetHeading(dir, _initialSpeed);
         _owner = owner;
+    }
+    
+    // Direction the spear is pointing
+    private void SetFacing(Vector2 facing) {
+        transform.right = facing;
+    }
+
+    // Direction the spear is moving in
+    private void SetHeading(Vector2 heading, float speed) {
+        // If speed = -1, use current speed
+        if (Math.Abs(speed - (-1)) < 0.001) {
+            speed = _rb.velocity.magnitude;
+        }
+        
+        _rb.velocity = heading.normalized * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

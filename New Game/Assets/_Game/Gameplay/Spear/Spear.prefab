@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 1
   _kbMagnitude: 0
-  _initialForce: 1750
+  _initialSpeed: 30
   _retractionSpeed: 25
 --- !u!61 &5929681382831634805
 BoxCollider2D:
