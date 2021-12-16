@@ -18,6 +18,9 @@ public class SpearController : MonoBehaviour {
     // Retraction
     private Transform _owner;
     private bool retracted = false;
+    
+    // Bouncing
+    private Vector2 _previousVelocity = Vector2.zero;
 
     private void Awake() {
         _rb = GetComponent<Rigidbody2D>();
@@ -35,6 +38,8 @@ public class SpearController : MonoBehaviour {
             transform.right = toOwner;
             _rb.velocity = toOwner * _retractionSpeed;
         }
+
+        _previousVelocity = _rb.velocity;
     }
 
     public void Init(Vector2 initialDirection, Transform owner) {
@@ -51,11 +56,10 @@ public class SpearController : MonoBehaviour {
 
     // Direction the spear is moving in
     private void SetHeading(Vector2 heading, float speed) {
-        // If speed = -1, use current speed
-        if (Math.Abs(speed - (-1)) < 0.001) {
+        // If speed < 0 use current speed
+        if (speed < 0) {
             speed = _rb.velocity.magnitude;
         }
-        
         _rb.velocity = heading.normalized * speed;
     }
 
@@ -67,6 +71,19 @@ public class SpearController : MonoBehaviour {
         if (other.CompareTag("Enemy")) {
             Damageable enemy = other.GetComponent<Damageable>();
             enemy.TakeDamage(_damage, transform.right, _kbMagnitude);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Bouncy")) {
+            Vector2 normal = other.GetContact(0).normal;
+            // Component of velocity in direction of normal
+            Vector2 velocityNormalComp = normal * Vector2.Dot(normal, _previousVelocity);
+            Vector2 newVelocity = _previousVelocity - 2 * velocityNormalComp;
+            
+            _rb.velocity = newVelocity;
+            SetFacing(newVelocity.normalized);
+            retracted = false;
         }
     }
 }

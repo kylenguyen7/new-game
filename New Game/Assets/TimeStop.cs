@@ -29,8 +29,6 @@ private void Awake() {
     
     private IEnumerator RestoreTime(float delay) {
         yield return new WaitForSecondsRealtime(delay);
-        Debug.LogWarning("Time restored to 1.");
-        Debug.LogWarning(FindObjectsOfType<TimeStop>().Length);
         Time.timeScale = 1f;
     }
 }
