@@ -69,7 +69,7 @@ public class SpearController : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Bouncy")) {
+        if (other.gameObject.CompareTag("Bouncy") || other.gameObject.CompareTag("Enemy Bouncy")) {
             Vector2 normal = other.GetContact(0).normal;
             // Component of velocity in direction of normal
             Vector2 velocityNormalComp = normal * Vector2.Dot(normal, _previousVelocity);

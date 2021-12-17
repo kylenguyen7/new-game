@@ -395,6 +395,7 @@ MonoBehaviour:
   _itemPrefab: {fileID: 1574369818119889862, guid: 81c55ad6c650b8743951db3844b6aaad, type: 3}
   knockbackDecayPerFrame: 1
   _spriteRenderer: {fileID: 776011253}
+  _shurikenPrefab: {fileID: 3016903211322276300, guid: 049e52322df624744bfbd6df6c03e464, type: 3}
 --- !u!50 &238936308
 Rigidbody2D:
   serializedVersion: 4
@@ -440,7 +441,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238936306}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.52, y: -8.73, z: 0}
+  m_LocalPosition: {x: 4.78, y: -1.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1126831856}
