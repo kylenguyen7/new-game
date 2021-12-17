@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spearPrefab: {fileID: 3637497735404715364, guid: 1fa5ac27c17753941b00310e13fe5e18, type: 3}
+  _maxSpears: 1
 --- !u!1 &143016466
 GameObject:
   m_ObjectHideFlags: 0

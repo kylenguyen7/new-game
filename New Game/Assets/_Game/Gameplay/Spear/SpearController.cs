@@ -22,6 +22,11 @@ public class SpearController : MonoBehaviour {
     // Bouncing
     private Vector2 _previousVelocity = Vector2.zero;
     [SerializeField] private GameObject _spearTip;
+    
+    // Destroying
+    public delegate void OnDestroySpear();
+
+    public event OnDestroySpear OnDestroySpearCallback;
 
     private void Awake() {
         _rb = GetComponent<Rigidbody2D>();
@@ -56,12 +61,16 @@ public class SpearController : MonoBehaviour {
         transform.right = facing;
     }
 
+    private void OnDestroy() {
+        OnDestroySpearCallback?.Invoke();
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
         if (retracted && other.CompareTag("Player")) {
             Destroy(gameObject);
         }
 
-        if (other.CompareTag("Enemy")) {
+        if (retracted && other.CompareTag("Enemy")) {
             Damageable enemy = other.GetComponent<Damageable>();
             enemy.TakeDamage(_damage, transform.right, _kbMagnitude);
         }

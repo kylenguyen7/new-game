@@ -7,9 +7,11 @@ using UnityEngine;
 
 public class SpearLauncher : MonoBehaviour {
     [SerializeField] private GameObject _spearPrefab;
+    [SerializeField] private int _maxSpears;
+    private int _currentSpears;
 
     private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && _currentSpears < _maxSpears) {
             FireHarpoon(KaleUtils.GetMousePosWorldCoordinates());
         }
     }
@@ -20,5 +22,8 @@ public class SpearLauncher : MonoBehaviour {
         var spearController = spear.GetComponent<SpearController>();
 
         spearController.Init((target - (Vector2)position), transform);
+
+        _currentSpears += 1;
+        spearController.OnDestroySpearCallback += () => _currentSpears -= 1;
     }
 }
