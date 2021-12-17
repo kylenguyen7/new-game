@@ -19,6 +19,7 @@ public abstract class Damageable : MonoBehaviour {
     [SerializeField] private GameObject _deathParticlesPrefab;
     [SerializeField] private GameObject _itemPrefab;
     [SerializeField] float knockbackDecayPerFrame;
+    private bool Dead;
     
     // Taking damage
     [SerializeField] protected SpriteRenderer _spriteRenderer;
@@ -89,6 +90,8 @@ public abstract class Damageable : MonoBehaviour {
     }
 
     private void Die() {
+        if (Dead) return;
+        Dead = true;
         if (_itemPrefab) SpawnItem();
         SpawnDeathEffects();
         OnDeathCallback?.Invoke();

@@ -21,7 +21,6 @@ public class SpearController : MonoBehaviour {
     
     // Bouncing
     private Vector2 _previousVelocity = Vector2.zero;
-    [SerializeField] private float _floatDecayFactor;
     [SerializeField] private GameObject _spearTip;
 
     private void Awake() {
@@ -30,8 +29,8 @@ public class SpearController : MonoBehaviour {
 
     private void Update() {
         if (Input.GetMouseButtonDown(1) && !retracted) {
-            retracted = true;
             _spearTip.SetActive(false);
+            retracted = true;
         }
     }
 
@@ -70,12 +69,18 @@ public class SpearController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Bouncy") || other.gameObject.CompareTag("Enemy Bouncy")) {
+            float bounciness = other.gameObject.GetComponent<TerrainController>().Bounciness;
+            if (bounciness <= 0) {
+                _rb.velocity = Vector2.zero;
+                return;
+            }
+            
             Vector2 normal = other.GetContact(0).normal;
             // Component of velocity in direction of normal
             Vector2 velocityNormalComp = normal * Vector2.Dot(normal, _previousVelocity);
             Vector2 newVelocity = _previousVelocity - 2 * velocityNormalComp;
             
-            _rb.velocity = newVelocity * _floatDecayFactor;
+            _rb.velocity = newVelocity * bounciness;
             SetFacing(newVelocity.normalized);
         }
     }

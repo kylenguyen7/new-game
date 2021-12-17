@@ -6,6 +6,8 @@ public class CameraController : MonoBehaviour {
     [Range(0f, 1f), SerializeField] private float _mouseTracking;
 
     private void Update() {
+        if (_followTarget == null) return;
+        
         Vector2 mousePos = Input.mousePosition;
         
         // Range from [-0.5, 0.5] based on mouse position on screen. Clamp in case mouse is off-screen.

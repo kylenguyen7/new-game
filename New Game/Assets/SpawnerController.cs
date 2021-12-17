@@ -7,14 +7,16 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class SpawnerController : MonoBehaviour {
-    // Define boundaries somehow
+    [SerializeField] private float _spawnWidth;
+    [SerializeField] private float _spawnHeight;
 
     [SerializeField, Range(1, 10)]
     private int _minSpawnCount;
     [SerializeField, Range(1, 10)]
     private int _maxSpawnCount;
     [SerializeField] private GameObject _dasherPrefab;
-
+    [SerializeField] private GameObject _shooterPrefab;
+    
     private int _enemyCount = 0;
     private Coroutine _spawnWaveCoroutine;
 
@@ -24,11 +26,16 @@ public class SpawnerController : MonoBehaviour {
         }
     }
 
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireCube(Vector3.zero, new Vector3(_spawnWidth, _spawnHeight, 0f));
+    }
+
     private IEnumerator SpawnWaveCoroutine() {
         yield return new WaitForSeconds(1f);
         int count = Random.Range(_minSpawnCount, _maxSpawnCount);
         for (int i = 0; i < count; i++) {
-            var damageable = Instantiate(_dasherPrefab, new Vector2(Random.Range(-5, 5), Random.Range(-5, 5)), Quaternion.identity)
+            var enemy = Random.value < 0.5f ? _dasherPrefab : _shooterPrefab;
+            var damageable = Instantiate(enemy, new Vector2(Random.Range(-_spawnWidth/2, _spawnWidth/2), Random.Range(-_spawnHeight/2, _spawnHeight/2)), Quaternion.identity)
                 .GetComponent<Damageable>();
             damageable.OnDeathCallback += DecreaseCounter;
             _enemyCount += 1;

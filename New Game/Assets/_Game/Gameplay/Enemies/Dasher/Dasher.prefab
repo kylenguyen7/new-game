@@ -183,12 +183,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 20
+  _deathParticlesPrefab: {fileID: 3422884608894595234, guid: e70afb6716f79894393dae073c0ab357, type: 3}
+  _itemPrefab: {fileID: 0}
   knockbackDecayPerFrame: 1
   _spriteRenderer: {fileID: 8045688399757685014}
-  _initialColor: {r: 1, g: 1, b: 1, a: 1}
-  _damagedColor: {r: 1, g: 0, b: 0, a: 1}
-  _damagedColorFadeTime: 0.25
-  _deathParticlesPrefab: {fileID: 3422884608894595234, guid: e70afb6716f79894393dae073c0ab357, type: 3}
-  _itemPrefab: {fileID: 1574369818119889862, guid: 81c55ad6c650b8743951db3844b6aaad, type: 3}
   _dasherData: {fileID: 11400000, guid: 1b7086a46b1e7014db764e755121661f, type: 2}
-  _spriteRenderer: {fileID: 8045688399757685014}
+  _damage: 0
+  _kbMagnitude: 0

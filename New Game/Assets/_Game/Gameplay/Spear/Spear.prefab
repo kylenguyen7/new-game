@@ -110,7 +110,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 5
+  m_LinearDrag: 2.5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -132,9 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 1
   _kbMagnitude: 0
-  _initialSpeed: 30
-  _retractionSpeed: 25
-  _floatDecayFactor: 0.5
+  _initialSpeed: 50
+  _retractionSpeed: 30
   _spearTip: {fileID: 8337373822445176432}
 --- !u!61 &5929681382831634805
 BoxCollider2D:
