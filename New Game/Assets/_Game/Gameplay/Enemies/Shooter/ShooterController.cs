@@ -6,6 +6,7 @@ using UnityEngine;
 public class ShooterController : EnemyBase {
     [SerializeField] private GameObject _shurikenPrefab;
     [SerializeField] private float _trackRadius;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     private Vector2 _gizmoCenter;
     
@@ -17,7 +18,7 @@ public class ShooterController : EnemyBase {
 
         _gizmoCenter = transform.position;
         
-        var track = new ShooterStateTrack(this, _shurikenPrefab);
+        var track = new ShooterStateTrack(this, _spriteRenderer, _shurikenPrefab);
         var roam = new ShooterStateRoam(this, _rb);
         
         // _stateMachine.AddTransition(roam, track, () => GetDistanceToTarget() <= _trackRadius);
