@@ -134,6 +134,8 @@ MonoBehaviour:
   _kbMagnitude: 0
   _initialSpeed: 30
   _retractionSpeed: 25
+  _floatDecayFactor: 0.5
+  _spearTip: {fileID: 8337373822445176432}
 --- !u!61 &5929681382831634805
 BoxCollider2D:
   m_ObjectHideFlags: 0

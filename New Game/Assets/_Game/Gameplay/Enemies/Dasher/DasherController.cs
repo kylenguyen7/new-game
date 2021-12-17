@@ -6,7 +6,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class DasherController : EnemyBase {
-    private StateMachine _stateMachine = new StateMachine();
     [SerializeField] private DasherData _dasherData;
     [SerializeField] private float _damage;
     [SerializeField] private float _kbMagnitude;
@@ -47,20 +46,10 @@ public class DasherController : EnemyBase {
         _stateMachine.Init(roam);
     }
 
-    private new void Update() {
-        base.Update();
-        _stateMachine.Tick();
-    }
-
     private void OnDrawGizmos() {
         Gizmos.DrawWireSphere(transform.position, _dasherData.chaseStartRadius);
         Gizmos.DrawWireSphere(transform.position, _dasherData.roamDestinationRadius);
         Gizmos.DrawWireSphere(transform.position, _dasherData.chaseFinishedRadius);
-    }
-
-    private new void FixedUpdate() {
-        base.FixedUpdate();
-        _stateMachine.FixedTick();
     }
     
     /**
@@ -83,23 +72,6 @@ public class DasherController : EnemyBase {
         return Vector2.Distance(GetClosestPlayer().position, transform.position);
     }
 
-    private Transform GetClosestPlayer() {
-        PlayerController closest = null;
-        float minDist = float.MaxValue;
-        foreach (var player in FindObjectsOfType<PlayerController>()) {
-            float dist = Vector2.Distance(player.transform.position, transform.position);
-            if (dist < minDist) {
-                closest = player;
-                minDist = dist;
-            }
-        }
-
-        if (closest == null) {
-            Debug.LogError("Dasher failed to find any players in scene.");
-        }
-        return closest.transform;
-    }
-    
     private void OnCollisionStay2D(Collision2D other) {
         // Deal damage only while dashing
         if (!(_stateMachine.getCurrentState() is DasherStateDash)) return;

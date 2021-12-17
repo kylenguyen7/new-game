@@ -21,6 +21,8 @@ public class SpearController : MonoBehaviour {
     
     // Bouncing
     private Vector2 _previousVelocity = Vector2.zero;
+    [SerializeField] private float _floatDecayFactor;
+    [SerializeField] private GameObject _spearTip;
 
     private void Awake() {
         _rb = GetComponent<Rigidbody2D>();
@@ -29,6 +31,7 @@ public class SpearController : MonoBehaviour {
     private void Update() {
         if (Input.GetMouseButtonDown(1) && !retracted) {
             retracted = true;
+            _spearTip.SetActive(false);
         }
     }
 
@@ -45,22 +48,13 @@ public class SpearController : MonoBehaviour {
     public void Init(Vector2 initialDirection, Transform owner) {
         var dir = initialDirection.normalized;
         SetFacing(dir);
-        SetHeading(dir, _initialSpeed);
+        _rb.velocity = dir * _initialSpeed;
         _owner = owner;
     }
     
     // Direction the spear is pointing
     private void SetFacing(Vector2 facing) {
         transform.right = facing;
-    }
-
-    // Direction the spear is moving in
-    private void SetHeading(Vector2 heading, float speed) {
-        // If speed < 0 use current speed
-        if (speed < 0) {
-            speed = _rb.velocity.magnitude;
-        }
-        _rb.velocity = heading.normalized * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -81,9 +75,8 @@ public class SpearController : MonoBehaviour {
             Vector2 velocityNormalComp = normal * Vector2.Dot(normal, _previousVelocity);
             Vector2 newVelocity = _previousVelocity - 2 * velocityNormalComp;
             
-            _rb.velocity = newVelocity;
+            _rb.velocity = newVelocity * _floatDecayFactor;
             SetFacing(newVelocity.normalized);
-            retracted = false;
         }
     }
 }
