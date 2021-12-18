@@ -45,8 +45,11 @@ public class SpearController : MonoBehaviour {
             transform.right = toOwner;
             _rb.velocity = toOwner * _retractionSpeed;
         }
-
-        _previousVelocity = _rb.velocity;
+        else {
+            transform.right = Rotator.instance.UpdateHeading(transform.right, transform.position);
+            _rb.velocity = _rb.velocity.magnitude * transform.right;
+            _previousVelocity = _rb.velocity;
+        }
     }
 
     public void Init(Vector2 initialDirection, Transform owner) {
@@ -56,6 +59,7 @@ public class SpearController : MonoBehaviour {
     }
 
     private void SetVelocity(Vector2 velocity) {
+        Debug.Log("Velocity being set.");
         _rb.velocity = velocity;
         transform.right = velocity.normalized;
     }
