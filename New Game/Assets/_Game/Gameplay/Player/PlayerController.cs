@@ -19,6 +19,11 @@ public class PlayerController : Damageable {
     
     public float Speed => _speed;
     public float DashSpeed => _dashSpeed;
+    
+    // Charging
+    public float Flash;
+    public float _currentFlash;
+    private Material _material;
 
     // Cardinal direction (up, left, right, down)
     public Vector2 Facing { get; set; }
@@ -27,9 +32,12 @@ public class PlayerController : Damageable {
 
     private new void Awake() {
         base.Awake();
+
+        _material = _spriteRenderer.material;
         
         IState idle = new PlayerStateIdle(this, _playerSpriteAnimator);
         IState move = new PlayerStateMoving(this, _playerSpriteAnimator);
+        IState charging = new PlayerStateCharging(this, _playerSpriteAnimator);
         IState dash = new PlayerStateDashing(this);
         
         _stateMachine.AddTransition(idle, move,
@@ -42,12 +50,18 @@ public class PlayerController : Damageable {
             () => Input.GetKeyDown(KeyCode.LeftShift));
         _stateMachine.AddTransition(dash, idle,
             () => !Dashing);
+
+        _stateMachine.AddAnyTransition(charging, () => Input.GetMouseButtonDown(1));
+        _stateMachine.AddTransition(charging, idle, () => Input.GetMouseButtonUp(1));
         _stateMachine.Init(idle);
     }
 
     private new void Update() {
         base.Update();
         _stateMachine.Tick();
+        
+        _currentFlash = Mathf.Lerp(_currentFlash, Flash, 0.05f);
+        _material.SetFloat("_Flash", _currentFlash);
     }
 
     private new void FixedUpdate() {
