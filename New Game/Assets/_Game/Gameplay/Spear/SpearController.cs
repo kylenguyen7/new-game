@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Common;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ public class SpearController : MonoBehaviour {
 
     // Retraction
     private Transform _owner;
-    private bool retracted = false;
+    private bool retracted;
     
     // Bouncing
     private Vector2 _previousVelocity = Vector2.zero;
@@ -25,7 +26,6 @@ public class SpearController : MonoBehaviour {
     
     // Destroying
     public delegate void OnDestroySpear();
-
     public event OnDestroySpear OnDestroySpearCallback;
 
     private void Awake() {
@@ -41,15 +41,12 @@ public class SpearController : MonoBehaviour {
 
     private void FixedUpdate() {
         if (retracted) {
-            Vector2 toOwner = (_owner.position - transform.position).normalized;
-            transform.right = toOwner;
-            _rb.velocity = toOwner * _retractionSpeed;
+            Vector2 to = (_owner.position - transform.position).normalized;
+            transform.right = to;
+            _rb.velocity = to * _retractionSpeed;
         }
-        else {
-            transform.right = Rotator.instance.UpdateHeading(transform.right, transform.position);
-            _rb.velocity = _rb.velocity.magnitude * transform.right;
-            _previousVelocity = _rb.velocity;
-        }
+        
+        _previousVelocity = _rb.velocity;
     }
 
     public void Init(Vector2 initialDirection, Transform owner) {
@@ -59,7 +56,6 @@ public class SpearController : MonoBehaviour {
     }
 
     private void SetVelocity(Vector2 velocity) {
-        Debug.Log("Velocity being set.");
         _rb.velocity = velocity;
         transform.right = velocity.normalized;
     }
