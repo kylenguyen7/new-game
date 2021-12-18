@@ -30,18 +30,13 @@ public class SpearController : MonoBehaviour {
 
     private void Awake() {
         _rb = GetComponent<Rigidbody2D>();
-        GestureDetector.instance.OnGestureCallback += Redirect;
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space) && !retracted) {
+        if (Input.GetMouseButtonDown(1) && !retracted) {
             _spearTip.SetActive(false);
             retracted = true;
         }
-    }
-
-    private void OnDisable() {
-        GestureDetector.instance.OnGestureCallback -= Redirect;
     }
 
     private void FixedUpdate() {
@@ -58,10 +53,6 @@ public class SpearController : MonoBehaviour {
         var dir = initialDirection.normalized;
         SetVelocity(dir * _initialSpeed);
         _owner = owner;
-    }
-
-    private void Redirect(Vector2 direction) {
-        SetVelocity(direction.normalized * _initialSpeed);
     }
 
     private void SetVelocity(Vector2 velocity) {
