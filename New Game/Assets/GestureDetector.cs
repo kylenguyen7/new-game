@@ -7,13 +7,24 @@ using UnityEditor;
 using UnityEngine;
 
 public class GestureDetector : MonoBehaviour {
+    public static GestureDetector instance;
     [SerializeField] private float _minGestureLength;
     [SerializeField] private LineRenderer _lineRenderer;
     private bool _gesturing;
     private Vector2 _start;
     private Vector3[] _emptyPositions = { Vector3.zero, Vector3.zero };
 
+    public delegate void OnGesture(Vector2 gesture);
+
+    public event OnGesture OnGestureCallback;
+
     private void Awake() {
+        if (instance != null) {
+            Destroy(this);
+            return;
+        }
+
+        instance = this;
         _lineRenderer.SetPositions(_emptyPositions);
     }
 
@@ -27,13 +38,13 @@ public class GestureDetector : MonoBehaviour {
         if (_gesturing) {
             // Update indicator
             _lineRenderer.SetPosition(1, KaleUtils.GetMousePosWorldCoordinates());
-            Vector2 gesture = _start - (Vector2)Input.mousePosition;
+            Vector2 gesture = (Vector2)Input.mousePosition - _start;
             _lineRenderer.startColor = _lineRenderer.endColor = gesture.magnitude >= _minGestureLength ? Color.yellow : Color.gray;
             
             // End gesture
             if (Input.GetMouseButtonUp(1)) {
                 if (gesture.magnitude >= _minGestureLength) {
-                    Debug.Log(gesture.normalized);
+                    OnGestureCallback?.Invoke(gesture.normalized);
                 }
                 _lineRenderer.SetPositions(_emptyPositions);
                 _gesturing = false;

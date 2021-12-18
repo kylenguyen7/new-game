@@ -30,13 +30,18 @@ public class SpearController : MonoBehaviour {
 
     private void Awake() {
         _rb = GetComponent<Rigidbody2D>();
+        GestureDetector.instance.OnGestureCallback += Redirect;
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(1) && !retracted) {
+        if (Input.GetKeyDown(KeyCode.Space) && !retracted) {
             _spearTip.SetActive(false);
             retracted = true;
         }
+    }
+
+    private void OnDisable() {
+        GestureDetector.instance.OnGestureCallback -= Redirect;
     }
 
     private void FixedUpdate() {
@@ -51,14 +56,17 @@ public class SpearController : MonoBehaviour {
 
     public void Init(Vector2 initialDirection, Transform owner) {
         var dir = initialDirection.normalized;
-        SetFacing(dir);
-        _rb.velocity = dir * _initialSpeed;
+        SetVelocity(dir * _initialSpeed);
         _owner = owner;
     }
-    
-    // Direction the spear is pointing
-    private void SetFacing(Vector2 facing) {
-        transform.right = facing;
+
+    private void Redirect(Vector2 direction) {
+        SetVelocity(direction.normalized * _initialSpeed);
+    }
+
+    private void SetVelocity(Vector2 velocity) {
+        _rb.velocity = velocity;
+        transform.right = velocity.normalized;
     }
 
     private void OnDestroy() {
@@ -70,7 +78,7 @@ public class SpearController : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        if (retracted && other.CompareTag("Enemy")) {
+        if (other.CompareTag("Enemy")) {
             Damageable enemy = other.GetComponent<Damageable>();
             enemy.TakeDamage(_damage, transform.right, _kbMagnitude);
         }
@@ -88,9 +96,7 @@ public class SpearController : MonoBehaviour {
             // Component of velocity in direction of normal
             Vector2 velocityNormalComp = normal * Vector2.Dot(normal, _previousVelocity);
             Vector2 newVelocity = _previousVelocity - 2 * velocityNormalComp;
-            
-            _rb.velocity = newVelocity * bounciness;
-            SetFacing(newVelocity.normalized);
+            SetVelocity(newVelocity * bounciness);
         }
     }
 }
