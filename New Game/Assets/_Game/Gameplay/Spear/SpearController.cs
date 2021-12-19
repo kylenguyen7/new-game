@@ -77,6 +77,12 @@ public class SpearController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Bouncy") || other.gameObject.CompareTag("Enemy Bouncy")) {
+            
+            //
+            _rb.velocity = Vector2.zero;
+            return;
+            //
+            
             float bounciness = other.gameObject.GetComponent<TerrainController>().Bounciness;
             if (bounciness <= 0) {
                 _rb.velocity = Vector2.zero;

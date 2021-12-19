@@ -51,8 +51,8 @@ public class PlayerController : Damageable {
         _stateMachine.AddTransition(dash, idle,
             () => !Dashing);
 
-        _stateMachine.AddAnyTransition(charging, () => Input.GetMouseButtonDown(1));
-        _stateMachine.AddTransition(charging, idle, () => Input.GetMouseButtonUp(1));
+        _stateMachine.AddAnyTransition(charging, () => Input.GetMouseButtonDown(0));
+        _stateMachine.AddTransition(charging, idle, () => Input.GetMouseButtonUp(0));
         _stateMachine.Init(idle);
     }
 
@@ -60,7 +60,7 @@ public class PlayerController : Damageable {
         base.Update();
         _stateMachine.Tick();
         
-        _currentFlash = Mathf.Lerp(_currentFlash, Flash, 0.05f);
+        _currentFlash = Mathf.Lerp(_currentFlash, Flash, 0.1f);
         _material.SetFloat("_Flash", _currentFlash);
     }
 

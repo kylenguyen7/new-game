@@ -132,8 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 1
   _kbMagnitude: 0
-  _initialSpeed: 25
-  _retractionSpeed: 30
+  _initialSpeed: 50
+  _retractionSpeed: 50
   _spearTip: {fileID: 8337373822445176432}
 --- !u!61 &5929681382831634805
 BoxCollider2D:
