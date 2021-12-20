@@ -24,7 +24,8 @@ public class PlayerController : Damageable {
     
     // Attacking
     // Some of these can become constants later
-    [SerializeField] private float _attackTime;                     // How long an attack lasts for
+    [SerializeField] public float _attackTime;                     // How long an attack lasts for
+    [SerializeField] public float _lastAttackTime;                     // How long an attack lasts for
     [SerializeField] public float _attackDisplacementSpeed;         // How fast the player dashes forward when attacking
     [SerializeField] public float _attackDisplacementDecel;         // How fast the dash decelerates
     [SerializeField] public float _attackOffset;                    // Distance to center of attack hitbox
@@ -34,7 +35,6 @@ public class PlayerController : Damageable {
     [HideInInspector] public float _attackCooldownTimer;
     
     public bool Attacking { get; set; }
-    public float AttackTime => _attackTime;
 
     // Cardinal direction (up, left, right, down)
     public Vector2 Facing { get; set; }

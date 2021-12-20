@@ -22,7 +22,7 @@ public class PlayerStateMelee : IState {
     
     public void Tick() {
         if (_attackTimer <= 0) {
-            if (_attackQueued && _attackCount < COMBO_COUNT) {
+            if (_attackQueued) {
                 Attack();
                 _attackQueued = false;
             }
@@ -31,7 +31,7 @@ public class PlayerStateMelee : IState {
             }
         }
 
-        if (!_attackQueued && _attackTimer <= 0.8f * _playerController.AttackTime) {
+        if (!_attackQueued && _attackCount < COMBO_COUNT && _attackTimer <= 0.8f * _playerController._attackTime) {
             _attackQueued = Input.GetMouseButtonDown(0);
         }
     }
@@ -48,9 +48,11 @@ public class PlayerStateMelee : IState {
     }
 
     private void Attack() {
+        bool lastAttack = _attackCount == COMBO_COUNT;
         Vector2 toMouse = (KaleUtils.GetMousePosWorldCoordinates() - (Vector2)_playerController.transform.position).normalized;
         _playerController.Heading = toMouse;
         _playerController.Velocity = _playerController._attackDisplacementSpeed * toMouse;
+        if (lastAttack) _playerController.Velocity *= 1.2f;
 
         if (Math.Abs(toMouse.x) > Math.Abs(toMouse.y)) {
             _playerController.Facing = new Vector2(Mathf.Sign(toMouse.x), 0);
@@ -73,7 +75,7 @@ public class PlayerStateMelee : IState {
         _animator.SetFloat("facingY", _playerController.Heading.y);
         _animator.SetTrigger("attacking" + _attackCount % 2);
         _attackCount++;
-        _attackTimer = _playerController.AttackTime;
+        _attackTimer = lastAttack ? _playerController._lastAttackTime : _playerController._attackTime;
     }
 
     private Vector2 Decelerate(Vector2 velocity, float decel) {
