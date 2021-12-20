@@ -33,7 +33,7 @@ public class DasherStateDash : IState {
     public void OnEnter() {
         _dashTime = _dasherData.dashTime;
         _spriteRenderer.color = Color.red;
-        _dasherController.gameObject.layer = 6;
+        _dasherController.gameObject.layer = ApothecaryConstants.LAYER_DASHING;
         _dasherController.Collided = false;
     }
 
@@ -41,6 +41,6 @@ public class DasherStateDash : IState {
         _dashFinished = false;
         _rb.velocity = Vector2.zero;
         _spriteRenderer.color = Color.white;
-        _dasherController.gameObject.layer = 10;
+        _dasherController.gameObject.layer = ApothecaryConstants.LAYER_ENEMIES;
     }
 }

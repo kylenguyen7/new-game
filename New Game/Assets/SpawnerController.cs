@@ -38,9 +38,7 @@ public class SpawnerController : MonoBehaviour {
             var damageable = Instantiate(enemy, new Vector2(Random.Range(-_spawnWidth/2, _spawnWidth/2), Random.Range(-_spawnHeight/2, _spawnHeight/2)), Quaternion.identity)
                 .GetComponent<Damageable>();
             damageable.OnDeathCallback += DecreaseCounter;
-            damageable.gameObject.layer = LayerMask.NameToLayer("Enemies");
-            Debug.Log(damageable.gameObject);
-            Debug.Log(damageable.gameObject.layer);
+            damageable.gameObject.layer = ApothecaryConstants.LAYER_ENEMIES;
             _enemyCount += 1;
             yield return new WaitForSecondsRealtime(Random.Range(0.10f, 0.5f));
         }

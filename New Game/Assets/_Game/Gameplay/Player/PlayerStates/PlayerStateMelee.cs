@@ -56,9 +56,6 @@ public class PlayerStateMelee : IState {
             _playerController.Facing = new Vector2(0, Mathf.Sign(toMouse.y));
         }
 
-        _animator.SetFloat("facingX", _playerController.Facing.x);
-        _animator.SetFloat("facingY", _playerController.Facing.y);
-
         Collider2D[] hits = Physics2D.OverlapBoxAll(
             (Vector2)_playerController.transform.position + _playerController.Facing * _playerController._attackOffset,
             new Vector2(_playerController._attackWidth, _playerController._attackWidth),
@@ -66,7 +63,6 @@ public class PlayerStateMelee : IState {
             LayerMask.GetMask("Enemies"));
 
         foreach (Collider2D hit in hits) {
-            Debug.Log(hit);
             var enemy = hit.gameObject.GetComponent<EnemyBase>();
             enemy.TakeDamage(1f, toMouse, 1);
         }

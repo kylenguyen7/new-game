@@ -32,7 +32,7 @@ public class PlayerStateDashing : IState {
         start = _playerController.transform.position;
         
         _playerController.Dashing = true;
-        _playerController.gameObject.layer = 6;
+        _playerController.gameObject.layer = ApothecaryConstants.LAYER_DASHING;
         
         // _dashDir = _playerController.Velocity.magnitude == 0 ? _playerController.Facing : _playerController.Heading;
         _dashDir = (KaleUtils.GetMousePosWorldCoordinates() - (Vector2)_playerController.transform.position).normalized;
@@ -47,6 +47,6 @@ public class PlayerStateDashing : IState {
         Debug.Log(((Vector2)_playerController.transform.position - start).magnitude);
         Debug.Log(_dashTime);
         _playerController.Velocity = Vector2.zero;
-        _playerController.gameObject.layer = 7;
+        _playerController.gameObject.layer = ApothecaryConstants.LAYER_PLAYER;
     }
 }
