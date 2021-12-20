@@ -26,6 +26,8 @@ public class PlayerController : Damageable {
     [SerializeField] private float _attackTime;
     [SerializeField] public float _attackDisplacementSpeed;
     [SerializeField] public float _attackDisplacementDecel;
+    [SerializeField] public float _attackOffset;
+    [SerializeField] public float _attackWidth;
     public bool Attacking { get; set; }
     public float AttackTime => _attackTime;
 
@@ -33,6 +35,10 @@ public class PlayerController : Damageable {
     public Vector2 Facing { get; set; }
     // True direction
     public Vector2 Heading { get; set; }
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireCube((Vector2)transform.position + Facing * _attackOffset, new Vector2(_attackWidth, _attackWidth));
+    }
 
     private new void Awake() {
         base.Awake();

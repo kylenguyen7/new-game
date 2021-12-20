@@ -41,6 +41,6 @@ public class DasherStateDash : IState {
         _dashFinished = false;
         _rb.velocity = Vector2.zero;
         _spriteRenderer.color = Color.white;
-        _dasherController.gameObject.layer = 0;
+        _dasherController.gameObject.layer = 10;
     }
 }

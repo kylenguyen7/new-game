@@ -18,14 +18,10 @@ public class PlayerStateDashing : IState {
     }
 
     public void Tick() {
-        _dashTime += Time.deltaTime;
         if (_dashTime >= _playerController.DashTime) {
             _playerController.Dashing = false;
         }
-        
-        // if(((Vector2)_playerController.transform.position - start).magnitude > _playerController.DashDistance) {
-        //     _playerController.Dashing = false;
-        // }
+        _dashTime += Time.deltaTime;
     }
 
     public void FixedTick() {
@@ -38,8 +34,8 @@ public class PlayerStateDashing : IState {
         _playerController.Dashing = true;
         _playerController.gameObject.layer = 6;
         
-        _dashDir = _playerController.Velocity.magnitude == 0 ? _playerController.Facing : _playerController.Heading;
-        // _dashDir = (KaleUtils.GetMousePosWorldCoordinates() - (Vector2)_playerController.transform.position).normalized;
+        // _dashDir = _playerController.Velocity.magnitude == 0 ? _playerController.Facing : _playerController.Heading;
+        _dashDir = (KaleUtils.GetMousePosWorldCoordinates() - (Vector2)_playerController.transform.position).normalized;
         _dashTime = 0f;
         
         _animator.SetTrigger("idle");
