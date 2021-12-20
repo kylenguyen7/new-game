@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using _Common;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerStateDashing : IState {
     private PlayerController _playerController;
+    private Animator _animator;
     private Vector2 _dashDir;
     private float _dashTime;
+
+    private Vector2 start;
     
-    public PlayerStateDashing(PlayerController playerController) {
+    public PlayerStateDashing(PlayerController playerController, Animator animator) {
         _playerController = playerController;
+        _animator = animator;
     }
 
     public void Tick() {
@@ -17,6 +22,10 @@ public class PlayerStateDashing : IState {
         if (_dashTime >= _playerController.DashTime) {
             _playerController.Dashing = false;
         }
+        
+        // if(((Vector2)_playerController.transform.position - start).magnitude > _playerController.DashDistance) {
+        //     _playerController.Dashing = false;
+        // }
     }
 
     public void FixedTick() {
@@ -24,14 +33,23 @@ public class PlayerStateDashing : IState {
     }
 
     public void OnEnter() {
+        start = _playerController.transform.position;
+        
         _playerController.Dashing = true;
         _playerController.gameObject.layer = 6;
         
         _dashDir = _playerController.Velocity.magnitude == 0 ? _playerController.Facing : _playerController.Heading;
+        // _dashDir = (KaleUtils.GetMousePosWorldCoordinates() - (Vector2)_playerController.transform.position).normalized;
         _dashTime = 0f;
+        
+        _animator.SetTrigger("idle");
+        _animator.SetFloat("facingX", _dashDir.x);
+        _animator.SetFloat("facingY", _dashDir.y);
     }
 
     public void OnExit() {
+        Debug.Log(((Vector2)_playerController.transform.position - start).magnitude);
+        Debug.Log(_dashTime);
         _playerController.Velocity = Vector2.zero;
         _playerController.gameObject.layer = 7;
     }

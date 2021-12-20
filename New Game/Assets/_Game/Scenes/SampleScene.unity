@@ -543,7 +543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &235732070
 Transform:
   m_ObjectHideFlags: 0
@@ -769,6 +769,10 @@ MonoBehaviour:
   _speed: 8
   _dashSpeed: 30
   _dashTime: 0.1
+  _dashDistance: 0
+  _attackTime: 0.3
+  _attackDisplacementSpeed: 7
+  _attackDisplacementDecel: 1
 --- !u!4 &516520003
 Transform:
   m_ObjectHideFlags: 0
@@ -1910,7 +1914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2135975655
 MonoBehaviour:
   m_ObjectHideFlags: 0

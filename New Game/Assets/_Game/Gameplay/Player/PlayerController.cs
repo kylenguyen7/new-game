@@ -13,12 +13,21 @@ public class PlayerController : Damageable {
     // Dashing
     [SerializeField] private float _dashSpeed;
     [SerializeField] private float _dashTime;
+    [SerializeField] private float _dashDistance;
 
     public float DashTime => _dashTime;
+    public float DashDistance => _dashDistance;
     public bool Dashing { get; set; }
     
     public float Speed => _speed;
     public float DashSpeed => _dashSpeed;
+    
+    // Attacking
+    [SerializeField] private float _attackTime;
+    [SerializeField] public float _attackDisplacementSpeed;
+    [SerializeField] public float _attackDisplacementDecel;
+    public bool Attacking { get; set; }
+    public float AttackTime => _attackTime;
 
     // Cardinal direction (up, left, right, down)
     public Vector2 Facing { get; set; }
@@ -30,19 +39,22 @@ public class PlayerController : Damageable {
         
         IState idle = new PlayerStateIdle(this, _playerSpriteAnimator);
         IState move = new PlayerStateMoving(this, _playerSpriteAnimator);
-        IState dash = new PlayerStateDashing(this);
+        IState dash = new PlayerStateDashing(this, _playerSpriteAnimator);
+        IState melee = new PlayerStateMelee(this, _playerSpriteAnimator);
         
         _stateMachine.AddTransition(idle, move,
             () => Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0);
         _stateMachine.AddTransition(move, idle,
             () => Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0);
-        _stateMachine.AddTransition(idle, dash,
-            () => Input.GetKeyDown(KeyCode.LeftShift));
-        _stateMachine.AddTransition(move, dash,
-            () => Input.GetKeyDown(KeyCode.LeftShift));
+        _stateMachine.AddAnyTransition(dash, 
+            () => Input.GetKeyDown(KeyCode.Space));
         _stateMachine.AddTransition(dash, idle,
             () => !Dashing);
-            
+        _stateMachine.AddAnyTransition(melee, 
+            () => Input.GetMouseButtonDown(0));
+        _stateMachine.AddTransition(melee, idle, 
+            () => !Attacking);
+        
         _stateMachine.Init(idle);
     }
 

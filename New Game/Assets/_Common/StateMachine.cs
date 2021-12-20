@@ -73,6 +73,7 @@ public class StateMachine {
     }
     
     private void SetState(IState newState) {
+        // Cannot transition from a state to itself
         if (newState == _currentState) return;
         
         _currentState?.OnExit();
