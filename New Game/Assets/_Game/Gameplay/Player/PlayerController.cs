@@ -59,7 +59,7 @@ public class PlayerController : Damageable {
         _stateMachine.AddTransition(move, idle,
             () => Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0);
         _stateMachine.AddAnyTransition(dash, 
-            () => Input.GetKeyDown(KeyCode.Space));
+            () => Input.GetKeyDown(KeyCode.LeftShift));
         _stateMachine.AddTransition(dash, idle,
             () => !Dashing);
         _stateMachine.AddAnyTransition(melee, 

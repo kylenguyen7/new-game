@@ -14,5 +14,9 @@ public class DevTools : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E)) {
             TimeStop._instance.StopTime();
         }
+
+        if (Input.GetKeyDown(KeyCode.T)) {
+            FindObjectOfType<PlayerController>().gameObject.transform.position = Vector3.zero;
+        }
     }
 }
