@@ -770,11 +770,13 @@ MonoBehaviour:
   _dashSpeed: 30
   _dashTime: 0.1
   _dashDistance: 5
-  _attackTime: 0.28
+  _attackTime: 0.25
   _attackDisplacementSpeed: 7
   _attackDisplacementDecel: 1
   _attackOffset: 0.75
   _attackWidth: 2
+  _attackCooldown: 0.25
+  _attackCooldownTimer: 0
 --- !u!4 &516520003
 Transform:
   m_ObjectHideFlags: 0

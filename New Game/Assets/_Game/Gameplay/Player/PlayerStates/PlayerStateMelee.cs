@@ -8,6 +8,7 @@ using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class PlayerStateMelee : IState {
+    private static int COMBO_COUNT = 3;
     private PlayerController _playerController;
     private Animator _animator;
     private float _attackTimer = 0f;
@@ -21,7 +22,7 @@ public class PlayerStateMelee : IState {
     
     public void Tick() {
         if (_attackTimer <= 0) {
-            if (_attackQueued) {
+            if (_attackQueued && _attackCount < COMBO_COUNT) {
                 Attack();
                 _attackQueued = false;
             }
@@ -41,6 +42,7 @@ public class PlayerStateMelee : IState {
     }
 
     public void OnEnter() {
+        _attackCount = 0;
         _playerController.Attacking = true;
         Attack();
     }
@@ -60,7 +62,7 @@ public class PlayerStateMelee : IState {
             (Vector2)_playerController.transform.position + _playerController.Facing * _playerController._attackOffset,
             new Vector2(_playerController._attackWidth, _playerController._attackWidth),
             0,
-            LayerMask.GetMask("Enemies"));
+            1 << ApothecaryConstants.LAYER_ENEMIES);
 
         foreach (Collider2D hit in hits) {
             var enemy = hit.gameObject.GetComponent<EnemyBase>();
@@ -69,8 +71,8 @@ public class PlayerStateMelee : IState {
 
         _animator.SetFloat("facingX", _playerController.Heading.x);
         _animator.SetFloat("facingY", _playerController.Heading.y);
-        _animator.SetTrigger("attacking" + _attackCount);
-        _attackCount = (_attackCount + 1) % 2;
+        _animator.SetTrigger("attacking" + _attackCount % 2);
+        _attackCount++;
         _attackTimer = _playerController.AttackTime;
     }
 
@@ -95,5 +97,7 @@ public class PlayerStateMelee : IState {
         return new Vector2(x, y);
     }
 
-    public void OnExit() { }
+    public void OnExit() {
+        _playerController._attackCooldownTimer = _playerController._attackCooldown;
+    }
 }
