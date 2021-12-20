@@ -44,8 +44,8 @@ public class PlayerStateDashing : IState {
     }
 
     public void OnExit() {
-        Debug.Log(((Vector2)_playerController.transform.position - start).magnitude);
-        Debug.Log(_dashTime);
+        // Debug.Log(((Vector2)_playerController.transform.position - start).magnitude);
+        // Debug.Log(_dashTime);
         _playerController.Velocity = Vector2.zero;
         _playerController.gameObject.layer = ApothecaryConstants.LAYER_PLAYER;
     }
