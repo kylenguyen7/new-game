@@ -24,7 +24,7 @@ public class PlayerStateMelee : IState {
 
     public void Tick() {
         // Only allow attacks up to the COMBO_COUNT
-        bool attacksRemaining = _comboCounter < COMBO_COUNT;
+        bool attacksRemaining = true || _comboCounter < COMBO_COUNT;
         if (!_attackQueued && attacksRemaining) {
             _attackQueued = Input.GetMouseButtonDown(0);
         }

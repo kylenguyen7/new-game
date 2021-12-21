@@ -9,6 +9,7 @@ public class DasherController : EnemyBase {
     [SerializeField] private DasherData _dasherData;
     [SerializeField] private float _damage;
     [SerializeField] private float _kbMagnitude;
+    private Animator _animator;
 
     // These variables have to be in this function since they require a MonoBehaviour
     public Transform Target { get; private set; }
@@ -17,12 +18,13 @@ public class DasherController : EnemyBase {
 
     private new void Awake() {
         base.Awake();
+        _animator = GetComponentInChildren<Animator>();
         
-        var roam = new DasherStateRoam(this, _dasherData);
+        var roam = new DasherStateRoam(this, _dasherData, _animator);
         var wait = new DasherStateWait(this, _dasherData);
-        var chase = new DasherStateChase(this, _dasherData, _rb);
+        var chase = new DasherStateChase(this, _dasherData, _animator);
         var prep = new DasherStatePrepare(_dasherData, _rb, _spriteRenderer);
-        var dash = new DasherStateDash(this, _dasherData, _rb, _spriteRenderer);
+        var dash = new DasherStateDash(this, _dasherData, _spriteRenderer, _animator);
         var recover = new DasherStateRecover(_dasherData, _rb, _spriteRenderer);
 
         _stateMachine.AddTransition(roam, wait, () => roam.RoamFinished);
@@ -83,5 +85,10 @@ public class DasherController : EnemyBase {
         }
 
         Collided = true;
+    }
+
+    public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
+        base.TakeDamage(damage, kbDirection, kbMagnitude);
+        _animator.SetTrigger("hurt");
     }
 }

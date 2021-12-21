@@ -292,6 +292,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spearPrefab: {fileID: 3637497735404715364, guid: 1fa5ac27c17753941b00310e13fe5e18, type: 3}
   _maxSpears: 100
+--- !u!1 &91283942 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8045688399757685012, guid: 8c9e3b04f62632849b879fe6fe19bd8a, type: 3}
+  m_PrefabInstance: {fileID: 174671346}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &91283943
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91283942}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 48b33e104a901b241ad69ac1f37e3275, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &143016466
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,6 +446,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8045688399757685014, guid: 8c9e3b04f62632849b879fe6fe19bd8a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2510910809370328699, guid: 2b4c777512c35b94d897f53f16d163bf, type: 3}
+    - target: {fileID: 8045688399757685014, guid: 8c9e3b04f62632849b879fe6fe19bd8a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 8045688400319738624, guid: 8c9e3b04f62632849b879fe6fe19bd8a, type: 3}
       propertyPath: m_Name
       value: Dasher

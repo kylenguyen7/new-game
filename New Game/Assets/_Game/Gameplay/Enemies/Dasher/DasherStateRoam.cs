@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,10 +9,13 @@ public class DasherStateRoam : IState {
 
     private bool _roamFinished;
     public bool RoamFinished => _roamFinished;
+    
+    private Animator _animator;
 
-    public DasherStateRoam(DasherController dasherController, DasherData dasherData) {
+    public DasherStateRoam(DasherController dasherController, DasherData dasherData, Animator animator) {
         _dasherController = dasherController;
         _dasherData = dasherData;
+        _animator = animator;
     }
 
     public void Tick() {
@@ -25,6 +29,7 @@ public class DasherStateRoam : IState {
     public void FixedTick() {
         Vector2 toDestination = _destination - (Vector2)_dasherController.transform.position;
         _dasherController.Velocity = toDestination.normalized * _dasherData.roamSpeed;
+        _animator.SetFloat("facingX", Mathf.Sign(_dasherController.Velocity.x));
     }
 
     public void OnEnter() {
