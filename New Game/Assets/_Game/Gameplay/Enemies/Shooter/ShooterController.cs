@@ -20,8 +20,8 @@ public class ShooterController : EnemyBase {
         var track = new ShooterStateTrack(this, _spriteRenderer, _shurikenPrefab);
         var roam = new ShooterStateRoam(this, _rb);
         
-        // _stateMachine.AddTransition(roam, track, () => GetDistanceToTarget() <= _trackRadius);
-        // _stateMachine.AddTransition(track, roam, () => GetDistanceToTarget() > _trackRadius);
+        _stateMachine.AddTransition(roam, track, () => GetDistanceToTarget() <= _trackRadius);
+        _stateMachine.AddTransition(track, roam, () => GetDistanceToTarget() > _trackRadius);
         _stateMachine.Init(track);
     }
 

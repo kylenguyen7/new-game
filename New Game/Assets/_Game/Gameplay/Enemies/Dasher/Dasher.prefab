@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 8045688399757685012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8045688400319738652}
   m_RootOrder: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3625043607559282579, guid: 045b15ec09bba42448d89db77fa6f20a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 098db799ec532764387a8c7736ebbd7d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,9 +91,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8045688400319738652}
-  - component: {fileID: 8045688400319738627}
   - component: {fileID: 8045688400319738626}
   - component: {fileID: 8045688400319738625}
+  - component: {fileID: 8451075361056201296}
   m_Layer: 8
   m_Name: Dasher
   m_TagString: Enemy
@@ -116,39 +116,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &8045688400319738627
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8045688400319738624}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.5}
-    newSize: {x: 1, y: 0.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.002163887, y: 0.49620295}
-      - {x: -0.5083933, y: -0.000633955}
-      - {x: -0.5, y: 0.0011615753}
-      - {x: -0.21859407, y: -0.286371}
-      - {x: -0.003431797, y: -0.5045965}
-      - {x: 0.5, y: -0.02734375}
-      - {x: 0.5, y: 0.015625}
-      - {x: 0.43961716, y: 0.06814551}
 --- !u!50 &8045688400319738626
 Rigidbody2D:
   serializedVersion: 4
@@ -188,5 +155,21 @@ MonoBehaviour:
   knockbackDecayPerFrame: 1
   _spriteRenderer: {fileID: 8045688399757685014}
   _dasherData: {fileID: 11400000, guid: 1b7086a46b1e7014db764e755121661f, type: 2}
-  _damage: 0
+  _damage: 1
   _kbMagnitude: 0
+--- !u!58 &8451075361056201296
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8045688400319738624}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.11}
+  serializedVersion: 2
+  m_Radius: 0.44
