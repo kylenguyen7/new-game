@@ -11,55 +11,84 @@ public class PlayerStateMelee : IState {
     private static int COMBO_COUNT = 3;
     private PlayerController _playerController;
     private Animator _animator;
-    private float _attackTimer = 0f;
-    private int _attackCount = 0;
+
+    private float _attackTimer;
+    private int _comboCounter; // The number of attacks that have occurred
     private bool _attackQueued;
-    
+    private float _prevAttackTime;
+
     public PlayerStateMelee(PlayerController playerController, Animator animator) {
         _playerController = playerController;
         _animator = animator;
     }
-    
-    public void Tick() {
-        if (_attackTimer <= 0) {
-            if (_attackQueued) {
-                Attack();
-                _attackQueued = false;
-            }
-            else {
-                _playerController.Attacking = false;
-            }
-        }
 
-        if (!_attackQueued && _attackCount < COMBO_COUNT && _attackTimer <= 0.8f * _playerController._attackTime) {
+    public void Tick() {
+        // Only allow attacks up to the COMBO_COUNT
+        bool attacksRemaining = _comboCounter < COMBO_COUNT;
+        if (!_attackQueued && attacksRemaining) {
             _attackQueued = Input.GetMouseButtonDown(0);
         }
     }
 
     public void FixedTick() {
+        if (_attackTimer <= 0) {
+            if (_attackQueued) {
+                Attack();
+                _attackQueued = false;
+            } else {
+                // It is impossible to queue another attack once this has been set, since
+                // input is checked in Tick() but before Tick() can be called, the state transition
+                // out of Attack will trigger.
+                _playerController.Attacking = false;
+            }
+        }
         _attackTimer -= Time.deltaTime;
         _playerController.Velocity = Decelerate(_playerController.Velocity, _playerController._attackDisplacementDecel);
     }
 
     public void OnEnter() {
-        _attackCount = 0;
+        if (Time.time - _prevAttackTime >= _playerController._attackComboResetTime) {
+            _comboCounter = 0;
+        }
+        _attackQueued = true;
         _playerController.Attacking = true;
-        Attack();
     }
 
-    private void Attack() {
-        bool lastAttack = _attackCount == COMBO_COUNT;
+    private void Attack() { 
         Vector2 toMouse = (KaleUtils.GetMousePosWorldCoordinates() - (Vector2)_playerController.transform.position).normalized;
-        _playerController.Heading = toMouse;
-        _playerController.Velocity = _playerController._attackDisplacementSpeed * toMouse;
-        if (lastAttack) _playerController.Velocity *= 1.2f;
-
-        if (Math.Abs(toMouse.x) > Math.Abs(toMouse.y)) {
-            _playerController.Facing = new Vector2(Mathf.Sign(toMouse.x), 0);
-        } else {
-            _playerController.Facing = new Vector2(0, Mathf.Sign(toMouse.y));
+        SetDirection(toMouse);
+        DealDamage(toMouse);
+        
+        _playerController._audioSource.pitch = 1 + _comboCounter * 0.1f;
+        _playerController._audioSource.PlayOneShot(_playerController._attackSfx);
+        _attackTimer = _playerController._attackTime;
+        _prevAttackTime = Time.time;
+        _comboCounter++;
+    }
+    
+    public void OnExit() {
+        if (_comboCounter == COMBO_COUNT) {
+            _playerController._attackCooldownTimer = _playerController._attackCooldown;
+            _comboCounter = 0;
         }
+    }
+    
+    private void SetDirection(Vector2 dir) {
+        _playerController.Heading = dir;
+        _playerController.Velocity = _playerController._attackDisplacementSpeed * dir;
 
+        if (Math.Abs(dir.x) > Math.Abs(dir.y)) {
+            _playerController.Facing = new Vector2(Mathf.Sign(dir.x), 0);
+        } else {
+            _playerController.Facing = new Vector2(0, Mathf.Sign(dir.y));
+        }
+        
+        _animator.SetFloat("facingX", _playerController.Heading.x);
+        _animator.SetFloat("facingY", _playerController.Heading.y);
+        _animator.SetTrigger("attacking" + _comboCounter % 2);
+    }
+
+    private void DealDamage(Vector2 dir) {
         Collider2D[] hits = Physics2D.OverlapBoxAll(
             (Vector2)_playerController.transform.position + _playerController.Facing * _playerController._attackOffset,
             new Vector2(_playerController._attackWidth, _playerController._attackWidth),
@@ -68,14 +97,8 @@ public class PlayerStateMelee : IState {
 
         foreach (Collider2D hit in hits) {
             var enemy = hit.gameObject.GetComponent<EnemyBase>();
-            enemy.TakeDamage(1f, toMouse, 1);
+            enemy.TakeDamage(1f, dir, 1);
         }
-
-        _animator.SetFloat("facingX", _playerController.Heading.x);
-        _animator.SetFloat("facingY", _playerController.Heading.y);
-        _animator.SetTrigger("attacking" + _attackCount % 2);
-        _attackCount++;
-        _attackTimer = lastAttack ? _playerController._lastAttackTime : _playerController._attackTime;
     }
 
     private Vector2 Decelerate(Vector2 velocity, float decel) {
@@ -97,9 +120,5 @@ public class PlayerStateMelee : IState {
         }
 
         return new Vector2(x, y);
-    }
-
-    public void OnExit() {
-        _playerController._attackCooldownTimer = _playerController._attackCooldown;
     }
 }

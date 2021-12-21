@@ -57,6 +57,7 @@ public abstract class Damageable : MonoBehaviour {
     // BEGIN PRIVATE HELPER FUNCTIONS
     private void DepleteHealth(float damage) {
         _hp -= damage;
+        Debug.Log(_hp);
         if (_hp <= 0) {
             Die();
         }

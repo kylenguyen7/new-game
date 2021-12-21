@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class PlayerController : Damageable {
     private StateMachine _stateMachine = new StateMachine();
-    
+
+    [SerializeField] public AudioSource _audioSource;
     [SerializeField] private Animator _playerSpriteAnimator;
     [SerializeField] private float _speed;
     
@@ -25,12 +26,15 @@ public class PlayerController : Damageable {
     // Attacking
     // Some of these can become constants later
     [SerializeField] public float _attackTime;                     // How long an attack lasts for
-    [SerializeField] public float _lastAttackTime;                     // How long an attack lasts for
     [SerializeField] public float _attackDisplacementSpeed;         // How fast the player dashes forward when attacking
     [SerializeField] public float _attackDisplacementDecel;         // How fast the dash decelerates
     [SerializeField] public float _attackOffset;                    // Distance to center of attack hitbox
     [SerializeField] public float _attackWidth;                     // Width of attack hitbox
+    
+    
     [SerializeField] public float _attackCooldown;
+    [SerializeField] public float _attackComboResetTime;
+    [SerializeField] public AudioClip _attackSfx;
 
     [HideInInspector] public float _attackCooldownTimer;
     

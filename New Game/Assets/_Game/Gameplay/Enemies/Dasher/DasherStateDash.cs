@@ -19,15 +19,16 @@ public class DasherStateDash : IState {
         _spriteRenderer = spriteRenderer;
     }
 
-    public void Tick() {
-        if (_dashTime <= 0) {
-            _dashFinished = true;
-        }
-        _dashTime -= Time.deltaTime;
-    }
+    public void Tick() { }
 
     public void FixedTick() {
-        _rb.velocity = _dasherController.DashDir * _dasherData.dashSpeed;
+        if (_dashTime <= 0) {
+            _rb.velocity = Vector2.zero;
+            _dashFinished = true;
+        } else {
+            _rb.velocity = _dasherController.DashDir * _dasherData.dashSpeed;
+        }
+        _dashTime -= Time.deltaTime;
     }
 
     public void OnEnter() {
@@ -39,7 +40,6 @@ public class DasherStateDash : IState {
 
     public void OnExit() {
         _dashFinished = false;
-        _rb.velocity = Vector2.zero;
         _spriteRenderer.color = Color.white;
         _dasherController.gameObject.layer = ApothecaryConstants.LAYER_ENEMIES;
     }
