@@ -45,6 +45,8 @@ public class PlayerController : Damageable {
     public Vector2 Facing { get; set; }
     // True direction
     public Vector2 Heading { get; set; }
+    
+    private bool Collided { get; set; }
 
     private void OnDrawGizmos() {
         Gizmos.DrawWireCube((Vector2)transform.position + Facing * _attackOffset, 
@@ -67,6 +69,14 @@ public class PlayerController : Damageable {
             () => Input.GetKeyDown(KeyCode.LeftShift));
         _stateMachine.AddTransition(dash, idle,
             () => !Dashing);
+        _stateMachine.AddTransition(dash, idle,
+            () => {
+                if (Collided) {
+                    Collided = false;
+                    return true;
+                }
+                return false;
+            });
         _stateMachine.AddAnyTransition(melee, 
             () => Input.GetMouseButtonDown(0) && _attackCooldownTimer < 0);
         _stateMachine.AddTransition(melee, idle, 
@@ -90,5 +100,9 @@ public class PlayerController : Damageable {
     public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
         base.TakeDamage(damage, kbDirection, kbMagnitude);
         TimeStop._instance.StopTime();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        Collided = true;
     }
 }

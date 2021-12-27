@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
-    [SerializeField] private Transform _followTarget;
+    [SerializeField] private Rigidbody2D _followTarget;
     [Range(0f, 1f), SerializeField] private float _followSpeed;
     [Range(0f, 1f), SerializeField] private float _mouseTracking;
+    [SerializeField] private Rigidbody2D _rb;
 
-    private void Update() {
+    private Vector2 _targetPos;
+
+    private void FixedUpdate() {
         if (_followTarget == null) return;
         
         Vector2 mousePos = Input.mousePosition;
@@ -16,8 +20,9 @@ public class CameraController : MonoBehaviour {
 
         float cameraHeightUnityUnits = 2 * Camera.main.orthographicSize;
         float cameraWidthUnityUnits = cameraHeightUnityUnits * Camera.main.aspect;
-        Vector3 targetPos = _followTarget.position + new Vector3(h * cameraWidthUnityUnits, v * cameraHeightUnityUnits, -10f) * _mouseTracking;
+        Vector2 projectedFollowTargetPosition = _followTarget.position + _followTarget.velocity * Time.fixedDeltaTime;
+        _targetPos = projectedFollowTargetPosition + new Vector2(h * cameraWidthUnityUnits, v * cameraHeightUnityUnits) * _mouseTracking;
 
-        transform.position = Vector3.Lerp(transform.position, targetPos, _followSpeed);
+        _rb.MovePosition((Vector2)transform.position + (_targetPos - (Vector2)transform.position) * _followSpeed);
     }
 }
