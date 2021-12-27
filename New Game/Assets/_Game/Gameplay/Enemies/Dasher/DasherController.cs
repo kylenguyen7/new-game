@@ -23,9 +23,9 @@ public class DasherController : EnemyBase {
         var roam = new DasherStateRoam(this, _dasherData, _animator);
         var wait = new DasherStateWait(this, _dasherData);
         var chase = new DasherStateChase(this, _dasherData, _animator);
-        var prep = new DasherStatePrepare(_dasherData, _rb, _spriteRenderer);
+        var prep = new DasherStatePrepare(this, _dasherData, _spriteRenderer);
         var dash = new DasherStateDash(this, _dasherData, _spriteRenderer, _animator);
-        var recover = new DasherStateRecover(_dasherData, _rb, _spriteRenderer);
+        var recover = new DasherStateRecover(this, _dasherData, _spriteRenderer);
 
         _stateMachine.AddTransition(roam, wait, () => roam.RoamFinished);
         _stateMachine.AddTransition(wait, roam, () => wait.WaitFinished);

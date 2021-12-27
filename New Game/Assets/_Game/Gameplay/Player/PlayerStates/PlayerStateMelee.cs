@@ -24,7 +24,7 @@ public class PlayerStateMelee : IState {
 
     public void Tick() {
         // Only allow attacks up to the COMBO_COUNT
-        bool attacksRemaining = true || _comboCounter < COMBO_COUNT;
+        bool attacksRemaining = _comboCounter < COMBO_COUNT;
         if (!_attackQueued && attacksRemaining) {
             _attackQueued = Input.GetMouseButtonDown(0);
         }
@@ -47,7 +47,8 @@ public class PlayerStateMelee : IState {
     }
 
     public void OnEnter() {
-        if (Time.time - _prevAttackTime >= _playerController._attackComboResetTime) {
+        float endOfPrevAttack = _prevAttackTime + _playerController._attackTime;
+        if (Time.time - endOfPrevAttack >= _playerController._attackComboResetTime) {
             _comboCounter = 0;
         }
         _attackQueued = true;
@@ -61,7 +62,7 @@ public class PlayerStateMelee : IState {
         
         _playerController._audioSource.pitch = 1 + _comboCounter * 0.1f;
         _playerController._audioSource.PlayOneShot(_playerController._attackSfx);
-        _attackTimer = _playerController._attackTime;
+        _attackTimer = _comboCounter == COMBO_COUNT - 1 ? _playerController._finalAttackTime : _playerController._attackTime;
         _prevAttackTime = Time.time;
         _comboCounter++;
     }
@@ -85,7 +86,7 @@ public class PlayerStateMelee : IState {
         
         _animator.SetFloat("facingX", _playerController.Heading.x);
         _animator.SetFloat("facingY", _playerController.Heading.y);
-        _animator.SetTrigger("attacking" + _comboCounter % 2);
+        _animator.SetTrigger("attacking" + _comboCounter % 3);
     }
 
     private void DealDamage(Vector2 dir) {
@@ -97,7 +98,7 @@ public class PlayerStateMelee : IState {
 
         foreach (Collider2D hit in hits) {
             var enemy = hit.gameObject.GetComponent<EnemyBase>();
-            enemy.TakeDamage(1f, dir, 1);
+            enemy.TakeDamage(1f, dir, 2);
         }
     }
 

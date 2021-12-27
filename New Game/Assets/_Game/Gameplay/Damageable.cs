@@ -18,7 +18,7 @@ public abstract class Damageable : MonoBehaviour {
     // Dying
     [SerializeField] private GameObject _deathParticlesPrefab;
     [SerializeField] private GameObject _itemPrefab;
-    [SerializeField] float knockbackDecayPerFrame;
+    [SerializeField] float _knockbackDecay;
     private bool Dead;
     
     // Taking damage
@@ -34,13 +34,12 @@ public abstract class Damageable : MonoBehaviour {
         _spriteRenderer.color = _initialColor;
     }
 
-    protected void Update() {
-        DecayKnockback();
-    }
+    protected void Update() { }
 
     protected void FixedUpdate() {
-        // Removed knockback for now, since I don't think it feels good right now
+        Debug.Log(_knockback);
         _rb.velocity = Velocity + _knockback;
+        DecayKnockback();
     }
 
     public virtual void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
@@ -57,7 +56,6 @@ public abstract class Damageable : MonoBehaviour {
     // BEGIN PRIVATE HELPER FUNCTIONS
     private void DepleteHealth(float damage) {
         _hp -= damage;
-        Debug.Log(_hp);
         if (_hp <= 0) {
             Die();
         }
@@ -111,7 +109,7 @@ public abstract class Damageable : MonoBehaviour {
      * knockback differently.
      */
     private void DecayKnockback() {
-        _knockback = Vector2.Lerp(_knockback, Vector2.zero, knockbackDecayPerFrame * Time.deltaTime);
+        _knockback = Vector2.Lerp(_knockback, Vector2.zero, _knockbackDecay);
     }
     #endregion
 }

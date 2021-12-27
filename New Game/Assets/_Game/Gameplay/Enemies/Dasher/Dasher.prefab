@@ -172,7 +172,7 @@ MonoBehaviour:
   _hp: 20
   _deathParticlesPrefab: {fileID: 3422884608894595234, guid: e70afb6716f79894393dae073c0ab357, type: 3}
   _itemPrefab: {fileID: 0}
-  knockbackDecayPerFrame: 1
+  _knockbackDecay: 0.1
   _spriteRenderer: {fileID: 8045688399757685014}
   _dasherData: {fileID: 11400000, guid: 1b7086a46b1e7014db764e755121661f, type: 2}
   _damage: 1

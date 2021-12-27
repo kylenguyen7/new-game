@@ -25,7 +25,8 @@ public class PlayerController : Damageable {
     
     // Attacking
     // Some of these can become constants later
-    [SerializeField] public float _attackTime;                     // How long an attack lasts for
+    [SerializeField] public float _attackTime;                      // How long an attack lasts for
+    [SerializeField] public float _finalAttackTime;                 // How long the final attack lasts for
     [SerializeField] public float _attackDisplacementSpeed;         // How fast the player dashes forward when attacking
     [SerializeField] public float _attackDisplacementDecel;         // How fast the dash decelerates
     [SerializeField] public float _attackOffset;                    // Distance to center of attack hitbox

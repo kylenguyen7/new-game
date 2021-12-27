@@ -4,16 +4,16 @@ using UnityEngine;
 using UnityEngine.U2D;
 
 public class DasherStateRecover : IState {
+    private DasherController _dasherController;
     private DasherData _dasherData;
-    private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
     private float _recoverTime;
 
     private bool _recoverFinished;
     public bool RecoverFinished => _recoverFinished;
 
-    public DasherStateRecover(DasherData dasherData, Rigidbody2D rb, SpriteRenderer spriteRenderer) {
-        _rb = rb;
+    public DasherStateRecover(DasherController dasherController, DasherData dasherData, SpriteRenderer spriteRenderer) {
+        _dasherController = dasherController;
         _dasherData = dasherData;
         _spriteRenderer = spriteRenderer;
     }
@@ -26,7 +26,7 @@ public class DasherStateRecover : IState {
     }
 
     public void FixedTick() {
-        _rb.velocity = Vector2.zero;
+        _dasherController.Velocity = Vector2.zero;
     }
 
     public void OnEnter() {
