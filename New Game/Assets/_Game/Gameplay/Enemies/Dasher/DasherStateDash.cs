@@ -37,7 +37,6 @@ public class DasherStateDash : IState {
         _dashTime = _dasherData.dashTime;
         _spriteRenderer.color = Color.red;
         _dasherController.gameObject.layer = ApothecaryConstants.LAYER_DASHING;
-        _dasherController.Collided = false;
         _animator.SetTrigger("dash");
     }
 

@@ -26,4 +26,7 @@ public class DasherData : ScriptableObject {
     
     // Recovering
     public float recoverTime;
+    
+    // Stunned
+    public float stunnedTime;
 }

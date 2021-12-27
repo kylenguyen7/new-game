@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBase : Damageable {
     protected StateMachine _stateMachine = new StateMachine();
     
-    private new void Update() {
+    protected new void Update() {
         base.Update();
         _stateMachine.Tick();
     }

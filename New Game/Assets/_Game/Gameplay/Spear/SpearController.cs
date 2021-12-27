@@ -33,7 +33,7 @@ public class SpearController : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(1) && !retracted) {
+        if (Input.GetKeyDown(KeyCode.Space) && !retracted) {
             _spearTip.SetActive(false);
             retracted = true;
         }

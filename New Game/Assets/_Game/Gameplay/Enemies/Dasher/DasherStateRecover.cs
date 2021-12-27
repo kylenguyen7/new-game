@@ -30,12 +30,12 @@ public class DasherStateRecover : IState {
     }
 
     public void OnEnter() {
+        _recoverFinished = false;
         _recoverTime = _dasherData.recoverTime;
         _spriteRenderer.color = Color.gray;
     }
 
     public void OnExit() {
-        _recoverFinished = false;
         _spriteRenderer.color = Color.white;
     }
 }

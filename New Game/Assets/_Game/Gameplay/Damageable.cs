@@ -9,6 +9,10 @@ public abstract class Damageable : MonoBehaviour {
     public delegate void OnDeath();
     // Event specifies a subscription list of OnDeath type functions to call when death occurs
     public event OnDeath OnDeathCallback;
+
+    public delegate void OnDamaged();
+
+    public event OnDamaged OnDamagedCallback;
     
     [SerializeField] private float _hp;
     private Vector2 _knockback;
@@ -37,12 +41,12 @@ public abstract class Damageable : MonoBehaviour {
     protected void Update() { }
 
     protected void FixedUpdate() {
-        Debug.Log(_knockback);
         _rb.velocity = Velocity + _knockback;
         DecayKnockback();
     }
 
     public virtual void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
+        OnDamagedCallback?.Invoke();
         DepleteHealth(damage);
         AddKnockback(kbDirection, kbMagnitude);
 

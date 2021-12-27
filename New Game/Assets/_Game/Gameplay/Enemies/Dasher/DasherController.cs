@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class DasherController : EnemyBase {
@@ -15,6 +16,7 @@ public class DasherController : EnemyBase {
     public Transform Target { get; private set; }
     public Vector2 DashDir { get; private set; }
     public bool Collided { get; set; }
+    public bool Damaged { get; set; }
 
     private new void Awake() {
         base.Awake();
@@ -26,6 +28,7 @@ public class DasherController : EnemyBase {
         var prep = new DasherStatePrepare(this, _dasherData, _spriteRenderer);
         var dash = new DasherStateDash(this, _dasherData, _spriteRenderer, _animator);
         var recover = new DasherStateRecover(this, _dasherData, _spriteRenderer);
+        var stun = new DasherStateStunned(this, _dasherData, _spriteRenderer, _animator);
 
         _stateMachine.AddTransition(roam, wait, () => roam.RoamFinished);
         _stateMachine.AddTransition(wait, roam, () => wait.WaitFinished);
@@ -35,11 +38,21 @@ public class DasherController : EnemyBase {
         _stateMachine.AddTransition(prep, dash, () => prep.PrepFinished);
         _stateMachine.AddTransition(dash, recover, () => dash.DashFinished);
         _stateMachine.AddTransition(recover, roam, () => recover.RecoverFinished);
+        _stateMachine.AddTransition(stun, roam, () => stun.StunFinished);
         
         _stateMachine.AddTransition(dash, recover, () => {
             // Start recover state if collided with something last frame
             if (Collided) {
                 Collided = false;
+                return true;
+            }
+            return false;
+        });
+        
+        _stateMachine.AddAnyTransition(stun, () => {
+            // Start stunned state if took damage last frame
+            if (Damaged) {
+                Damaged = false;
                 return true;
             }
             return false;
@@ -83,12 +96,11 @@ public class DasherController : EnemyBase {
             PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
             playerController.TakeDamage(_damage, dir, _kbMagnitude);
         }
-
         Collided = true;
     }
 
     public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
         base.TakeDamage(damage, kbDirection, kbMagnitude);
-        _animator.SetTrigger("hurt");
+        Damaged = true;
     }
 }
