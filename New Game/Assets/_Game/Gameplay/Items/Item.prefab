@@ -63,7 +63,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ef3426391fe78402c836615a54f1e46a, type: 3}
   - {fileID: 21300000, guid: f03ec18ab350e41a896644b92567efda, type: 3}
   - {fileID: 21300000, guid: 432bae185b8924d1cb8c2cba0b9e2747, type: 3}
-  _phaseTime: 0.25
+  _phaseTime: 0.05
 --- !u!58 &5564594521153115072
 CircleCollider2D:
   m_ObjectHideFlags: 0

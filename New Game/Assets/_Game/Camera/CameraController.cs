@@ -13,9 +13,16 @@ public class CameraController : MonoBehaviour {
 
     private float _cameraWidthUnityUnits;
     private float _cameraHeightUnityUnits;
-    
+
+    public static CameraController Instance;
     
     private void Awake() {
+        if (Instance != null) {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
         _rb = GetComponent<Rigidbody2D>();
         _cameraWidthUnityUnits = 2 * Camera.main.orthographicSize * Camera.main.aspect;
         _cameraHeightUnityUnits = 2 * Camera.main.orthographicSize;
@@ -41,6 +48,10 @@ public class CameraController : MonoBehaviour {
         targetPos.y = Mathf.Clamp(targetPos.y, minY, maxY);
         
         _rb.MovePosition((Vector2)transform.position + (targetPos - (Vector2)transform.position) * _followSpeed);
+    }
+
+    public void SetCameraSize(Vector2 size) {
+        _size = size;
     }
     
     private void OnDrawGizmosSelected() {
