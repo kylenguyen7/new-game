@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3342841180011665563}
   - component: {fileID: 7853337746277418565}
   m_Layer: 0
-  m_Name: Item
+  m_Name: Honey
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,20 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scatterForce: 500
   _spriteRenderer: {fileID: 9218334193515346578}
-  _sprites:
-  - {fileID: 21300000, guid: 1531b86a4cd3741b3a29d9685beb14d8, type: 3}
-  - {fileID: 21300000, guid: 57e70480519224c619e722a7160bb7ec, type: 3}
-  - {fileID: 21300000, guid: c0c8fbf3fdf8a46d2b4a6a6855adf7d5, type: 3}
-  - {fileID: 21300000, guid: 949567dd95c04496cabb11e6f2beee21, type: 3}
-  - {fileID: 21300000, guid: 71a0ec482d9a04347a35e2985862f095, type: 3}
-  - {fileID: 21300000, guid: d05a4c866242a407181220d611444bc9, type: 3}
-  - {fileID: 21300000, guid: 45c2b9a640d1b434786b0791716fcdc9, type: 3}
-  - {fileID: 21300000, guid: 2690a9532062c42eaa41f4fe86ede7d6, type: 3}
-  - {fileID: 21300000, guid: efc5ade6bbce34d00aa5da030d03ced4, type: 3}
-  - {fileID: 21300000, guid: 615cc7fe914914cc9b96209da9181fa7, type: 3}
-  - {fileID: 21300000, guid: ef3426391fe78402c836615a54f1e46a, type: 3}
-  - {fileID: 21300000, guid: f03ec18ab350e41a896644b92567efda, type: 3}
-  - {fileID: 21300000, guid: 432bae185b8924d1cb8c2cba0b9e2747, type: 3}
+  _item: {fileID: 11400000, guid: 6502e871c28a584469976bd0ab11cc0f, type: 2}
   _phaseTime: 0.05
 --- !u!58 &5564594521153115072
 CircleCollider2D:

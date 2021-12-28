@@ -39,8 +39,6 @@ public class SpawnerController : MonoBehaviour {
                 _spawnWaveCoroutine = StartCoroutine(SpawnWaveCoroutine());
             }
         }
-
-        Debug.Log($"{_numWavesRemaining}, {Finished}");
     }
 
     private void OnDrawGizmosSelected() {

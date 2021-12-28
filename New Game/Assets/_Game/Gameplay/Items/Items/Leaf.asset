@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f649743925a4bb8458b95033cd83eb39, type: 3}
-  m_Name: Level 1
+  m_Script: {fileID: 11500000, guid: 8bd99d77ddaff494bbeaaf8eb9abf06b, type: 3}
+  m_Name: Leaf
   m_EditorClassIdentifier: 
-  CameraBounds: {x: 34, y: 16}
-  LevelPrefab: {fileID: 6411489053090284315, guid: a8d88c13eb8bf4a49b14b2c28882a2bb, type: 3}
+  Name: Leaf
+  Sprite: {fileID: 21300000, guid: f03ec18ab350e41a896644b92567efda, type: 3}

@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -18,15 +15,15 @@ public class LevelManagerLite : MonoBehaviour {
         
         // Create spawner and set spawn bounds
         _spawner = Instantiate(_spawnerPrefab, Vector3.zero, Quaternion.identity).GetComponent<SpawnerController>();
-        _spawner.SetSpawnSize(_level._cameraBounds.x - 4, _level._cameraBounds.y - 4);
+        _spawner.SetSpawnSize(_level.CameraBounds.x - 4, _level.CameraBounds.y - 4);
         
         // Create level
-        Instantiate(_level._levelPrefab, Vector3.zero, Quaternion.identity);
+        Instantiate(_level.LevelPrefab, Vector3.zero, Quaternion.identity);
     }
 
     private void Start() {
         // Set camera bounds
-        CameraController.Instance.SetCameraSize(_level._cameraBounds);
+        CameraController.Instance.SetCameraSize(_level.CameraBounds);
     }
 
     private void Update() {

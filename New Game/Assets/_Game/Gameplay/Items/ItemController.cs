@@ -15,7 +15,7 @@ public class ItemController : MonoBehaviour {
     
     // Sprite
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private List<Sprite> _sprites;
+    [SerializeField] private Item _item;
     
     // Picking up
     [SerializeField] private float _phaseTime;
@@ -28,7 +28,7 @@ public class ItemController : MonoBehaviour {
         
         gameObject.layer = ApothecaryConstants.LAYER_PHASING;
         Invoke(nameof(MoveToItemLayer), _phaseTime);
-        _spriteRenderer.sprite = _sprites[Random.Range(0, _sprites.Count - 1)];
+        _spriteRenderer.sprite = _item.Sprite;
     }
 
     private void MoveToItemLayer() {
@@ -55,14 +55,19 @@ public class ItemController : MonoBehaviour {
     // (right now triggers are used as a way to easily phase after being speared; see line 41)
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            Destroy(gameObject);
+            PickUp();
         }
         _rb.velocity = Vector2.zero;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            Destroy(gameObject);
+            PickUp();
         }
+    }
+
+    private void PickUp() {
+        Debug.Log($"Picked up a {_item.Name}!");
+        Destroy(gameObject);
     }
 }
