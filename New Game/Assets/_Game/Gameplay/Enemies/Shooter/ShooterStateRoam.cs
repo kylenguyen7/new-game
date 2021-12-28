@@ -50,7 +50,6 @@ public class ShooterStateRoam : IState
         if ((_currentDestination - (Vector2) _shooter.transform.position).magnitude < _roamFinishedTolerance) return;
         
         var dir = (_currentDestination - (Vector2)_shooter.transform.position).normalized;
-        _shooter.transform.right = dir;
         _rb.velocity = dir * _roamSpeed;
     }
 

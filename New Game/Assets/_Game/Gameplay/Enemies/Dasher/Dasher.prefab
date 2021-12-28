@@ -169,9 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cacab2c7bf361b4a85154afacb230fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 20
+  _hp: 5
   _deathParticlesPrefab: {fileID: 3422884608894595234, guid: e70afb6716f79894393dae073c0ab357, type: 3}
-  _itemPrefab: {fileID: 0}
+  _itemPrefab: {fileID: 1574369818119889862, guid: 81c55ad6c650b8743951db3844b6aaad, type: 3}
   _knockbackDecay: 0.1
   _spriteRenderer: {fileID: 8045688399757685014}
   _dasherData: {fileID: 11400000, guid: 1b7086a46b1e7014db764e755121661f, type: 2}

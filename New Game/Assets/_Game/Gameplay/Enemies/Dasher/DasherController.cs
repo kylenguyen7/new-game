@@ -66,6 +66,14 @@ public class DasherController : EnemyBase {
         Gizmos.DrawWireSphere(transform.position, _dasherData.roamDestinationRadius);
         Gizmos.DrawWireSphere(transform.position, _dasherData.chaseFinishedRadius);
     }
+
+    protected new void Update() {
+        base.Update();
+
+        // Set Collided and Damaged to false here if they weren't culled by state machine's tick
+        Collided = false;
+        Damaged = false;
+    }
     
     /**
      * Target and DashDir are maintained in DasherController since they are accessed
@@ -87,7 +95,7 @@ public class DasherController : EnemyBase {
         return Vector2.Distance(GetClosestPlayer().position, transform.position);
     }
 
-    private void OnCollisionStay2D(Collision2D other) {
+    private void OnCollisionEnter2D(Collision2D other) {
         // Deal damage only while dashing
         if (!(_stateMachine.getCurrentState() is DasherStateDash)) return;
         

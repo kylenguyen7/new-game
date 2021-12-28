@@ -19,11 +19,11 @@ public class PlayerStateDashing : IState {
 
     public void FixedTick() {
         if (_dashTime >= _playerController.DashTime) {
-            _playerController.Dashing = false;
             // Set velocity to 0 here, since another FixedUpdate might occur before the 
             // an Update loop where the stateMachine can call OnExit to set velocity to 0.
-            _playerController.Velocity = Vector2.zero;
+            _playerController.Dashing = false;
             _playerController.gameObject.layer = ApothecaryConstants.LAYER_PLAYER;
+            _playerController.Velocity = Vector2.zero;
         }
         _dashTime += Time.deltaTime;
     }
@@ -43,5 +43,9 @@ public class PlayerStateDashing : IState {
         _animator.SetFloat("facingY", _dashDir.y);
     }
 
-    public void OnExit() { }
+    public void OnExit() {
+        // Set here, since dashing might be exited upon collision
+        _playerController.Dashing = false;
+        _playerController.gameObject.layer = ApothecaryConstants.LAYER_PLAYER;
+    }
 }

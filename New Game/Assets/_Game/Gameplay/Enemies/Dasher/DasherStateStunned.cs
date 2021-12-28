@@ -23,7 +23,6 @@ public class DasherStateStunned : IState {
             _stunFinished = true;
         }
         _stunnedTimer -= Time.deltaTime;
-        Debug.Log(_spriteRenderer.color);
     }
 
     public void FixedTick() {

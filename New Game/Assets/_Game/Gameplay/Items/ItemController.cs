@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 public class ItemController : MonoBehaviour {
     private Rigidbody2D _rb;
     private FixedJoint2D _fixedJoint2D;
-    [SerializeField] private float scatterForce;
+    [SerializeField] private float _scatterForce;
     private bool _attached;
     
     // Sprite
@@ -17,45 +17,42 @@ public class ItemController : MonoBehaviour {
     [SerializeField] private List<Sprite> _sprites;
     
     // Picking up
-    [SerializeField] private Collider2D _itemCollider;
-    [SerializeField] private float _colliderEnableDelay;
+    [SerializeField] private float _phaseTime;
 
     private void Awake() {
         _rb = GetComponent<Rigidbody2D>();
+        _rb.AddForce(_scatterForce * Random.insideUnitCircle);
         _fixedJoint2D = GetComponent<FixedJoint2D>();
-        _itemCollider.enabled = false;
-        Invoke(nameof(EnableCollider), _colliderEnableDelay);
-
+        
+        gameObject.layer = ApothecaryConstants.LAYER_PHASING;
+        Invoke(nameof(MoveToItemLayer), _phaseTime);
         _spriteRenderer.sprite = _sprites[Random.Range(0, _sprites.Count - 1)];
     }
 
-    private void EnableCollider() {
-        _itemCollider.enabled = true;
-    }
-
-    public void Scatter() {
-        _rb.AddForce(scatterForce * Random.insideUnitCircle);
+    private void MoveToItemLayer() {
+        gameObject.layer = ApothecaryConstants.LAYER_ITEMS;
     }
 
     public void Attach(Rigidbody2D target) {
         if (_attached) return;
         
         _attached = true;
-        disableRigidbody();
+        DisableRigidbody();
         _fixedJoint2D.enabled = true;
         _fixedJoint2D.connectedBody = target;
     }
 
-    private void disableRigidbody() {
+    private void DisableRigidbody() {
         _rb.mass = 0;
         _rb.drag = 0;
         _rb.angularDrag = 0;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            Debug.Log("Picked up an item!");
             Destroy(gameObject);
         }
+
+        _rb.velocity = Vector2.zero;
     }
 }

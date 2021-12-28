@@ -31,8 +31,8 @@ public class ShooterStateTrack : IState {
     }
 
     public void Tick() {
-        var transform = _shooter.transform;
-        transform.right = _shooter.GetDirectionToTarget();
+        // var transform = _shooter.transform;
+        // transform.right = _shooter.GetDirectionToTarget();
     }
 
     public void FixedTick() {

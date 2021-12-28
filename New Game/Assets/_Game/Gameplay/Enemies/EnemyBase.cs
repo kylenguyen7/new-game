@@ -10,7 +10,7 @@ public class EnemyBase : Damageable {
         _stateMachine.Tick();
     }
     
-    private new void FixedUpdate() {
+    protected new void FixedUpdate() {
         base.FixedUpdate();
         _stateMachine.FixedTick();
     }

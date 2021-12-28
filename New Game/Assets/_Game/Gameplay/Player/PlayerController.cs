@@ -89,6 +89,8 @@ public class PlayerController : Damageable {
         base.Update();
         _stateMachine.Tick();
         
+        // Set Collided to false if it wasn't culled by state machine's tick
+        Collided = false;
         _attackCooldownTimer -= Time.deltaTime;
     }
 

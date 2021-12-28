@@ -223,7 +223,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2674408054995292377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   _hp: 5
   _deathParticlesPrefab: {fileID: 3422884608894595234, guid: e70afb6716f79894393dae073c0ab357, type: 3}
   _itemPrefab: {fileID: 0}
-  knockbackDecayPerFrame: 1
+  _knockbackDecay: 0
   _spriteRenderer: {fileID: 2674408055525674463}
   _shurikenPrefab: {fileID: 3016903211322276300, guid: 049e52322df624744bfbd6df6c03e464, type: 3}
   _trackRadius: 8
@@ -315,7 +315,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: -689520407193891599, guid: 45695024b8de446ba9453efabdd4b81b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

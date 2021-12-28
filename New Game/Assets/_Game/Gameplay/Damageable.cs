@@ -83,9 +83,7 @@ public abstract class Damageable : MonoBehaviour {
 
     #region Dying
     private void SpawnItem() {
-        ItemController item = Instantiate(_itemPrefab, transform.position, Quaternion.identity)
-            .GetComponent<ItemController>();
-        item.Scatter();
+        Instantiate(_itemPrefab, transform.position, Quaternion.identity).GetComponent<ItemController>();
     }
 
     private void SpawnDeathEffects() {

@@ -98,7 +98,7 @@ public class PlayerStateMelee : IState {
 
         foreach (Collider2D hit in hits) {
             var enemy = hit.gameObject.GetComponent<EnemyBase>();
-            enemy.TakeDamage(1f, dir, 2);
+            enemy.TakeDamage(1f, dir, 0);
         }
     }
 

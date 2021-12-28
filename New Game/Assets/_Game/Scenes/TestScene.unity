@@ -772,8 +772,8 @@ MonoBehaviour:
   _dashSpeed: 30
   _dashTime: 0.1
   _dashDistance: 5
-  _attackTime: 0.4
-  _finalAttackTime: 0.65
+  _attackTime: 0.3
+  _finalAttackTime: 0.4
   _attackDisplacementSpeed: 6
   _attackDisplacementDecel: 0.8
   _attackOffset: 0.75
@@ -2075,7 +2075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2135975655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2093,7 +2093,7 @@ MonoBehaviour:
   _minSpawnCount: 3
   _maxSpawnCount: 5
   _dasherPrefab: {fileID: 8045688400319738624, guid: 8c9e3b04f62632849b879fe6fe19bd8a, type: 3}
-  _shooterPrefab: {fileID: 8045688400319738624, guid: 8c9e3b04f62632849b879fe6fe19bd8a, type: 3}
+  _shooterPrefab: {fileID: 2674408054995292376, guid: 07b4c5e1292ea794a87665d233df2224, type: 3}
 --- !u!4 &2135975656
 Transform:
   m_ObjectHideFlags: 0
