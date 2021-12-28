@@ -238,7 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 5
   _deathParticlesPrefab: {fileID: 3422884608894595234, guid: e70afb6716f79894393dae073c0ab357, type: 3}
-  _itemPrefab: {fileID: 0}
+  _itemPrefab: {fileID: 1574369818119889862, guid: 81c55ad6c650b8743951db3844b6aaad, type: 3}
   _knockbackDecay: 0
   _spriteRenderer: {fileID: 2674408055525674463}
   _shurikenPrefab: {fileID: 3016903211322276300, guid: 049e52322df624744bfbd6df6c03e464, type: 3}

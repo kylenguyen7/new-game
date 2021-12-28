@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 public class ItemController : MonoBehaviour {
     private Rigidbody2D _rb;
     private FixedJoint2D _fixedJoint2D;
+    private Collider2D _collider;
     [SerializeField] private float _scatterForce;
     private bool _attached;
     
@@ -20,6 +21,7 @@ public class ItemController : MonoBehaviour {
     [SerializeField] private float _phaseTime;
 
     private void Awake() {
+        _collider = GetComponent<Collider2D>();
         _rb = GetComponent<Rigidbody2D>();
         _rb.AddForce(_scatterForce * Random.insideUnitCircle);
         _fixedJoint2D = GetComponent<FixedJoint2D>();
@@ -35,7 +37,8 @@ public class ItemController : MonoBehaviour {
 
     public void Attach(Rigidbody2D target) {
         if (_attached) return;
-        
+
+        _collider.isTrigger = true;
         _attached = true;
         DisableRigidbody();
         _fixedJoint2D.enabled = true;
@@ -47,12 +50,19 @@ public class ItemController : MonoBehaviour {
         _rb.drag = 0;
         _rb.angularDrag = 0;
     }
-
+    
+    // TODO: Rely only on collisions, not triggers
+    // (right now triggers are used as a way to easily phase after being speared; see line 41)
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Player")) {
             Destroy(gameObject);
         }
-
         _rb.velocity = Vector2.zero;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("Player")) {
+            Destroy(gameObject);
+        }
     }
 }

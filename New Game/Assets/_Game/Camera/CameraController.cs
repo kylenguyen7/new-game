@@ -5,9 +5,21 @@ public class CameraController : MonoBehaviour {
     [SerializeField] private Rigidbody2D _followTarget;
     [Range(0f, 1f), SerializeField] private float _followSpeed;
     [Range(0f, 1f), SerializeField] private float _mouseTracking;
-    [SerializeField] private Rigidbody2D _rb;
+    private Rigidbody2D _rb;
 
-    private Vector2 _targetPos;
+    private Vector2 _center = Vector2.zero;
+    // TODO: remove SerializeField
+    [SerializeField] private Vector2 _size;
+
+    private float _cameraWidthUnityUnits;
+    private float _cameraHeightUnityUnits;
+    
+    
+    private void Awake() {
+        _rb = GetComponent<Rigidbody2D>();
+        _cameraWidthUnityUnits = 2 * Camera.main.orthographicSize * Camera.main.aspect;
+        _cameraHeightUnityUnits = 2 * Camera.main.orthographicSize;
+    }
 
     private void FixedUpdate() {
         if (_followTarget == null) return;
@@ -17,12 +29,22 @@ public class CameraController : MonoBehaviour {
         // Range from [-0.5, 0.5] based on mouse position on screen. Clamp in case mouse is off-screen.
         float h = Mathf.Clamp((mousePos.x / Screen.width) - 0.5f, -0.5f, 0.5f);
         float v = Mathf.Clamp((mousePos.y / Screen.height) - 0.5f, -0.5f, 0.5f);
-
-        float cameraHeightUnityUnits = 2 * Camera.main.orthographicSize;
-        float cameraWidthUnityUnits = cameraHeightUnityUnits * Camera.main.aspect;
+        
+        float minX = _center.x - _size.x / 2 + _cameraWidthUnityUnits / 2;
+        float maxX = _center.x + _size.x / 2 - _cameraWidthUnityUnits / 2;
+        float minY = _center.y - _size.y / 2 + _cameraHeightUnityUnits / 2;
+        float maxY = _center.y + _size.y / 2 - _cameraHeightUnityUnits / 2;
         Vector2 projectedFollowTargetPosition = _followTarget.position + _followTarget.velocity * Time.fixedDeltaTime;
-        _targetPos = projectedFollowTargetPosition + new Vector2(h * cameraWidthUnityUnits, v * cameraHeightUnityUnits) * _mouseTracking;
-
-        _rb.MovePosition((Vector2)transform.position + (_targetPos - (Vector2)transform.position) * _followSpeed);
+        Vector2 targetPos = projectedFollowTargetPosition + new Vector2(h * _cameraWidthUnityUnits, v * _cameraHeightUnityUnits) * _mouseTracking;
+        
+        targetPos.x = Mathf.Clamp(targetPos.x, minX, maxX);
+        targetPos.y = Mathf.Clamp(targetPos.y, minY, maxY);
+        
+        _rb.MovePosition((Vector2)transform.position + (targetPos - (Vector2)transform.position) * _followSpeed);
+    }
+    
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(_center, _size);
     }
 }
