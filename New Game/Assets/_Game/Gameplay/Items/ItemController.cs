@@ -67,7 +67,7 @@ public class ItemController : MonoBehaviour {
     }
 
     private void PickUp() {
-        Debug.Log($"Picked up a {_item.Name}!");
+        Inventory.Instance.AddItem(_item.Name);
         Destroy(gameObject);
     }
 }
