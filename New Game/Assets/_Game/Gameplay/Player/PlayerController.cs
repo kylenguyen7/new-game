@@ -24,7 +24,8 @@ public class PlayerController : Damageable {
     public float DashSpeed => _dashSpeed;
     
     // Attacking
-    // Some of these can become constants later
+    // TODO: Change some of these to constants
+    [SerializeField] public bool _canAttack;
     [SerializeField] public float _attackTime;                      // How long an attack lasts for
     [SerializeField] public float _finalAttackTime;                 // How long the final attack lasts for
     [SerializeField] public float _attackDisplacementSpeed;         // How fast the player dashes forward when attacking
@@ -78,7 +79,7 @@ public class PlayerController : Damageable {
                 return false;
             });
         _stateMachine.AddAnyTransition(melee, 
-            () => Input.GetMouseButtonDown(0) && _attackCooldownTimer < 0);
+            () => Input.GetMouseButtonDown(0) && _attackCooldownTimer < 0 && _canAttack);
         _stateMachine.AddTransition(melee, idle, 
             () => !Attacking);
         
