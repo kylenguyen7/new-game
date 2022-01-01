@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnWidth: 20
   _spawnHeight: 20
-  _minSpawnCount: 3
+  _minSpawnCount: 2
   _maxSpawnCount: 5
   _numWavesRemaining: 2
   _dasherPrefab: {fileID: 8045688400319738624, guid: 8c9e3b04f62632849b879fe6fe19bd8a, type: 3}
