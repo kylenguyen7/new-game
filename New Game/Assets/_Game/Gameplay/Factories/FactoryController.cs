@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[RequireComponent(typeof(Collider2D))]
 public class FactoryController : MonoBehaviour {
+    
     public enum Status {
         empty,
         working,
@@ -12,12 +14,30 @@ public class FactoryController : MonoBehaviour {
     }
     
     [SerializeField] private FactoryData _factoryData;
+    [SerializeField] private Vector2 _pointerOffset;
 
     private Status _status = Status.empty;
     private int _startTime;
+    private bool _hovered;
     
     public Status GetStatus() => _status;
     public int GetStartTime() => _startTime;
+
+    private void OnMouseEnter() {
+        _hovered = true;
+        Cursor.SetCursor(Resources.Load<Texture2D>("Pointer"), _pointerOffset, CursorMode.Auto);
+    }
+
+    private void OnMouseExit() {
+        _hovered = false;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+    }
+
+    private void Update() {
+        if (Input.GetMouseButtonDown(0) && _hovered) {
+            Debug.Log("Mouse click detected!");
+        }
+    }
 
     public void Load() {
         if (_status != Status.empty) {
@@ -42,17 +62,4 @@ public class FactoryController : MonoBehaviour {
 
         Inventory.Instance.AddItem(_factoryData.Item.Name, _factoryData.Output);
     }
-}
-
-[CreateAssetMenu(order = 2, menuName = "Apothecary/FactoryData")]
-public class FactoryData : ScriptableObject {
-    public Item Item;
-    public int Cost;
-    public int Input;
-    public int Output;
-    public int Duration;
-
-    public Sprite EmptySprite;
-    public Sprite WorkingSprite;
-    public Sprite FinishedSprite;
 }
