@@ -33,6 +33,10 @@ public class FactoryController : MonoBehaviour {
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 
+    private void Start() {
+        throw new NotImplementedException();
+    }
+
     private void Update() {
         if (Input.GetMouseButtonDown(0) && _hovered) {
             Debug.Log("Mouse click detected!");
