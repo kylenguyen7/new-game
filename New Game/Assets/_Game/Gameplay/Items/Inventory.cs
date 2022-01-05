@@ -21,7 +21,7 @@ public class Inventory : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-    public void AddItem(String item, int quantity) {
+    private void AddItem(String item, int quantity) {
         switch (item) {
             case "Honey":
                 NumHoney += quantity;
@@ -33,11 +33,24 @@ public class Inventory : MonoBehaviour {
                 Debug.LogWarning($"Couldn't find item of name {item}");
                 break;
         }
-        
+    }
+
+    public void AddItemAndUpdateLabel(String item, int quantity) { 
+        AddItem(item, quantity);
+        UpdateLabel();
+    }
+
+    public bool RemoveItemAndUpdateLabel(String item, int quantity) {
+        bool result = RemoveItem(item, quantity);
+        UpdateLabel();
+        return result;
+    }
+
+    private void UpdateLabel() {
         _tmp.text = $"Honey: {NumHoney}\nLeaves: {NumLeaf}";
     }
 
-    public bool RemoveItem(String item, int quantity) {
+    private bool RemoveItem(String item, int quantity) {
         if (item == "Honey") {
             if (NumHoney < quantity) {
                 return false;

@@ -8,11 +8,11 @@ public class DevTools : MonoBehaviour {
     private void Update() {
 
         if (Input.GetKeyDown(KeyCode.R)) {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {
-            TimeStop._instance.StopTime();
+            Inventory.Instance.AddItemAndUpdateLabel("Leaf", 1);
         }
 
         if (Input.GetKeyDown(KeyCode.T)) {
