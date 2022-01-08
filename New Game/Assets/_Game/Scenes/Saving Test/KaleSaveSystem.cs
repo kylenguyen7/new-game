@@ -18,7 +18,6 @@ public static class KaleSaveSystem {
     public static void Save(string saveString) {
         CheckDirectoryExists();
         File.WriteAllText(SAVE_DIR + SAVE_FILENAME, saveString);
-        Debug.Log(SAVE_DIR);
     }
 
     public static string Load() {

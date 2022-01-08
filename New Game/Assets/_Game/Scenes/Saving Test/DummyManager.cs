@@ -4,7 +4,7 @@ using System.Text;
 using _Common;
 using UnityEngine;
 
-public class DummyManager : MonoBehaviour {
+public class DummyManager : Saveable {
     [Serializable]
     public struct DummyData {
         public Vector3 Position;
@@ -16,14 +16,6 @@ public class DummyManager : MonoBehaviour {
     private int _counter;
     
     private List<DummyController> _dummies = new List<DummyController>();
-    
-    private void Start() {
-        Load();
-    }
-
-    private void OnDestroy() {
-        Save();
-    }
 
     private void Update() {
         if (Input.GetMouseButtonDown(1)) {
@@ -43,7 +35,7 @@ public class DummyManager : MonoBehaviour {
         _dummies.Add(dummy);
     }
 
-    private void Save() {
+    protected override void Save() {
         List<DummyData> dummyDataList = new List<DummyData>();
         foreach (DummyController dummy in _dummies) {
             DummyData dummyData;
@@ -56,7 +48,7 @@ public class DummyManager : MonoBehaviour {
         Debug.Log($"Dummy Manager saved Dummy Data list.");
     }
 
-    private void Load() {
+    protected override void Load() {
         foreach (DummyData dummyData in DummySaveData.Instance.dummies) {
             CreateAndRegisterDummy(dummyData.Position, dummyData.Uuid);
         }
