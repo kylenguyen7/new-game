@@ -5,7 +5,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PortalController : MonoBehaviour {
+    [SerializeField] private String targetSceneName;
+    
     private void OnTriggerEnter2D(Collider2D other) {
-        TransitionHandler.Instance.SaveSceneAndLoadNewScene(0);
+        TransitionHandler.Instance.SaveSceneAndLoadNewScene(targetSceneName);
     }
 }

@@ -43,9 +43,9 @@ public class CameraController : MonoBehaviour {
         float maxY = _center.y + _size.y / 2 - _cameraHeightUnityUnits / 2;
         Vector2 projectedFollowTargetPosition = _followTarget.position + _followTarget.velocity * Time.fixedDeltaTime;
         Vector2 targetPos = projectedFollowTargetPosition + new Vector2(h * _cameraWidthUnityUnits, v * _cameraHeightUnityUnits) * _mouseTracking;
-        
-        targetPos.x = Mathf.Clamp(targetPos.x, minX, maxX);
-        targetPos.y = Mathf.Clamp(targetPos.y, minY, maxY);
+
+        targetPos.x = minX < maxX ? Mathf.Clamp(targetPos.x, minX, maxX) : _center.x;
+        targetPos.y = minY < maxY ? Mathf.Clamp(targetPos.y, minY, maxY) : _center.y;
         
         _rb.MovePosition((Vector2)transform.position + (targetPos - (Vector2)transform.position) * _followSpeed);
     }

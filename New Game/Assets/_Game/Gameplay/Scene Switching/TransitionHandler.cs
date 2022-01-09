@@ -16,11 +16,11 @@ public class TransitionHandler : MonoBehaviour {
         Instance = this;
     }
 
-    public void SaveSceneAndLoadNewScene(int newSceneBuildIndex) {
+    public void SaveSceneAndLoadNewScene(String sceneName) {
         foreach (var saveable in FindObjectsOfType<Saveable>()) {
             saveable.Save();
         }
         
-        SceneManager.LoadScene(newSceneBuildIndex);
+        SceneManager.LoadScene(sceneName);
     }
 }

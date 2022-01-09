@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/_Game/Scenes/TownScene.unity
     guid: bb751e81052b42c44b5bb034e1d3edb1
   - enabled: 1
-    path: Assets/_Game/Scenes/Saving Test/SavingTestScene.unity
-    guid: 3ecc3b82bea82dd488e0d5cd3e4cce6a
-  - enabled: 1
-    path: Assets/_Game/Scenes/Saving Test/SavingTestScene2.unity
-    guid: 9a221389ef5fb61449a0c4d92980de83
+    path: Assets/_Game/Scenes/HouseScene.unity
+    guid: 4061ee1564899d4468fa1783e40d1106
   m_configObjects: {}
