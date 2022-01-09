@@ -19,13 +19,11 @@ public class DevTools : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.T)) {
-            FindObjectOfType<PlayerController>().gameObject.transform.position = Vector3.zero;
+            FindObjectOfType<FactoryManager>()?.CreateNewFactoryLite();
         }
 
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S)) {
             SaveData.Instance.ManualSave();
         }
-        
-        // TODO: Add dev tool to spawn a factory to test factory persistence.
     }
 }

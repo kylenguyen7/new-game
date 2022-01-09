@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -8,22 +9,27 @@ public class FactoryManager : Saveable {
     private List<FactoryController> _factories = new List<FactoryController>();
     
     protected override void Load() {
+        Debug.Log($"FactoryManager loaded {SaveData.Instance.factories.Count} factories.");
         foreach (SaveData.FactoryData factoryData in SaveData.Instance.factories) {
             CreateAndRegisterFactory(factoryData);
         }
     }
 
-    protected override void Save() {
+    public override void Save() {
         List<SaveData.FactoryData> factoryDataList = new List<SaveData.FactoryData>();
         
         foreach(FactoryController factory in _factories) {
-            SaveData.FactoryData factoryData = new SaveData.FactoryData();
-            factoryData.Location = factory.transform.position;
-            factoryData.Status = factory.GetStatus();
-            factoryData.StartTime = factory.GetStartTime();
+            SaveData.FactoryData factoryData = new SaveData.FactoryData {
+                Location = factory.transform.position,
+                Status = factory.GetStatus(),
+                StartTime = factory.GetStartTime()
+            };
+            factoryDataList.Add(factoryData);
+            Debug.Log(factoryData.Status);
         }
 
         SaveData.Instance.factories = factoryDataList;
+        Debug.Log($"FactoryManager saved {factoryDataList.Count} factories.");
     }
 
     /**
@@ -35,5 +41,10 @@ public class FactoryManager : Saveable {
         var factoryController = Instantiate(_factoryPrefab).GetComponent<FactoryController>();
         factoryController.Init(factoryData);
         _factories.Add(factoryController);
+    }
+
+    public void CreateNewFactoryLite() {
+        SaveData.FactoryData data = new SaveData.FactoryData(FactoryController.Status.empty, new Vector2(_factories.Count * 3, 2));
+        CreateAndRegisterFactory(data);
     }
 }

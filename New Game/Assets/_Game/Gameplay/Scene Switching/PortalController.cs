@@ -6,6 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PortalController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
-        SceneManager.LoadScene(0);
+        TransitionHandler.Instance.SaveSceneAndLoadNewScene(0);
     }
 }

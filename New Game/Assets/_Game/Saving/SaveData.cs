@@ -6,12 +6,20 @@ using UnityEngine;
 public class SaveData : MonoBehaviour {
     public static SaveData Instance;
 
+    // Serialized fields
     public List<FactoryData> factories = new List<FactoryData>();
     
+    [Serializable]
     public struct FactoryData {
-        public Vector2 Location;
+        public Vector2 Location ;
         public FactoryController.Status Status;
         public int StartTime;
+
+        public FactoryData(FactoryController.Status status, Vector2 location) {
+            Status = status;
+            Location = location;
+            StartTime = 0;
+        }
     }
 
     private void Awake() {

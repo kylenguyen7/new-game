@@ -35,7 +35,7 @@ public class DummyManager : Saveable {
         _dummies.Add(dummy);
     }
 
-    protected override void Save() {
+    public override void Save() {
         List<DummyData> dummyDataList = new List<DummyData>();
         foreach (DummyController dummy in _dummies) {
             DummyData dummyData;

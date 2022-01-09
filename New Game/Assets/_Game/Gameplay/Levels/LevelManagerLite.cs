@@ -44,8 +44,6 @@ public class LevelManagerLite : MonoBehaviour {
         } else if (scene.buildIndex == 1) {
             _levelCount = 0;
         }
-        
-        Debug.Log($"Scene loaded. Level count is {_levelCount}.");
     }
 
     private void Update() {
