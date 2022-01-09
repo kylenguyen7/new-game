@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DateTime = GlobalTime.DateTime;
 
 public class SaveData : MonoBehaviour {
     public static SaveData Instance;
@@ -11,14 +12,19 @@ public class SaveData : MonoBehaviour {
     
     [Serializable]
     public struct FactoryData {
-        public Vector2 Location ;
-        public FactoryController.Status Status;
-        public int StartTime;
-
-        public FactoryData(FactoryController.Status status, Vector2 location) {
-            Status = status;
-            Location = location;
-            StartTime = 0;
+        [SerializeField] private Vector2 location;
+        public Vector2 Location => location;
+        
+        [SerializeField] private FactoryController.Status status;
+        public FactoryController.Status Status => status;
+        
+        [SerializeField] private DateTime startTime;
+        public DateTime StartTime => startTime;
+        
+        public FactoryData(Vector2 location, FactoryController.Status status, DateTime startTime) {
+            this.location = location;
+            this.status = status;
+            this.startTime = startTime;
         }
     }
 

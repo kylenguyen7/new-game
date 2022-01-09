@@ -241,7 +241,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2916946d016324383e15aed59ee1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _secondsPerTimeUnit: 2
+  startingTime:
+    time:
+      hours: 0
+      minutes: 0
+    date: 0
+  timeUnit: 0
+  realTimeSecondsPerTimeUnit: 0
 --- !u!114 &25169479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,6 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a7c211972bc9343a3bed5b851ddd93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  factories: []
 --- !u!114 &25169481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,7 +649,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 6:00 am
+  m_text: 'Day 1
+
+    6:00 am'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

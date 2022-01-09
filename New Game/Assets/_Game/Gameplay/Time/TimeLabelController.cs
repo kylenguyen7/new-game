@@ -13,18 +13,18 @@ public class TimeLabelController : MonoBehaviour {
     }
 
     private void Start() {
-        UpdateTime(GlobalTime.Instance.CurrentTime);
+        UpdateTime(GlobalTime.Instance.CurrentDateTime);
     }
 
     private void OnEnable() {
-        GlobalTime.Instance.OnTimeChangedCallback += UpdateTime;
+        GlobalTime.Instance.OnDateTimeChangedCallback += UpdateTime;
     }
 
     private void OnDisable() {
-        GlobalTime.Instance.OnTimeChangedCallback -= UpdateTime;
+        GlobalTime.Instance.OnDateTimeChangedCallback -= UpdateTime;
     }
 
-    private void UpdateTime(int time) {
-        _tmp.text = GlobalTime.GetTime(time);
+    private void UpdateTime(GlobalTime.DateTime dateTime) {
+        _tmp.text = dateTime.ToString();
     }
 }

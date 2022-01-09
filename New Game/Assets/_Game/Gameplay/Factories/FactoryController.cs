@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
+using DateTime = GlobalTime.DateTime;
 
 [RequireComponent(typeof(Collider2D))]
 public class FactoryController : MonoBehaviour {
@@ -18,7 +19,7 @@ public class FactoryController : MonoBehaviour {
 
     // Factory state
     private Status _status = Status.empty;
-    private int _startTime;
+    private DateTime _startTime;
     
     // Sprite
     private SpriteRenderer _spriteRenderer;
@@ -28,7 +29,7 @@ public class FactoryController : MonoBehaviour {
     private bool _hovered;
 
     public Status GetStatus() => _status;
-    public int GetStartTime() => _startTime;
+    public DateTime GetStartTime() => _startTime;
 
     private void Awake() {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -39,7 +40,7 @@ public class FactoryController : MonoBehaviour {
         _status = factoryData.Status;
         _startTime = factoryData.StartTime;
 
-        UpdateWorkingStatus(GlobalTime.Instance.CurrentTime);
+        UpdateWorkingStatus(GlobalTime.Instance.CurrentDateTime);
         UpdateSprite();
     }
 
@@ -63,11 +64,11 @@ public class FactoryController : MonoBehaviour {
     }
 
     private void OnEnable() {
-        GlobalTime.Instance.OnTimeChangedCallback += UpdateWorkingStatus;
+        GlobalTime.Instance.OnDateTimeChangedCallback += UpdateWorkingStatus;
     }
 
     private void OnDisable() {
-        GlobalTime.Instance.OnTimeChangedCallback -= UpdateWorkingStatus;
+        GlobalTime.Instance.OnDateTimeChangedCallback -= UpdateWorkingStatus;
     }
 
     public void AttemptLoad() {
@@ -86,7 +87,7 @@ public class FactoryController : MonoBehaviour {
     }
 
     private void Load() {
-        _startTime = GlobalTime.Instance.CurrentTime;
+        _startTime = GlobalTime.Instance.CurrentDateTime;
         UpdateStatus(Status.working);
     }
 
@@ -103,7 +104,7 @@ public class FactoryController : MonoBehaviour {
         UpdateStatus(Status.empty);
     }
 
-    private void UpdateWorkingStatus(int time) {
+    private void UpdateWorkingStatus(DateTime time) {
         // Time changes should only affect working factories
         if (_status != Status.working) {
             return;

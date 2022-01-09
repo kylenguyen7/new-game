@@ -19,13 +19,9 @@ public class FactoryManager : Saveable {
         List<SaveData.FactoryData> factoryDataList = new List<SaveData.FactoryData>();
         
         foreach(FactoryController factory in _factories) {
-            SaveData.FactoryData factoryData = new SaveData.FactoryData {
-                Location = factory.transform.position,
-                Status = factory.GetStatus(),
-                StartTime = factory.GetStartTime()
-            };
+            SaveData.FactoryData factoryData =
+                new SaveData.FactoryData(factory.transform.position, factory.GetStatus(), factory.GetStartTime());
             factoryDataList.Add(factoryData);
-            Debug.Log(factoryData.Status);
         }
 
         SaveData.Instance.factories = factoryDataList;
@@ -44,7 +40,7 @@ public class FactoryManager : Saveable {
     }
 
     public void CreateNewFactoryLite() {
-        SaveData.FactoryData data = new SaveData.FactoryData(FactoryController.Status.empty, new Vector2(_factories.Count * 3, 2));
+        SaveData.FactoryData data = new SaveData.FactoryData(new Vector2(_factories.Count * 3, 2), FactoryController.Status.empty, new GlobalTime.DateTime());
         CreateAndRegisterFactory(data);
     }
 }

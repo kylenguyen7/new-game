@@ -1,1 +1,1 @@
-{"factories":[{"Location":{"x":0.0,"y":2.0},"Status":1,"StartTime":4},{"Location":{"x":3.0,"y":2.0},"Status":1,"StartTime":5},{"Location":{"x":6.0,"y":2.0},"Status":0,"StartTime":0}]}
+{"factories":[{"location":{"x":0.0,"y":2.0},"status":1,"startTime":{"time":{"hours":6,"minutes":0},"date":1}}]}
