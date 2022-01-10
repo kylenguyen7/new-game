@@ -43,7 +43,9 @@ public class GlobalTime : MonoBehaviour {
     [Serializable]
     public struct DateTime {
         [SerializeField] private Time time;
+        public Time Time => time;
         [SerializeField] private int date;
+        public int Date => date;
 
         public DateTime(Time time, int date) {
             this.time = time;
@@ -109,9 +111,17 @@ public class GlobalTime : MonoBehaviour {
         _timer -= UnityEngine.Time.deltaTime;
 
         if (_timer <= 0) {
-            _dateTime += timeUnit;
-            OnDateTimeChangedCallback?.Invoke(CurrentDateTime);
+            SetDateTime(_dateTime + timeUnit);
             _timer = realTimeSecondsPerTimeUnit;
         }
+    }
+
+    public void Sleep() {
+        SetDateTime(new DateTime(startingTime.Time, _dateTime.Date + 1));
+    }
+
+    private void SetDateTime(DateTime newDateTime) {
+        _dateTime = newDateTime;
+        OnDateTimeChangedCallback?.Invoke(CurrentDateTime);
     }
 }

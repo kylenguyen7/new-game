@@ -8,7 +8,7 @@ using DateTime = GlobalTime.DateTime;
 
 [RequireComponent(typeof(Collider2D))]
 public class FactoryController : MonoBehaviour {
-    
+    [Serializable]
     public enum Status {
         empty,
         working,

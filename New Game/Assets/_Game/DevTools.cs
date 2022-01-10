@@ -11,7 +11,7 @@ public class DevTools : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.R)) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene("HouseScene");
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {
