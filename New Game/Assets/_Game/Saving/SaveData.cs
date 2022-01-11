@@ -28,6 +28,25 @@ public class SaveData : MonoBehaviour {
         }
     }
 
+    [Serializable]
+    public struct GlobalTimeData {
+        [SerializeField] private int date;
+        public GlobalTimeData(int date) {
+            this.date = date;
+        }
+    }
+
+    [Serializable]
+    public struct InventoryData {
+        [SerializeField] private int numHoney;
+        [SerializeField] private int numLeaf;
+
+        public InventoryData(int numHoney, int numLeaf) {
+            this.numHoney = numHoney;
+            this.numLeaf = numLeaf;
+        }
+    }
+
     private void Awake() {
         if (Instance != null) {
             Destroy(gameObject);
