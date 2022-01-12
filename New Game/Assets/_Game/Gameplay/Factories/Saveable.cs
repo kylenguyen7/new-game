@@ -7,7 +7,6 @@ public abstract class Saveable : MonoBehaviour
 {
     protected void Start() {
         Load();
-        Debug.Log("Saveable loaded info from SaveData.");
     }
 
     /**

@@ -25,7 +25,7 @@ public class FactoryController : MonoBehaviour {
     private SpriteRenderer _spriteRenderer;
     
     // Hovering
-    private Vector2 _pointerOffset = new Vector2(190, 60);
+    // private Vector2 _pointerOffset = new Vector2(190, 60);
     private bool _hovered;
 
     public Status GetStatus() => _status;
@@ -55,12 +55,12 @@ public class FactoryController : MonoBehaviour {
     
     private void OnMouseEnter() {
         _hovered = true;
-        Cursor.SetCursor(Resources.Load<Texture2D>("Pointer"), _pointerOffset, CursorMode.Auto);
+        // Cursor.SetCursor(Resources.Load<Texture2D>("Pointer"), _pointerOffset, CursorMode.Auto);
     }
 
     private void OnMouseExit() {
         _hovered = false;
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        // Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 
     private void OnEnable() {

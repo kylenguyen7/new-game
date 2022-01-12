@@ -8,8 +8,27 @@ public class SaveData : MonoBehaviour {
     public static SaveData Instance;
 
     // Serialized fields
-    public List<FactoryData> factories = new List<FactoryData>();
-    
+    [SerializeField] private List<FactoryData> factories = new List<FactoryData>();
+
+    public List<FactoryData> Factories {
+        get => factories;
+        set => factories = value;
+    }
+
+    [SerializeField] private GlobalTimeData globalTimeData;
+
+    public GlobalTimeData SavedGlobalTimeData {
+        get => globalTimeData;
+        set => globalTimeData = value;
+    }
+
+    [SerializeField] private InventoryData inventoryData;
+
+    public InventoryData SavedInventoryData {
+        get => inventoryData;
+        set => inventoryData = value;
+    }
+
     [Serializable]
     public struct FactoryData {
         [SerializeField] private Vector2 location;
@@ -31,6 +50,7 @@ public class SaveData : MonoBehaviour {
     [Serializable]
     public struct GlobalTimeData {
         [SerializeField] private int date;
+        public int Date => date;
         public GlobalTimeData(int date) {
             this.date = date;
         }
@@ -39,7 +59,9 @@ public class SaveData : MonoBehaviour {
     [Serializable]
     public struct InventoryData {
         [SerializeField] private int numHoney;
+        public int NumHoney => numHoney;
         [SerializeField] private int numLeaf;
+        public int NumLeaf => numLeaf;
 
         public InventoryData(int numHoney, int numLeaf) {
             this.numHoney = numHoney;

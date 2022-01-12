@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : Saveable {
     public static Inventory Instance;
     [SerializeField] private TextMeshProUGUI _tmp;
 
-    public int NumHoney;
-    public int NumLeaf;
+    private int _numHoney;
+    private int _numLeaf;
     
     private void Awake() {
         if (Instance != null) {
@@ -24,10 +24,10 @@ public class Inventory : MonoBehaviour {
     private void AddItem(String item, int quantity) {
         switch (item) {
             case "Honey":
-                NumHoney += quantity;
+                _numHoney += quantity;
                 break;
             case "Leaf":
-                NumLeaf += quantity;
+                _numLeaf += quantity;
                 break;
             default:
                 Debug.LogWarning($"Couldn't find item of name {item}");
@@ -47,29 +47,40 @@ public class Inventory : MonoBehaviour {
     }
 
     private void UpdateLabel() {
-        _tmp.text = $"Honey: {NumHoney}\nLeaves: {NumLeaf}";
+        _tmp.text = $"Honey: {_numHoney}\nLeaves: {_numLeaf}";
     }
 
     private bool RemoveItem(String item, int quantity) {
         if (item == "Honey") {
-            if (NumHoney < quantity) {
+            if (_numHoney < quantity) {
                 return false;
             }
 
-            NumHoney -= quantity;
+            _numHoney -= quantity;
             return true;
         }
         
         if (item == "Leaf") {
-            if (NumLeaf < quantity) {
+            if (_numLeaf < quantity) {
                 return false;
             }
 
-            NumLeaf -= quantity;
+            _numLeaf -= quantity;
             return true;
         }
 
         Debug.LogWarning($"Couldn't find item of name {item}");
         return false;
+    }
+
+    protected override void Load() {
+        SaveData.InventoryData data = SaveData.Instance.SavedInventoryData;
+        _numHoney = data.NumHoney;
+        _numLeaf = data.NumLeaf;
+        UpdateLabel();
+    }
+
+    public override void Save() {
+        SaveData.Instance.SavedInventoryData = new SaveData.InventoryData(_numHoney, _numLeaf);
     }
 }

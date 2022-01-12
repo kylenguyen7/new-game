@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class GlobalTime : MonoBehaviour {
+public class GlobalTime : Saveable {
     public static GlobalTime Instance;
 
     [Serializable]
@@ -15,14 +15,14 @@ public class GlobalTime : MonoBehaviour {
             if (hours > 23 || hours < 0 || minutes < 0 || minutes > 59) {
                 throw new ArgumentException("Time structs can only be in the range [00:00, 23:59]");
             }
-            
+
             this.hours = hours;
             this.minutes = minutes;
         }
 
         public override string ToString() {
             string minutesLabel = $"{minutes:D2}";
-            
+
             if (hours == 12) {
                 return $"12:{minutesLabel} pm";
             }
@@ -56,7 +56,7 @@ public class GlobalTime : MonoBehaviour {
             int minutesSum = a.time.Minutes + minutes;
             int hoursSum = a.time.Hours;
             int dateSum = a.date;
-            
+
             while (minutesSum >= 60) {
                 minutesSum -= 60;
                 hoursSum++;
@@ -66,7 +66,7 @@ public class GlobalTime : MonoBehaviour {
                 hoursSum -= 24;
                 dateSum++;
             }
-            
+
             return new DateTime(new Time(hoursSum, minutesSum), dateSum);
         }
 
@@ -84,7 +84,14 @@ public class GlobalTime : MonoBehaviour {
     }
 
     private DateTime _dateTime;
-    public DateTime CurrentDateTime => _dateTime;
+
+    public DateTime CurrentDateTime {
+        get => _dateTime;
+        private set {
+            _dateTime = value;
+            OnDateTimeChangedCallback?.Invoke(CurrentDateTime);
+        }
+    }
 
     [SerializeField] private DateTime startingTime;
     [SerializeField] private int timeUnit;
@@ -103,7 +110,7 @@ public class GlobalTime : MonoBehaviour {
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        _dateTime = startingTime;
+        CurrentDateTime = startingTime;
         _timer = realTimeSecondsPerTimeUnit;
     }
 
@@ -111,17 +118,21 @@ public class GlobalTime : MonoBehaviour {
         _timer -= UnityEngine.Time.deltaTime;
 
         if (_timer <= 0) {
-            SetDateTime(_dateTime + timeUnit);
+            CurrentDateTime = CurrentDateTime + timeUnit;
             _timer = realTimeSecondsPerTimeUnit;
         }
     }
 
     public void Sleep() {
-        SetDateTime(new DateTime(startingTime.Time, _dateTime.Date + 1));
+        CurrentDateTime = new DateTime(startingTime.Time, _dateTime.Date + 1);
     }
 
-    private void SetDateTime(DateTime newDateTime) {
-        _dateTime = newDateTime;
-        OnDateTimeChangedCallback?.Invoke(CurrentDateTime);
+    protected override void Load() {
+        SaveData.GlobalTimeData data = SaveData.Instance.SavedGlobalTimeData;
+        CurrentDateTime = new DateTime(startingTime.Time, data.Date);
+    }
+
+    public override void Save() {
+        SaveData.Instance.SavedGlobalTimeData = new SaveData.GlobalTimeData(_dateTime.Date);
     }
 }

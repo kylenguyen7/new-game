@@ -9,8 +9,8 @@ public class FactoryManager : Saveable {
     private List<FactoryController> _factories = new List<FactoryController>();
     
     protected override void Load() {
-        Debug.Log($"FactoryManager loaded {SaveData.Instance.factories.Count} factories.");
-        foreach (SaveData.FactoryData factoryData in SaveData.Instance.factories) {
+        Debug.Log($"FactoryManager loaded {SaveData.Instance.Factories.Count} factories.");
+        foreach (SaveData.FactoryData factoryData in SaveData.Instance.Factories) {
             CreateAndRegisterFactory(factoryData);
         }
     }
@@ -24,7 +24,7 @@ public class FactoryManager : Saveable {
             factoryDataList.Add(factoryData);
         }
 
-        SaveData.Instance.factories = factoryDataList;
+        SaveData.Instance.Factories = factoryDataList;
         Debug.Log($"FactoryManager saved {factoryDataList.Count} factories.");
     }
 
