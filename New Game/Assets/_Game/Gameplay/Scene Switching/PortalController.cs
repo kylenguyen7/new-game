@@ -8,6 +8,8 @@ public class PortalController : MonoBehaviour {
     [SerializeField] private String targetSceneName;
     
     private void OnTriggerEnter2D(Collider2D other) {
-        TransitionHandler.Instance.SaveSceneAndLoadNewScene(targetSceneName);
+        if (other.CompareTag("Player")) {
+            TransitionHandler.Instance.SaveSceneAndLoadNewScene(targetSceneName);
+        }
     }
 }
