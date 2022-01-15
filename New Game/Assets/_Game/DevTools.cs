@@ -15,11 +15,11 @@ public class DevTools : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {
-            Inventory.Instance.AddItemAndUpdateLabel("Leaf", 1);
+            Inventory.Instance.AddItemAndUpdateLabel(Input.GetKey(KeyCode.LeftControl) ? "Leaf" : "Honey", 1);
         }
 
         if (Input.GetKeyDown(KeyCode.T)) {
-            FindObjectOfType<FactoryManager>()?.CreateNewFactoryLite();
+            FindObjectOfType<FactoryManager>()?.CreateNewFactoryLite(Input.GetKey(KeyCode.LeftControl) ? FactoryConstants.FactoryType.LEAF : FactoryConstants.FactoryType.HONEY);
         }
 
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S)) {

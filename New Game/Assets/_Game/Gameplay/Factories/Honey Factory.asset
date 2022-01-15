@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b9d262261588249b60ca9b9dc21b3c, type: 3}
+  m_Name: Honey Factory
+  m_EditorClassIdentifier: 
+  Item: {fileID: 11400000, guid: 6502e871c28a584469976bd0ab11cc0f, type: 2}
+  Cost: 10
+  Input: 2
+  Output: 3
+  Duration: 60
+  FactoryType: 1
+  EmptySprite: {fileID: 6039573320647661117, guid: db901d8257e38b44eafba92ca1c02d06, type: 3}
+  WorkingSprite: {fileID: 1819292701107181488, guid: db901d8257e38b44eafba92ca1c02d06, type: 3}
+  FinishedSprite: {fileID: 2809222081748022867, guid: db901d8257e38b44eafba92ca1c02d06, type: 3}

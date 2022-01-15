@@ -320,6 +320,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 25169480, guid: 7fc77a96925671647a43fa6084e73b02, type: 3}
+      propertyPath: factories.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 25169481, guid: 7fc77a96925671647a43fa6084e73b02, type: 3}
       propertyPath: fadeTime
       value: 0.5

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3936779667975152567}
   - component: {fileID: 3936779667975152565}
   m_Layer: 0
-  m_Name: Leaf Factory
+  m_Name: Blank Factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

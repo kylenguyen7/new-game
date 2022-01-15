@@ -15,7 +15,8 @@ public class FactoryController : MonoBehaviour {
         finished
     }
     
-    [SerializeField] private FactoryInfo factoryInfo;
+    // Factory type
+    [SerializeField] private FactoryInfo _factoryInfo;
 
     // Factory state
     private Status _status = Status.empty;
@@ -31,14 +32,17 @@ public class FactoryController : MonoBehaviour {
     public Status GetStatus() => _status;
     public DateTime GetStartTime() => _startTime;
 
+    public FactoryConstants.FactoryType GetFactoryType() => _factoryInfo.FactoryType;
+
     private void Awake() {
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Init(SaveData.FactoryData factoryData) {
+    public void Init(SaveData.FactoryData factoryData, FactoryInfo factoryInfo) {
         transform.position = factoryData.Location;
         _status = factoryData.Status;
         _startTime = factoryData.StartTime;
+        _factoryInfo = factoryInfo;
 
         UpdateWorkingStatus(GlobalTime.Instance.CurrentDateTime);
         UpdateSprite();
@@ -77,7 +81,7 @@ public class FactoryController : MonoBehaviour {
             return;
         }
 
-        if (Inventory.Instance.RemoveItemAndUpdateLabel(factoryInfo.Item.Name, factoryInfo.Input)) {
+        if (Inventory.Instance.RemoveItemAndUpdateLabel(_factoryInfo.Item.Name, _factoryInfo.Input)) {
             Load();
         }
         // TODO: remove
@@ -100,7 +104,7 @@ public class FactoryController : MonoBehaviour {
     }
 
     private void Harvest() {
-        Inventory.Instance.AddItemAndUpdateLabel(factoryInfo.Item.Name, factoryInfo.Output);
+        Inventory.Instance.AddItemAndUpdateLabel(_factoryInfo.Item.Name, _factoryInfo.Output);
         UpdateStatus(Status.empty);
     }
 
@@ -110,7 +114,7 @@ public class FactoryController : MonoBehaviour {
             return;
         }
 
-        if (time - _startTime > factoryInfo.Duration) {
+        if (time - _startTime > _factoryInfo.Duration) {
             UpdateStatus(Status.finished);
         }
     }
@@ -126,13 +130,13 @@ public class FactoryController : MonoBehaviour {
     private void UpdateSprite() {
         switch (_status) {
             case Status.empty:
-                _spriteRenderer.sprite = factoryInfo.EmptySprite;
+                _spriteRenderer.sprite = _factoryInfo.EmptySprite;
                 break;
             case Status.finished:
-                _spriteRenderer.sprite = factoryInfo.FinishedSprite;
+                _spriteRenderer.sprite = _factoryInfo.FinishedSprite;
                 break;
             case Status.working:
-                _spriteRenderer.sprite = factoryInfo.WorkingSprite;
+                _spriteRenderer.sprite = _factoryInfo.WorkingSprite;
                 break;
         }
     }

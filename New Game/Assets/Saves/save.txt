@@ -1,1 +1,0 @@
-{"factories":[{"location":{"x":0.0,"y":2.0},"status":0,"startTime":{"time":{"hours":6,"minutes":38},"date":3}},{"location":{"x":3.0,"y":2.0},"status":0,"startTime":{"time":{"hours":6,"minutes":49},"date":3}}],"globalTimeData":{"date":5},"inventoryData":{"numHoney":2,"numLeaf":6}}

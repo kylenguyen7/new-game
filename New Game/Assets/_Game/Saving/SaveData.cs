@@ -39,11 +39,15 @@ public class SaveData : MonoBehaviour {
         
         [SerializeField] private DateTime startTime;
         public DateTime StartTime => startTime;
+
+        [SerializeField] private FactoryConstants.FactoryType factoryType;
+        public FactoryConstants.FactoryType FactoryType => factoryType;
         
-        public FactoryData(Vector2 location, FactoryController.Status status, DateTime startTime) {
+        public FactoryData(Vector2 location, FactoryController.Status status, DateTime startTime, FactoryConstants.FactoryType factoryType) {
             this.location = location;
             this.status = status;
             this.startTime = startTime;
+            this.factoryType = factoryType;
         }
     }
 

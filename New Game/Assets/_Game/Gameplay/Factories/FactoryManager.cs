@@ -5,9 +5,10 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class FactoryManager : Saveable {
-    [SerializeField] private GameObject _factoryPrefab;
+    [SerializeField] private FactoryConstants factoryConstants;
+    [SerializeField] private GameObject factoryPrefab;
     private List<FactoryController> _factories = new List<FactoryController>();
-    
+
     protected override void Load() {
         Debug.Log($"FactoryManager loaded {SaveData.Instance.Factories.Count} factories.");
         foreach (SaveData.FactoryData factoryData in SaveData.Instance.Factories) {
@@ -20,7 +21,7 @@ public class FactoryManager : Saveable {
         
         foreach(FactoryController factory in _factories) {
             SaveData.FactoryData factoryData =
-                new SaveData.FactoryData(factory.transform.position, factory.GetStatus(), factory.GetStartTime());
+                new SaveData.FactoryData(factory.transform.position, factory.GetStatus(), factory.GetStartTime(), factory.GetFactoryType());
             factoryDataList.Add(factoryData);
         }
 
@@ -34,13 +35,13 @@ public class FactoryManager : Saveable {
      * way, because it will not persist.
      */
     public void CreateAndRegisterFactory(SaveData.FactoryData factoryData) {
-        var factoryController = Instantiate(_factoryPrefab).GetComponent<FactoryController>();
-        factoryController.Init(factoryData);
+        var factoryController = Instantiate(factoryPrefab).GetComponent<FactoryController>();
+        factoryController.Init(factoryData, factoryConstants.GetFactoryInfo(factoryData.FactoryType));
         _factories.Add(factoryController);
     }
 
-    public void CreateNewFactoryLite() {
-        SaveData.FactoryData data = new SaveData.FactoryData(new Vector2(_factories.Count * 3, 2), FactoryController.Status.empty, new GlobalTime.DateTime());
+    public void CreateNewFactoryLite(FactoryConstants.FactoryType factoryType) {
+        SaveData.FactoryData data = new SaveData.FactoryData(new Vector2(_factories.Count * 3, 2), FactoryController.Status.empty, new GlobalTime.DateTime(), factoryType);
         CreateAndRegisterFactory(data);
     }
 }

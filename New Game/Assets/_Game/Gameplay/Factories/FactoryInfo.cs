@@ -11,6 +11,8 @@ public class FactoryInfo : ScriptableObject {
     public int Output;
     public int Duration;
 
+    public FactoryConstants.FactoryType FactoryType;
+
     public Sprite EmptySprite;
     public Sprite WorkingSprite;
     public Sprite FinishedSprite;
