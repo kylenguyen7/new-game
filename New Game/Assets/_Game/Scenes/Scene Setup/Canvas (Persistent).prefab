@@ -448,7 +448,6 @@ GameObject:
   - component: {fileID: 4246190029941692994}
   - component: {fileID: 4246190029941692995}
   - component: {fileID: 4246190029941692999}
-  - component: {fileID: 4246190029941692998}
   - component: {fileID: 25169478}
   - component: {fileID: 25169479}
   - component: {fileID: 25169480}
@@ -558,23 +557,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tmp: {fileID: 4246190029133905227}
---- !u!114 &4246190029941692998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4246190029941693004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8942e92161f7e984b96561c090377c06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawnerPrefab: {fileID: 1205513014667898456, guid: 775c83c8a6490a14ab6531d834fac821, type: 3}
-  _levels:
-  - {fileID: 11400000, guid: 308eb07040333e847872c77478576011, type: 2}
-  - {fileID: 11400000, guid: 1eb0a90c205d6e645adb9ec0e208783d, type: 2}
-  _levelsPerPortal: 3
 --- !u!114 &25169478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,6 +618,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ede8ce17a1a14d8aaaa03f0476777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackScreen: {fileID: 0}
+  fadeTime: 0
+  secondsPerFadeTick: 0
 --- !u!1 &4246190030632197869
 GameObject:
   m_ObjectHideFlags: 0
