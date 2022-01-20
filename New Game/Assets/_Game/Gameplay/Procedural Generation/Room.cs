@@ -1,23 +1,32 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class Room : MonoBehaviour {
     private struct RoomBounds {
         private Vector2 _center;
-        private Vector2 _extents;
+        public Vector2 Center => _center;
+        private Vector2 _size;
+        public Vector2 Size => _size;
 
-        public RoomBounds(Vector2 center, Vector2 extents) {
+        public RoomBounds(Vector2 center, Vector2 size) {
             _center = center;
-            _extents = extents;
+            _size = size;
         }
     }
-    
+
     private Collider2D _collider;
     private RoomBounds _roomBounds;
 
     private void Awake() {
-        _collider = GetComponent<BoxCollider2D>();
+        _collider = GetComponent<Collider2D>();
         var bounds = _collider.bounds;
-        _roomBounds = new RoomBounds(bounds.center, bounds.extents);
+        _roomBounds = new RoomBounds(bounds.center, bounds.size);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Player")) {
+            CameraController.Instance.SetCameraBounds(_roomBounds.Center, _roomBounds.Size);
+        }
     }
 }

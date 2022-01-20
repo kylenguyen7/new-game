@@ -38,7 +38,7 @@ public class LevelManagerLite : MonoBehaviour {
             Instantiate(_level.LevelPrefab, Vector3.zero, Quaternion.identity);
             
             // Set camera bounds
-            CameraController.Instance.SetCameraSize(_level.CameraBounds);
+            CameraController.Instance.SetCameraBounds(Vector2.zero, _level.CameraBounds);
 
             _levelCount += 1;
         } else if (scene.buildIndex == 1) {
