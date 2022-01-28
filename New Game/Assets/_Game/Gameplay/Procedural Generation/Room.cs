@@ -1,32 +1,49 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-public class Room : MonoBehaviour {
-    private struct RoomBounds {
-        private Vector2 _center;
-        public Vector2 Center => _center;
-        private Vector2 _size;
-        public Vector2 Size => _size;
-
-        public RoomBounds(Vector2 center, Vector2 size) {
-            _center = center;
-            _size = size;
-        }
+public class Room {
+    /*
+    private enum Direction {
+        UP,
+        LEFT,
+        RIGHT,
+        DOWN
     }
+    */
 
-    private Collider2D _collider;
-    private RoomBounds _roomBounds;
+    private List<Point> body;
+    // private Dictionary<Direction, List<Point>> walls = new Dictionary<Direction, List<Point>>();
 
-    private void Awake() {
-        _collider = GetComponent<Collider2D>();
-        var bounds = _collider.bounds;
-        _roomBounds = new RoomBounds(bounds.center, bounds.size);
+    public Room(List<Point> body) {
+        this.body = new List<Point>(body);
     }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
-            CameraController.Instance.SetCameraBounds(_roomBounds.Center, _roomBounds.Size);
+    
+    private bool Place(bool[,] board, int x, int y) {
+        // Verify room can be placed
+        foreach (Point p in body) {
+            int pieceX = x + p.x;
+            int pieceY = y + p.y;
+            if (pieceX < 0 || pieceX >= board.GetLength(0) || pieceY < 0 || pieceY >= board.GetLength(1)) return false;
+            if (board[pieceX, pieceY]) return false;
         }
+        
+        // Place room
+        foreach (Point p in body) {
+            int pieceX = x + p.x;
+            int pieceY = y + p.y;
+            board[pieceX, pieceY] = true;
+        }
+        return true;
+    }
+}
+
+public struct Point {
+    public int x;
+    public int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 }
