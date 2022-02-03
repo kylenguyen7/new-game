@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DungeonProceduralGenerator : MonoBehaviour {
     private static readonly float RANDOM_GIVE_UP_CHANCE = 0f;
@@ -9,20 +11,33 @@ public class DungeonProceduralGenerator : MonoBehaviour {
     private bool[,] dungeon = new bool[50, 50];
     
     private Queue<Room> roomQueue = new Queue<Room>();
-    [SerializeField] private int roomsToGenerate = Random.Range(8, 10);
-    private int _roomsGenerated = 0;
+    [SerializeField] private int roomsToGenerate;
+    private int _roomsGenerated;
+
+    private void Start() {
+        GenerateRooms();
+        Debug.Log(dungeon);
+    }
 
     private void GenerateRooms() {
         // Enqueue initial room
         roomQueue.Enqueue(new Room(GRID_SIZE / 2, GRID_SIZE / 2));
         _roomsGenerated++;
         
-        while (roomQueue.Count > 0) {
+        while (roomQueue.Count > 0 && _roomsGenerated < roomsToGenerate) {
             Room prevRoom = roomQueue.Dequeue();
-            // TODO: choose random neighbor of room
+            foreach (Room neighbor in prevRoom.GetNeighbors()) {
+                if (CanPlaceRoom(neighbor)) {
+                    PlaceRoom(neighbor);
+                    roomQueue.Enqueue(neighbor);
+                    _roomsGenerated++;
+                }
+
+                if (_roomsGenerated == roomsToGenerate) break;
+            }
         }
     }
-
+    
     private bool CanPlaceRoom(Room room) {
         int x = room.X;
         int y = room.Y;
@@ -42,9 +57,10 @@ public class DungeonProceduralGenerator : MonoBehaviour {
         return true;
     }
     
-    private void PlaceRoom(int x, int y) {
+    private void PlaceRoom(Room room) {
+        int x = room.X;
+        int y = room.Y;
         dungeon[x, y] = true;
-        
     }
 
     private bool InBounds(int x, int y) {
