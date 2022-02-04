@@ -23,10 +23,10 @@ public class Room {
 
     public List<Room> GetNeighbors() {
         return new List<Room> {
-            new (X + 1, Y),
-            new (X - 1, Y),
-            new (X, Y + 1),
-            new (X, Y - 1),
+            new Room(X + 1, Y),
+            new Room(X - 1, Y),
+            new Room(X, Y + 1),
+            new Room(X, Y - 1),
         };
     }
 }
