@@ -22,11 +22,17 @@ public class Room {
     }
 
     public List<Room> GetNeighbors() {
-        return new List<Room> {
+        List<Room> neighbors = new List<Room> {
             new Room(X + 1, Y),
             new Room(X - 1, Y),
             new Room(X, Y + 1),
             new Room(X, Y - 1),
         };
+        
+        return neighbors;
+    }
+
+    public override string ToString() {
+        return $"Room (x = {X}, y = {Y})";
     }
 }
