@@ -3,11 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Enemy
-  - Item
-  - Bouncy
-  - Enemy Bouncy
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -18,7 +14,7 @@ TagManager:
   - Dashing
   - Player
   - Phasing
-  - Bouncy
+  - Terrain
   - Enemies
   - Items
   - Item Sticky

@@ -69,14 +69,14 @@ public class SpearController : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        if (other.CompareTag("Enemy")) {
+        if (other.gameObject.layer == ApothecaryConstants.LAYER_ENEMIES) {
             Damageable enemy = other.GetComponent<Damageable>();
             enemy.TakeDamage(_damage, transform.right, _kbMagnitude);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Bouncy") || other.gameObject.CompareTag("Enemy Bouncy")) {
+        if (other.gameObject.layer == ApothecaryConstants.LAYER_TERRAIN || other.gameObject.layer == ApothecaryConstants.LAYER_ENEMIES) {
             
             //
             _rb.velocity = Vector2.zero;

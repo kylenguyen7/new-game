@@ -18,20 +18,20 @@ public static class Dungeons {
         // Initialize
         RoomType[,] dungeon = new RoomType[size, size];
         int roomsGenerated = 0;
-        Queue<Room> roomQueue = new Queue<Room>();
+        Queue<GridRoom> roomQueue = new Queue<GridRoom>();
         
         // Enqueue initial room
-        Room firstRoom = new Room(size / 2, size / 2);
-        PlaceRoom(dungeon, firstRoom);
-        SetRoomType(dungeon, firstRoom, RoomType.START);
-        roomQueue.Enqueue(firstRoom);
+        GridRoom firstGridRoom = new GridRoom(size / 2, size / 2);
+        PlaceRoom(dungeon, firstGridRoom);
+        SetRoomType(dungeon, firstGridRoom, RoomType.START);
+        roomQueue.Enqueue(firstGridRoom);
         roomsGenerated++;
 
-        Room prevRoom = null;
+        GridRoom prevGridRoom = null;
         while (roomQueue.Count > 0) {
-            prevRoom = roomQueue.Dequeue();
+            prevGridRoom = roomQueue.Dequeue();
             int neighborsGenerated = 0;
-            foreach (Room neighbor in prevRoom.GetNeighbors()) {
+            foreach (GridRoom neighbor in prevGridRoom.GetNeighbors()) {
                 if (roomsGenerated == roomsToGenerate) break;
                 
                 if (CanPlaceRoom(dungeon, neighbor, randomGiveUpChance)) {
@@ -42,11 +42,11 @@ public static class Dungeons {
                 }
             }
             if (neighborsGenerated == 0) {
-                SetRoomType(dungeon, prevRoom, RoomType.END);
+                SetRoomType(dungeon, prevGridRoom, RoomType.END);
             }
         }
         
-        SetRoomType(dungeon, prevRoom, RoomType.BOSS);
+        SetRoomType(dungeon, prevGridRoom, RoomType.BOSS);
 
         // Retry if not successful
         if (roomsGenerated < roomsToGenerate) {
@@ -70,9 +70,9 @@ public static class Dungeons {
         Debug.Log(dungeonString);
     }
 
-    private static bool CanPlaceRoom(RoomType[,] dungeon, Room room, float randomGiveUpChance) {
-        int x = room.X;
-        int y = room.Y;
+    private static bool CanPlaceRoom(RoomType[,] dungeon, GridRoom gridRoom, float randomGiveUpChance) {
+        int x = gridRoom.X;
+        int y = gridRoom.Y;
         
         // Position must be in bounds and not be occupied
         if (!InBounds(dungeon, x, y) || dungeon[x, y] != RoomType.EMPTY) return false;
@@ -92,21 +92,26 @@ public static class Dungeons {
         return true;
     }
     
-    private static void PlaceRoom(RoomType[,] dungeon, Room room) {
-        dungeon[room.X, room.Y] = RoomType.BASIC;
+    private static void PlaceRoom(RoomType[,] dungeon, GridRoom gridRoom) {
+        dungeon[gridRoom.X, gridRoom.Y] = RoomType.BASIC;
     }
 
-    private static void SetRoomType(RoomType[,] dungeon, Room room, RoomType type) {
-        dungeon[room.X, room.Y] = type;
+    private static void SetRoomType(RoomType[,] dungeon, GridRoom gridRoom, RoomType type) {
+        dungeon[gridRoom.X, gridRoom.Y] = type;
     }
 
-    private static bool InBounds(RoomType[,] dungeon, int x, int y) {
+    public static bool InBounds(RoomType[,] dungeon, int x, int y) {
+        return x >= 0 && x < dungeon.GetLength(0) && y >= 0 && y < dungeon.GetLength(1);
+    }
+
+    public static bool InBounds(RoomBrain[,] dungeon, int x, int y) {
         return x >= 0 && x < dungeon.GetLength(0) && y >= 0 && y < dungeon.GetLength(1);
     }
 }
 
 public enum RoomType {
     EMPTY,
+    NULL,       // Used for out-of-bounds checks
     BASIC,
     START,
     END,

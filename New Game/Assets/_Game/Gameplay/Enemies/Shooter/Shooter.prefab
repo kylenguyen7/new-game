@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2674408054004901592}
   - component: {fileID: 2674408054004901593}
   - component: {fileID: 7564401508402553345}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Shooter Shield
   m_TagString: Enemy Bouncy
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 2674408054995292383}
   - component: {fileID: 2674408054995292382}
   - component: {fileID: 2674408054995292377}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shooter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2674408055525674460}
   - component: {fileID: 2674408055525674463}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6761717923466149417}
   - component: {fileID: 126208054952359829}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

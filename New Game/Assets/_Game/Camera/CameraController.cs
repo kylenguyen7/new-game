@@ -9,7 +9,8 @@ public class CameraController : MonoBehaviour {
 
     private Vector2 _center = Vector2.zero;
     // TODO: remove SerializeField
-    [SerializeField] private Vector2 _bounds;
+    [SerializeField] private Vector2 bounds;
+    [SerializeField] private bool inCombatRoom;     // Uses room bounds if in combat room
 
     private float _cameraWidthUnityUnits;
     private float _cameraHeightUnityUnits;
@@ -28,6 +29,13 @@ public class CameraController : MonoBehaviour {
         _cameraHeightUnityUnits = 2 * Camera.main.orthographicSize;
     }
 
+    private void Update() {
+        if (inCombatRoom) {
+            _center = DungeonProceduralGenerator.GetCurrentBrain().gameObject.transform.position;
+            bounds = DungeonProceduralGenerator.GetCurrentBrain().Bounds;
+        }
+    }
+
     private void FixedUpdate() {
         if (_followTarget == null) return;
         
@@ -37,10 +45,10 @@ public class CameraController : MonoBehaviour {
         float h = Mathf.Clamp((mousePos.x / Screen.width) - 0.5f, -0.5f, 0.5f);
         float v = Mathf.Clamp((mousePos.y / Screen.height) - 0.5f, -0.5f, 0.5f);
         
-        float minX = _center.x - _bounds.x / 2 + _cameraWidthUnityUnits / 2;
-        float maxX = _center.x + _bounds.x / 2 - _cameraWidthUnityUnits / 2;
-        float minY = _center.y - _bounds.y / 2 + _cameraHeightUnityUnits / 2;
-        float maxY = _center.y + _bounds.y / 2 - _cameraHeightUnityUnits / 2;
+        float minX = _center.x - bounds.x / 2 + _cameraWidthUnityUnits / 2;
+        float maxX = _center.x + bounds.x / 2 - _cameraWidthUnityUnits / 2;
+        float minY = _center.y - bounds.y / 2 + _cameraHeightUnityUnits / 2;
+        float maxY = _center.y + bounds.y / 2 - _cameraHeightUnityUnits / 2;
         Vector2 projectedFollowTargetPosition = _followTarget.position + _followTarget.velocity * Time.fixedDeltaTime;
         Vector2 targetPos = projectedFollowTargetPosition + new Vector2(h * _cameraWidthUnityUnits, v * _cameraHeightUnityUnits) * _mouseTracking;
 
@@ -52,11 +60,11 @@ public class CameraController : MonoBehaviour {
 
     public void SetCameraBounds(Vector2 center, Vector2 bounds) {
         _center = center;
-        _bounds = bounds;
+        this.bounds = bounds;
     }
     
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(_center, _bounds);
+        Gizmos.DrawWireCube(_center, bounds);
     }
 }

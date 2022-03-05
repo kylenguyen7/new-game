@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,19 +11,48 @@ public class DungeonProceduralGenerator : MonoBehaviour {
     [SerializeField] private int size;
     [SerializeField] private int roomsToGenerate;
     [SerializeField] private float randomGiveUpChance;
-
-    [SerializeField] private float roomSpacing;
+    [SerializeField] private float roomWidth;
+    [SerializeField] private float roomHeight;
     [SerializeField] private GameObject dungeonPrefab;
+
+    private static RoomType[,] dungeon;
+
+    public static RoomType GetDungeonRoomType(int x, int y) {
+        if (!Dungeons.InBounds(dungeon, x, y)) return RoomType.NULL;
+        return dungeon[x, y];
+    }
+
+    public static bool HasRoomAt(int x, int y) {
+        if (!Dungeons.InBounds(dungeon, x, y)) return false;
+        return dungeon[x, y] != RoomType.EMPTY;
+    }
     
-    private void Start() {
-        var dungeon = Dungeons.GenerateDungeon(size, roomsToGenerate, randomGiveUpChance);
+    private static RoomBrain[,] dungeonBrains;
+
+    public static RoomBrain GetDungeonRoomBrain(int x, int y) {
+        if (!Dungeons.InBounds(dungeonBrains, x, y)) return null;
+        return dungeonBrains[x, y];
+    }
+
+    private static RoomBrain currentBrain;
+
+    public static RoomBrain GetCurrentBrain() {
+        return currentBrain;
+    }
+
+    public static void SetCurrentBrain(int x, int y) {
+        currentBrain = dungeonBrains[x, y];
+    }
+
+    private void Awake() {
+        dungeon = Dungeons.GenerateDungeon(size, roomsToGenerate, randomGiveUpChance);
+        dungeonBrains = new RoomBrain[dungeon.GetLength(0), dungeon.GetLength(1)];
         PlaceDungeon(dungeon);
-        
-        // TODO: remove
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Update() {
+        currentBrain.Tick();
+        
         if (Input.GetKeyDown(KeyCode.R)) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -36,27 +66,16 @@ public class DungeonProceduralGenerator : MonoBehaviour {
                 RoomType type = dungeon[x, y];
                 if (type == RoomType.EMPTY) continue;
 
-                float placeX = (x - width / 2) * roomSpacing;
-                float placeY = (y - height / 2) * roomSpacing;
-
-                Color color = Color.black;
-                switch (type) {
-                    case RoomType.BASIC:
-                        color = Color.white;
-                        break;
-                    case RoomType.START:
-                        color = Color.blue;
-                        break;
-                    case RoomType.END:
-                        color = Color.red;
-                        break;
-                    case RoomType.BOSS :
-                        color = Color.yellow;
-                        break;
-                }
+                float placeX = (x - width / 2) * roomWidth;
+                float placeY = (y - height / 2) * roomHeight;
                 
-                Instantiate(dungeonPrefab, new Vector2(placeX, placeY), Quaternion.identity)
-                    .GetComponent<SpriteRenderer>().color = color;
+                var brain = Instantiate(dungeonPrefab, new Vector3(placeX, placeY, 0), Quaternion.identity).GetComponent<RoomBrain>();
+                brain.Init(x, y);
+                if (type == RoomType.START) {
+                    currentBrain = brain;
+                }
+
+                dungeonBrains[x, y] = brain;
             }
         }
     }

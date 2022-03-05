@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4458279201772228312}
   - component: {fileID: 4458279201772228314}
   - component: {fileID: 4458279201772228313}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 4458279202477428054}
   - component: {fileID: 4458279202477428055}
   - component: {fileID: 4458279202477428049}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ MonoBehaviour:
   _hp: 10
   _deathParticlesPrefab: {fileID: 3422884608894595234, guid: e70afb6716f79894393dae073c0ab357, type: 3}
   _itemPrefab: {fileID: 1574369818119889862, guid: 81c55ad6c650b8743951db3844b6aaad, type: 3}
-  knockbackDecayPerFrame: 5
+  _knockbackDecay: 0
   _spriteRenderer: {fileID: 4458279201772228314}
   _speed: 5
 --- !u!50 &4458279202477428049

@@ -25,7 +25,7 @@ public class ShurikenController : MonoBehaviour {
             DestroyMe();
         }
 
-        if (other.CompareTag("Bouncy")) {
+        if (other.gameObject.layer == ApothecaryConstants.LAYER_TERRAIN) {
             DestroyMe();
         }
     }
