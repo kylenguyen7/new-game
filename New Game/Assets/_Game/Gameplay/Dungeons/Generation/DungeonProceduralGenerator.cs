@@ -56,6 +56,10 @@ public class DungeonProceduralGenerator : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.R)) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
+        if (Input.GetKeyDown(KeyCode.P)) {
+            Dungeons.PrintDungeon(dungeon);
+        }
     }
 
     private void PlaceDungeon(RoomType[,] dungeon) {

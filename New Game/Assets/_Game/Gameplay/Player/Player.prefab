@@ -59,7 +59,7 @@ MonoBehaviour:
   _dashSpeed: 30
   _dashTime: 0.1
   _dashDistance: 5
-  _canAttack: 0
+  _canAttack: 1
   _attackTime: 0.3
   _finalAttackTime: 0.4
   _attackDisplacementSpeed: 6
@@ -288,8 +288,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65950c9edc9340afa9d2c7eb600e6590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spearPrefab: {fileID: 3637497735404715364, guid: 1fa5ac27c17753941b00310e13fe5e18, type: 3}
-  _maxSpears: 100
+  spearPrefab: {fileID: 3637497735404715364, guid: 1fa5ac27c17753941b00310e13fe5e18, type: 3}
+  maxSpears: 1
+  sparksPrefab: {fileID: 5682258358029724187, guid: 2b691f635c0374e46b68cf75ae0fcc7d, type: 3}
+  sparksSpread: 30
 --- !u!1 &4079198609445671902
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: West Door
+  m_Controller: {fileID: 9100000, guid: 02176abb851aa8642ba84f122a477787, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 0c40bcaac455dfa41b2377977e80cf3a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 040ccb529702a1742bd4337b629bdb1e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 56d936390140e5c488d7eca8b3e035be, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3aa7aeb9aaec048499d0e3a4eb25fc62, type: 2}

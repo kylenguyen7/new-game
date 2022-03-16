@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 1
   _kbMagnitude: 0
+  hitEffect: {fileID: 5910491427020979505, guid: 973456665738e6141a84491f6ff22bcb, type: 3}
   _initialSpeed: 50
   _retractionSpeed: 50
   _spearTip: {fileID: 8337373822445176432}

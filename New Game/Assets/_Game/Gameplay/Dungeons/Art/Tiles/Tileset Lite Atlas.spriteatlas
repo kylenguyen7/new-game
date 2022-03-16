@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Tileset Lite Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+    totalSpriteSurfaceArea: 3840
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -5554205545543624581, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: -1026623789849306029, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: -3494923085499861248, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: -344477122199124727, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: 3390635385766505092, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: 6193090167879632559, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: 4970132760655018225, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: 1663165240730584711, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: 2994627710884140361, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: -2916248499053786776, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: -1414503535937272231, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: -7593221698216045322, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: -4586981493618455029, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: -2154293020880039199, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  - {fileID: 4224634766045148441, guid: b3295f69e296acf46bd7214db5619811, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - CANOPY 3_5
+  - CANOPY 3_4
+  - CANOPY 3_7
+  - CANOPY 3_6
+  - CANOPY 3_1
+  - CANOPY 3_0
+  - CANOPY 3_14
+  - CANOPY 3_3
+  - CANOPY 3_2
+  - CANOPY 3_10
+  - CANOPY 3_11
+  - CANOPY 3_12
+  - CANOPY 3_9
+  - CANOPY 3_13
+  - CANOPY 3_8
+  m_RenderDataMap: {}
+  m_Tag: Tileset Lite Atlas
+  m_IsVariant: 0

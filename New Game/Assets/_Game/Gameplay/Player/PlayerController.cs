@@ -53,6 +53,14 @@ public class PlayerController : Damageable {
         Gizmos.DrawWireCube((Vector2)transform.position + Facing * _attackOffset, 
             new Vector2(_attackWidth, _attackWidth));
     }
+    
+    public void Teleport(Vector2 position, Vector2 direction) {
+        transform.position = position;
+        Facing = direction.normalized;
+        Heading = direction.normalized;
+        _playerSpriteAnimator.SetFloat("facingX", Facing.x);
+        _playerSpriteAnimator.SetFloat("facingY", Facing.y);
+    }
 
     private new void Awake() {
         base.Awake();

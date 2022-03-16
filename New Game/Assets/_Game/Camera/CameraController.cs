@@ -2,9 +2,10 @@ using System;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
-    [SerializeField] private Rigidbody2D _followTarget;
-    [Range(0f, 1f), SerializeField] private float _followSpeed;
-    [Range(0f, 1f), SerializeField] private float _mouseTracking;
+    [SerializeField] private Rigidbody2D followTarget;
+    [Range(0f, 1f), SerializeField] private float followSpeed;
+    [Range(0f, 1f), SerializeField] private float mouseTracking;
+    [SerializeField] private float maxSpeed;
     private Rigidbody2D _rb;
 
     private Vector2 _center = Vector2.zero;
@@ -37,7 +38,7 @@ public class CameraController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if (_followTarget == null) return;
+        if (followTarget == null) return;
         
         Vector2 mousePos = Input.mousePosition;
         
@@ -45,17 +46,43 @@ public class CameraController : MonoBehaviour {
         float h = Mathf.Clamp((mousePos.x / Screen.width) - 0.5f, -0.5f, 0.5f);
         float v = Mathf.Clamp((mousePos.y / Screen.height) - 0.5f, -0.5f, 0.5f);
         
+        
+        Vector2 projectedFollowTargetPosition = followTarget.position + followTarget.velocity * Time.fixedDeltaTime;
+        Vector2 targetPos = projectedFollowTargetPosition + new Vector2(h * _cameraWidthUnityUnits, v * _cameraHeightUnityUnits) * mouseTracking;
+        targetPos = ClampToBounds(targetPos);
+        
+        Debug.Log(targetPos);
+        
+        Vector2 currentPosition = transform.position;
+        Vector2 newPos;
+        if (((targetPos - currentPosition) * followSpeed).magnitude > maxSpeed) {
+            newPos = currentPosition + (targetPos - currentPosition).normalized * maxSpeed;
+        } else {
+            newPos = Vector2.Lerp(currentPosition, targetPos, followSpeed);
+        }
+        
+        _rb.MovePosition(new Vector3(newPos.x, newPos.y, -10));
+    }
+
+    /**
+     * Immediately sets the camera position to a certain position within the bounds.
+     * Useful when transitioning scenes.
+     */
+    public void SetPositionWithinBounds(Vector2 targetPos) {
+        targetPos = ClampToBounds(targetPos);
+        transform.position = new Vector3(targetPos.x, targetPos.y, -10);
+    }
+
+    private Vector2 ClampToBounds(Vector2 position) {
         float minX = _center.x - bounds.x / 2 + _cameraWidthUnityUnits / 2;
         float maxX = _center.x + bounds.x / 2 - _cameraWidthUnityUnits / 2;
         float minY = _center.y - bounds.y / 2 + _cameraHeightUnityUnits / 2;
         float maxY = _center.y + bounds.y / 2 - _cameraHeightUnityUnits / 2;
-        Vector2 projectedFollowTargetPosition = _followTarget.position + _followTarget.velocity * Time.fixedDeltaTime;
-        Vector2 targetPos = projectedFollowTargetPosition + new Vector2(h * _cameraWidthUnityUnits, v * _cameraHeightUnityUnits) * _mouseTracking;
-
-        targetPos.x = minX < maxX ? Mathf.Clamp(targetPos.x, minX, maxX) : _center.x;
-        targetPos.y = minY < maxY ? Mathf.Clamp(targetPos.y, minY, maxY) : _center.y;
         
-        _rb.MovePosition((Vector2)transform.position + (targetPos - (Vector2)transform.position) * _followSpeed);
+        float x = minX < maxX ? Mathf.Clamp(position.x, minX, maxX) : _center.x;
+        float y = minY < maxY ? Mathf.Clamp(position.y, minY, maxY) : _center.y;
+
+        return new Vector2(x, y);
     }
 
     public void SetCameraBounds(Vector2 center, Vector2 bounds) {

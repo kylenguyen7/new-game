@@ -90,7 +90,7 @@ public abstract class Damageable : MonoBehaviour {
         Instantiate(_deathParticlesPrefab, transform.position, Quaternion.identity);
     }
 
-    private void Die() {
+    protected void Die() {
         if (Dead) return;
         Dead = true;
         if (_itemPrefab) SpawnItem();

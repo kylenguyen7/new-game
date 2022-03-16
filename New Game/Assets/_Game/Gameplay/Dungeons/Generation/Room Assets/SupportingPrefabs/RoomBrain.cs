@@ -11,7 +11,9 @@ public abstract class RoomBrain : MonoBehaviour {
     public int Y => _gridY;
     
     protected bool _doorsOpen = false;
-    [SerializeField] private List<GameObject> doors = new List<GameObject>();
+    [SerializeField] private GameObject cavePrefab;
+    [SerializeField] private List<GameObject> doors;
+    [SerializeField] private List<GameObject> walls;
     [SerializeField] private Vector2 bounds;
     public Vector2 Bounds => bounds;
     
@@ -34,21 +36,55 @@ public abstract class RoomBrain : MonoBehaviour {
         }
 
         if (DungeonProceduralGenerator.HasRoomAt(_gridX, _gridY + 1)) {
-            doors[0].SetActive(false);
+            doors[0].GetComponent<Animator>().SetTrigger("open");
+            doors[0].GetComponent<Collider2D>().enabled = false;
         }
         if (DungeonProceduralGenerator.HasRoomAt(_gridX + 1, _gridY)) {
-            doors[1].SetActive(false);
+            doors[1].GetComponent<Animator>().SetTrigger("open");
+            doors[1].GetComponent<Collider2D>().enabled = false;
         }
         if (DungeonProceduralGenerator.HasRoomAt(_gridX, _gridY - 1)) {
-            doors[2].SetActive(false);
+            doors[2].GetComponent<Animator>().SetTrigger("open");
+            doors[2].GetComponent<Collider2D>().enabled = false;
         }
         if (DungeonProceduralGenerator.HasRoomAt(_gridX - 1, _gridY)) {
-            doors[3].SetActive(false);
+            doors[3].GetComponent<Animator>().SetTrigger("open");
+            doors[3].GetComponent<Collider2D>().enabled = false;
         }
+
+        if (DungeonProceduralGenerator.GetDungeonRoomType(_gridX, _gridY) == RoomType.END) {
+            Instantiate(cavePrefab, transform.position, Quaternion.identity);
+        }
+
+        _doorsOpen = true;
     }
 
     public void Init(int gridX, int gridY) {
         _gridX = gridX;
         _gridY = gridY;
+
+        if (!DungeonProceduralGenerator.HasRoomAt(_gridX, _gridY + 1)) {
+            doors[0].SetActive(false);
+        } else {
+            walls[0].SetActive(false);
+        }
+        
+        if (!DungeonProceduralGenerator.HasRoomAt(_gridX + 1, _gridY)) {
+            doors[1].SetActive(false);
+        } else {
+            walls[1].SetActive(false);
+        }
+
+        if (!DungeonProceduralGenerator.HasRoomAt(_gridX, _gridY - 1)) {
+            doors[2].SetActive(false);
+        } else {
+            walls[2].SetActive(false);
+        }
+
+        if (!DungeonProceduralGenerator.HasRoomAt(_gridX - 1, _gridY)) {
+            doors[3].SetActive(false);
+        } else {
+            walls[3].SetActive(false);
+        }
     }
 }

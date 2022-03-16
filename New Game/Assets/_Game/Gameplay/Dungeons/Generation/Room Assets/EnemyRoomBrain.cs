@@ -5,7 +5,9 @@ public class EnemyRoomBrain : RoomBrain {
     [SerializeField] private GameObject enemyRoomStaticObjects;
     [SerializeField] private int minSpawnCount;
     [SerializeField] private int maxSpawnCount;
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject dasherPrefab;
+    [SerializeField] private GameObject shooterPrefab;
+    [SerializeField] private GameObject mushroomPrefab;
 
     private int _enemyCount;
     private bool _enemiesSpawned;
@@ -32,8 +34,7 @@ public class EnemyRoomBrain : RoomBrain {
         yield return new WaitForSeconds(1f);
         int count = Random.Range(minSpawnCount, maxSpawnCount);
         for (int i = 0; i < count; i++) {
-            // var enemy = Random.value < 0.5f ? _dasherPrefab : _shooterPrefab;
-            var enemy = enemyPrefab;
+            var enemy = Random.value < 0.33f ? dasherPrefab : Random.value < 0.5f ? shooterPrefab : mushroomPrefab;
             var damageable = Instantiate(enemy, 
                     (Vector2)transform.position + new Vector2(Random.Range(-Bounds.x/2, Bounds.x/2), Random.Range(-Bounds.y/2, Bounds.y/2)),
                     Quaternion.identity)

@@ -10,6 +10,7 @@ public class SpearController : MonoBehaviour {
     // Dealing damage
     [SerializeField] private float _damage;
     [SerializeField] private float _kbMagnitude;
+    [SerializeField] private GameObject hitEffect;
     
     // Movement
     [SerializeField] private float _initialSpeed;
@@ -72,6 +73,8 @@ public class SpearController : MonoBehaviour {
         if (other.gameObject.layer == ApothecaryConstants.LAYER_ENEMIES) {
             Damageable enemy = other.GetComponent<Damageable>();
             enemy.TakeDamage(_damage, transform.right, _kbMagnitude);
+            
+            Instantiate(hitEffect, other.ClosestPoint(transform.position), Quaternion.identity);
         }
     }
 

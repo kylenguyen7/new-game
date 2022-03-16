@@ -6,15 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class BedController : MonoBehaviour {
     private Collider2D _collider;
-    [SerializeField] private SpriteRenderer _sprite;
-    private bool _leftBed = false;
 
     private void Awake() {
         _collider = GetComponent<Collider2D>();
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        if (other.CompareTag("Player") && _leftBed && CompleteOverlap(_collider, other)) {
+        if (other.CompareTag("Player") && CompleteOverlap(_collider, other)) {
             EndDay();
         }
     }
@@ -24,11 +22,7 @@ public class BedController : MonoBehaviour {
         GlobalTime.Instance.Save();
         Inventory.Instance.Save();
         SaveData.Instance.ManualSave();
-        TransitionHandler.Instance.SaveSceneAndLoadNewScene("HouseScene");
-    }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        _leftBed = true;
+        TransitionHandler.Instance.SaveSceneAndLoadNewScene("HouseScene", new Vector2(3, 0), new Vector2(-1, 0));
     }
 
     private static bool CompleteOverlap(Collider2D outer, Collider2D inner) {

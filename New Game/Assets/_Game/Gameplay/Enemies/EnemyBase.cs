@@ -6,6 +6,10 @@ public class EnemyBase : Damageable {
     protected StateMachine _stateMachine = new StateMachine();
     
     protected new void Update() {
+        // TODO: remove
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            Die();
+        }
         base.Update();
         _stateMachine.Tick();
     }
@@ -15,7 +19,7 @@ public class EnemyBase : Damageable {
         _stateMachine.FixedTick();
     }
     
-    protected Transform GetClosestPlayer() {
+    public Transform GetClosestPlayer() {
         PlayerController closest = null;
         float minDist = float.MaxValue;
         foreach (var player in FindObjectsOfType<PlayerController>()) {
