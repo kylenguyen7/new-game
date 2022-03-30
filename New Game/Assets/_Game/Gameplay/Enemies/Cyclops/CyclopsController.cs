@@ -5,6 +5,8 @@ public class CyclopsController : EnemyBase {
     private Vector2 _movement;
     [SerializeField] private float _speed;
 
+    public override EnemyType Type => EnemyType.SHOOTER;
+
     private new void Update() {
         base.Update();
         _movement = new Vector2(

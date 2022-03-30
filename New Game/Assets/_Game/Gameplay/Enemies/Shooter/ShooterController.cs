@@ -10,7 +10,9 @@ public class ShooterController : EnemyBase {
     private Vector2 _gizmoCenter;
     
     public Transform Target { get; private set; }
-    
+
+    public override EnemyType Type => EnemyType.SHOOTER;
+
     private new void Awake() {
         base.Awake();
         Target = GetClosestPlayer();

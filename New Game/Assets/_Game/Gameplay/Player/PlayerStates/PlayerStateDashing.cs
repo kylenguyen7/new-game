@@ -41,11 +41,16 @@ public class PlayerStateDashing : IState {
         _animator.SetTrigger("idle");
         _animator.SetFloat("facingX", _dashDir.x);
         _animator.SetFloat("facingY", _dashDir.y);
+        
+        
+        Debug.Log($"Dashing started {Time.time}");
     }
 
     public void OnExit() {
         // Set here, since dashing might be exited upon collision
         _playerController.Dashing = false;
         _playerController.gameObject.layer = ApothecaryConstants.LAYER_PLAYER;
+        
+        Debug.Log($"Dashing ended {Time.time}");
     }
 }

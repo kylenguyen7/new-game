@@ -6,18 +6,20 @@ using UnityEngine.PlayerLoop;
 
 public class MushroomController : EnemyBase {
     [SerializeField] private float speed;
-    [SerializeField] private float hurtTime;
-    [SerializeField] private Animator animator;
     private bool _damaged;
     
     public float Speed => speed;
-    public float HurtTime => hurtTime;
 
+
+    public override EnemyType Type => EnemyType.MUSHROOM;
 
     public new void Awake() {
         base.Awake();
+
+        var animator = GetComponentInChildren<Animator>();
+        
         var chase = new MushroomStateChase(this);
-        var hurt = new MushroomStateHurt(this);
+        var hurt = new EnemyHurtState(this, animator);
 
         _stateMachine.AddTransition(hurt, chase, () => hurt.Done);
 
@@ -37,6 +39,5 @@ public class MushroomController : EnemyBase {
     public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
         base.TakeDamage(damage, kbDirection, kbMagnitude);
         _damaged = true;
-        animator.SetTrigger("hurt");
     }
 }

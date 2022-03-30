@@ -26,6 +26,14 @@ private void Awake() {
         }
         _coroutine = StartCoroutine(RestoreTime(_delay));
     }
+
+    public void StopTimeManual() {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeTimeManual() {
+        Time.timeScale = 1f;
+    }
     
     private IEnumerator RestoreTime(float delay) {
         yield return new WaitForSecondsRealtime(delay);

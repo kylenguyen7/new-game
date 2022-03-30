@@ -21,6 +21,7 @@ public class BedController : MonoBehaviour {
         GlobalTime.Instance.Sleep();
         GlobalTime.Instance.Save();
         Inventory.Instance.Save();
+        BountyMenuManager.Instance.RandomizeBounties();
         SaveData.Instance.ManualSave();
         TransitionHandler.Instance.SaveSceneAndLoadNewScene("HouseScene", new Vector2(3, 0), new Vector2(-1, 0));
     }

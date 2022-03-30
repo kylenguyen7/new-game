@@ -19,6 +19,9 @@ public abstract class Damageable : MonoBehaviour {
     private Coroutine _damageCoroutine;
     protected Rigidbody2D _rb;
     
+    public float StartingHp { private set; get; }
+    public float Hp => _hp;
+    
     // Dying
     [SerializeField] private GameObject _deathParticlesPrefab;
     [SerializeField] private GameObject _itemPrefab;
@@ -36,6 +39,7 @@ public abstract class Damageable : MonoBehaviour {
     protected void Awake() {
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer.color = _initialColor;
+        StartingHp = _hp;
     }
 
     protected void Update() { }

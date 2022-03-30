@@ -101,6 +101,11 @@ public class PlayerController : Damageable {
         // Set Collided to false if it wasn't culled by state machine's tick
         Collided = false;
         _attackCooldownTimer -= Time.deltaTime;
+        
+        // Interact
+        if (Input.GetKeyDown(KeyCode.E)) {
+            Interact();
+        }
     }
 
     private new void FixedUpdate() {
@@ -115,5 +120,16 @@ public class PlayerController : Damageable {
 
     private void OnCollisionEnter2D(Collision2D other) {
         Collided = true;
+    }
+
+    private void Interact() {
+        var hits = Physics2D.RaycastAll(transform.position, Facing, 1f);
+        
+        foreach(var hit in hits) {
+            var interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+            if (interactable != null) {
+                interactable.Interact();
+            }
+        }
     }
 }

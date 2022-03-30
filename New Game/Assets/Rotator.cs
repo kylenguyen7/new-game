@@ -5,13 +5,6 @@ using _Common;
 using UnityEngine;
 
 public static class Rotator  {
-    /**
-     * Example usage:
-     * 
-     * private void FixedUpdate() {
-     *     transform.right = Rotator.instance.UpdateHeading(transform.right);
-     * }
-     */
     public static Vector2 UpdateHeading(Vector2 from, Vector2 to, float t) {
         from.Normalize();
         to.Normalize();

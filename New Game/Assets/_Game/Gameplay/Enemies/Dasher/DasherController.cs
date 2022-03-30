@@ -18,6 +18,8 @@ public class DasherController : EnemyBase {
     public bool Collided { get; set; }
     public bool Damaged { get; set; }
 
+    public override EnemyType Type => EnemyType.DASHER;
+
     private new void Awake() {
         base.Awake();
         _animator = GetComponentInChildren<Animator>();

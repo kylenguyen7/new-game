@@ -59,7 +59,7 @@ MonoBehaviour:
   enemyRoomStaticObjects: {fileID: 5211322218530945999, guid: facf640d0ad9ca7468819904843f673c, type: 3}
   minSpawnCount: 3
   maxSpawnCount: 5
-  dasherPrefab: {fileID: 8045688400319738624, guid: 8c9e3b04f62632849b879fe6fe19bd8a, type: 3}
+  dasherPrefab: {fileID: 8608521860614913262, guid: 16feb708103866643b5733ca4e228db6, type: 3}
   shooterPrefab: {fileID: 2674408054995292376, guid: 07b4c5e1292ea794a87665d233df2224, type: 3}
   mushroomPrefab: {fileID: 7396717653818323563, guid: 4661827c0d7c8f24f9d32a84d8a41f25, type: 3}
 --- !u!1001 &2402962961290393291

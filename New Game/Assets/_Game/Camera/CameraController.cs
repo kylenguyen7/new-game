@@ -51,8 +51,6 @@ public class CameraController : MonoBehaviour {
         Vector2 targetPos = projectedFollowTargetPosition + new Vector2(h * _cameraWidthUnityUnits, v * _cameraHeightUnityUnits) * mouseTracking;
         targetPos = ClampToBounds(targetPos);
         
-        Debug.Log(targetPos);
-        
         Vector2 currentPosition = transform.position;
         Vector2 newPos;
         if (((targetPos - currentPosition) * followSpeed).magnitude > maxSpeed) {

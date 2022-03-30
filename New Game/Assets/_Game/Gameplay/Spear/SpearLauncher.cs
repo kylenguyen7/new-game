@@ -15,7 +15,7 @@ public class SpearLauncher : MonoBehaviour {
     private int _currentSpears;
 
     private void Update() {
-        if (Input.GetMouseButtonDown(1)) { // && _currentSpears < maxSpears) {
+        if (Input.GetMouseButtonDown(1) && _currentSpears < maxSpears) {
             FireHarpoon(KaleUtils.GetMousePosWorldCoordinates());
         }
     }

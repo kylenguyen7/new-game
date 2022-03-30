@@ -53,6 +53,8 @@ public class PlayerStateMelee : IState {
         }
         _attackQueued = true;
         _playerController.Attacking = true;
+        
+        Debug.Log($"Melee started {Time.time}");
     }
 
     private void Attack() { 
@@ -72,6 +74,8 @@ public class PlayerStateMelee : IState {
             _playerController._attackCooldownTimer = _playerController._attackCooldown;
             _comboCounter = 0;
         }
+        
+        Debug.Log($"Melee ended {Time.time}");
     }
     
     private void SetDirection(Vector2 dir) {

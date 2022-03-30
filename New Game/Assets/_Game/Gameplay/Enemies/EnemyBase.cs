@@ -2,8 +2,18 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class EnemyBase : Damageable {
+public abstract class EnemyBase : Damageable {
+
+    public abstract EnemyType Type { get; }
     protected StateMachine _stateMachine = new StateMachine();
+
+    protected new void Awake() {
+        base.Awake();
+        
+        // TODO: Consider using type-safe event system http://www.willrmiller.com/?p=87=
+        // if managing deaths gets too tangled
+        OnDeathCallback += () => BountyManager.Instance.ReceiveDeath(Type);
+    }
     
     protected new void Update() {
         // TODO: remove
