@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd99d77ddaff494bbeaaf8eb9abf06b, type: 3}
+  m_Name: Fence
+  m_EditorClassIdentifier: 
+  Id: fence
+  Sprite: {fileID: 21300000, guid: b06fd94b7ba303f4d8e30c0eecd0f2bf, type: 3}
+  MaxStackSize: 12
+  WorldObjectPrefab: {fileID: 4078299727123787778, guid: 58754c4f90cc4f84fb392661e2ecff04, type: 3}
+  Type: 3

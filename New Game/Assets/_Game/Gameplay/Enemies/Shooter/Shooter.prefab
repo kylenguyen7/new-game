@@ -239,6 +239,7 @@ MonoBehaviour:
   _hp: 5
   _deathParticlesPrefab: {fileID: 3422884608894595234, guid: e70afb6716f79894393dae073c0ab357, type: 3}
   _itemPrefab: {fileID: 1574369818119889862, guid: b90ed28199d714142a1efb6e0f799643, type: 3}
+  _itemScriptableObject: {fileID: 11400000, guid: 2e9c59da3619c7b43985bcde1d1d028e, type: 2}
   _knockbackDecay: 0
   _spriteRenderer: {fileID: 2674408055525674463}
   _shurikenPrefab: {fileID: 3016903211322276300, guid: 049e52322df624744bfbd6df6c03e464, type: 3}

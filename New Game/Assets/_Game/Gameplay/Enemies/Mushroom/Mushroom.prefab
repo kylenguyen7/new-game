@@ -197,9 +197,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 10
   _deathParticlesPrefab: {fileID: 3422884608894595234, guid: e70afb6716f79894393dae073c0ab357, type: 3}
-  _itemPrefab: {fileID: 0}
+  _itemPrefab: {fileID: 1574369818119889862, guid: b90ed28199d714142a1efb6e0f799643, type: 3}
+  _itemScriptableObject: {fileID: 11400000, guid: 6502e871c28a584469976bd0ab11cc0f, type: 2}
   _knockbackDecay: 0.1
   _spriteRenderer: {fileID: 7396717653449716196}
   speed: 2
-  hurtTime: 0.5
-  animator: {fileID: 7396717653449716199}

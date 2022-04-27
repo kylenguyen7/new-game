@@ -25,6 +25,7 @@ public abstract class Damageable : MonoBehaviour {
     // Dying
     [SerializeField] private GameObject _deathParticlesPrefab;
     [SerializeField] private GameObject _itemPrefab;
+    [SerializeField] private Item _itemScriptableObject;
     [SerializeField] float _knockbackDecay;
     private bool Dead;
     
@@ -87,11 +88,16 @@ public abstract class Damageable : MonoBehaviour {
 
     #region Dying
     private void SpawnItem() {
-        Instantiate(_itemPrefab, transform.position, Quaternion.identity).GetComponent<ItemController>();
+        if (_itemPrefab == null) return;
+        
+        var item = Instantiate(_itemPrefab, transform.position, Quaternion.identity).GetComponent<ItemController>();
+        item.Init(_itemScriptableObject);
     }
 
     private void SpawnDeathEffects() {
-        Instantiate(_deathParticlesPrefab, transform.position, Quaternion.identity);
+        if (_deathParticlesPrefab != null) {
+            Instantiate(_deathParticlesPrefab, transform.position, Quaternion.identity);
+        }
     }
 
     protected void Die() {

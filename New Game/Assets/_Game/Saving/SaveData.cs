@@ -8,13 +8,6 @@ public class SaveData : MonoBehaviour {
     public static SaveData Instance;
 
     // Serialized fields
-    [SerializeField] private List<FactoryData> factories = new List<FactoryData>();
-
-    public List<FactoryData> Factories {
-        get => factories;
-        set => factories = value;
-    }
-
     [SerializeField] private GlobalTimeData globalTimeData;
 
     public GlobalTimeData SavedGlobalTimeData {
@@ -22,34 +15,33 @@ public class SaveData : MonoBehaviour {
         set => globalTimeData = value;
     }
 
-    [SerializeField] private InventoryData inventoryData;
-
-    public InventoryData SavedInventoryData {
-        get => inventoryData;
-        set => inventoryData = value;
-    }
-
-    [Serializable]
-    public struct FactoryData {
-        [SerializeField] private Vector2 location;
-        public Vector2 Location => location;
-        
-        [SerializeField] private FactoryController.Status status;
-        public FactoryController.Status Status => status;
-        
-        [SerializeField] private DateTime startTime;
-        public DateTime StartTime => startTime;
-
-        [SerializeField] private FactoryConstants.FactoryType factoryType;
-        public FactoryConstants.FactoryType FactoryType => factoryType;
-        
-        public FactoryData(Vector2 location, FactoryController.Status status, DateTime startTime, FactoryConstants.FactoryType factoryType) {
-            this.location = location;
-            this.status = status;
-            this.startTime = startTime;
-            this.factoryType = factoryType;
-        }
-    }
+    // [SerializeField] private List<FactoryData> factories = new List<FactoryData>();
+    //
+    // public List<FactoryData> Factories {
+    //     get => factories;
+    //     set => factories = value;
+    // }
+    // [Serializable]
+    // public struct FactoryData {
+    //     [SerializeField] private Vector2 location;
+    //     public Vector2 Location => location;
+    //     
+    //     [SerializeField] private FactoryController.Status status;
+    //     public FactoryController.Status Status => status;
+    //     
+    //     [SerializeField] private DateTime startTime;
+    //     public DateTime StartTime => startTime;
+    //
+    //     [SerializeField] private FactoryConstants.FactoryType factoryType;
+    //     public FactoryConstants.FactoryType FactoryType => factoryType;
+    //     
+    //     public FactoryData(Vector2 location, FactoryController.Status status, DateTime startTime, FactoryConstants.FactoryType factoryType) {
+    //         this.location = location;
+    //         this.status = status;
+    //         this.startTime = startTime;
+    //         this.factoryType = factoryType;
+    //     }
+    // }
 
     [Serializable]
     public struct GlobalTimeData {
@@ -59,18 +51,79 @@ public class SaveData : MonoBehaviour {
             this.date = date;
         }
     }
+    
+    [SerializeField] private InventoryData inventoryData;
+
+    public InventoryData SavedInventoryData {
+        get => inventoryData;
+        set => inventoryData = value;
+    }
 
     [Serializable]
     public struct InventoryData {
-        [SerializeField] private int numHoney;
-        public int NumHoney => numHoney;
-        [SerializeField] private int numLeaf;
-        public int NumLeaf => numLeaf;
-
-        public InventoryData(int numHoney, int numLeaf) {
-            this.numHoney = numHoney;
-            this.numLeaf = numLeaf;
+        [SerializeField] private List<SlotData> slotData;
+        public List<SlotData> SlotData => slotData;
+        
+        public InventoryData(List<SlotData> slotData) {
+            this.slotData = slotData;
         }
+    }
+
+    [Serializable]
+    public struct SlotData {
+        [SerializeField] private String itemId;
+        public String Id => itemId;
+        [SerializeField] private int quantity;
+        public int Quantity => quantity;
+        
+        public SlotData(String itemId, int quantity) {
+            this.itemId = itemId;
+            this.quantity = quantity;
+        }
+    }
+    
+    [SerializeField] private WorldObjectsData townWorldObjectsData;
+
+    public WorldObjectsData SavedTownWorldObjectsData {
+        get => townWorldObjectsData;
+        set => townWorldObjectsData = value;
+    }
+
+    [Serializable]
+    public struct WorldObjectsData {
+        [SerializeField] private List<WorldObjectData> worldObjects;
+        public List<WorldObjectData> WorldObjects => worldObjects;
+        
+        public WorldObjectsData(List<WorldObjectData> worldObjects) {
+            this.worldObjects = worldObjects;
+        }
+    }
+
+    [Serializable]
+    public struct WorldObjectData {
+        [SerializeField] private String worldObjectItemId;
+        public String Id => worldObjectItemId;
+        [SerializeField] private int x;
+        public int X => x;
+        [SerializeField] private int y;
+        public int Y => y;
+
+        [SerializeField] private String metadata;
+        public String Metadata => metadata;
+        
+        public WorldObjectData(String worldObjectItemId, int x, int y, String metadata) {
+            this.worldObjectItemId = worldObjectItemId;
+            this.x = x;
+            this.y = y;
+            this.metadata = metadata;
+        }
+    }
+    
+    [SerializeField] private int gold;
+
+    public int Gold {
+        get => gold;
+        set => gold = value;
     }
 
     private void Awake() {

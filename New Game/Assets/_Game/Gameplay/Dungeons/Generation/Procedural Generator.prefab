@@ -46,6 +46,6 @@ MonoBehaviour:
   size: 30
   roomsToGenerate: 8
   randomGiveUpChance: 0.5
-  roomWidth: 22
-  roomHeight: 13
-  dungeonPrefab: {fileID: 7027998691953575677, guid: be6fca3f61a66414bbbdb05cd65804d1, type: 3}
+  roomWidth: 28
+  roomHeight: 16
+  dungeonPrefab: {fileID: 8625933845344809777, guid: c41bde3d0b1286c43b0f5f92c7de61e6, type: 3}

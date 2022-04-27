@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c81be97477b4b54baa8ec59e9540ba5, type: 3}
+  m_Name: Fauna Info Snail
+  m_EditorClassIdentifier: 
+  XpStages: 00000000010000000300000006000000
+  Stages:
+  - {fileID: -635986086151032560, guid: 63387cfc0cc109f4695ce6dbd7579f82, type: 3}
+  - {fileID: -58114519408676540, guid: 63387cfc0cc109f4695ce6dbd7579f82, type: 3}
+  - {fileID: -7544717546062800981, guid: 63387cfc0cc109f4695ce6dbd7579f82, type: 3}
+  - {fileID: 8948158102373404730, guid: 63387cfc0cc109f4695ce6dbd7579f82, type: 3}
+  FoodList:
+  - {fileID: 11400000, guid: 76b73f98f61bf3040b5b0c7d007dec44, type: 2}
+  FoodXpValues: 01000000

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 535f8e525ff367c4ba67961e201a05ed, type: 3}
+  m_Name: Weeds
+  m_EditorClassIdentifier: 
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Transform:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  m_InstancedGameObject: {fileID: 0}
+  m_Flags: 1
+  m_ColliderType: 1
+  m_Sprites:
+  - {fileID: 981450041430903193, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: 1342573150747863315, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: -5770441553932440256, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: 6195432897693758472, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: 8526015980936057172, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: -3635025417517438254, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: -4964295558991080306, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: 8290342548587263860, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: -8873135910646938424, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: -1453233197129577015, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: 7810845990508006440, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: -1743085415999460615, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: 7291628970094846658, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: -7388296162023265495, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: 4221611118570553685, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: 8087701434699669057, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: -5770441553932440256, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: -5770441553932440256, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: -5770441553932440256, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}
+  - {fileID: -5770441553932440256, guid: b22c7bbaac02fbf429941a0e7ec62d1b, type: 3}

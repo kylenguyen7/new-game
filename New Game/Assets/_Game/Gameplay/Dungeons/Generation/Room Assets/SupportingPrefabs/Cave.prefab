@@ -191,5 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSceneName: TownScene
-  playerPositionInNewScene: {x: -12.5, y: 9.5}
+  randomTargetSceneNames: []
+  playerPositionInNewScene: {x: -12.5, y: 9}
   playerDirectionInNewScene: {x: 0, y: -1}

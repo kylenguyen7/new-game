@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EmptyRoomBrain : RoomBrain {
-    [SerializeField] private GameObject emptyRoomStaticObjects;
+    [SerializeField] private List<GameObject> possibleStaticObjects;
     
     public override void PlaceStaticObjects() {
-        Instantiate(emptyRoomStaticObjects, transform);
+        var staticObjects = possibleStaticObjects[Random.Range(0, possibleStaticObjects.Count)];
+        Instantiate(staticObjects, transform);
     }
 
     public override void Tick() {

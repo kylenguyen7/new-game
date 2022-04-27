@@ -175,15 +175,15 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 9122840602484597888, guid: 13627bed2cec6ee47bed37e9535261a2, type: 3}
-      propertyPath: roomWidth
-      value: 28
+      propertyPath: dungeonPrefabs.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9122840602484597888, guid: 13627bed2cec6ee47bed37e9535261a2, type: 3}
-      propertyPath: roomHeight
-      value: 16
-      objectReference: {fileID: 0}
+      propertyPath: dungeonPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 7027998691953575677, guid: be6fca3f61a66414bbbdb05cd65804d1, type: 3}
     - target: {fileID: 9122840602484597888, guid: 13627bed2cec6ee47bed37e9535261a2, type: 3}
-      propertyPath: dungeonPrefab
+      propertyPath: dungeonPrefabs.Array.data[1]
       value: 
       objectReference: {fileID: 8625933845344809777, guid: c41bde3d0b1286c43b0f5f92c7de61e6, type: 3}
     - target: {fileID: 9122840602484597889, guid: 13627bed2cec6ee47bed37e9535261a2, type: 3}

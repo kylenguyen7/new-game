@@ -80,7 +80,6 @@ public class SpearController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.layer == ApothecaryConstants.LAYER_TERRAIN || other.gameObject.layer == ApothecaryConstants.LAYER_ENEMIES) {
-            
             //
             _rb.velocity = Vector2.zero;
             return;

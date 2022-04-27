@@ -13,7 +13,7 @@ public class DungeonProceduralGenerator : MonoBehaviour {
     [SerializeField] private float randomGiveUpChance;
     [SerializeField] private float roomWidth;
     [SerializeField] private float roomHeight;
-    [SerializeField] private GameObject dungeonPrefab;
+    [SerializeField] private List<GameObject> dungeonPrefabs;
 
     private static RoomType[,] dungeon;
 
@@ -72,7 +72,8 @@ public class DungeonProceduralGenerator : MonoBehaviour {
 
                 float placeX = (x - width / 2) * roomWidth;
                 float placeY = (y - height / 2) * roomHeight;
-                
+
+                var dungeonPrefab = dungeonPrefabs[Random.Range(0, dungeonPrefabs.Count)];
                 var brain = Instantiate(dungeonPrefab, new Vector3(placeX, placeY, 0), Quaternion.identity).GetComponent<RoomBrain>();
                 brain.Init(x, y);
                 if (type == RoomType.START) {

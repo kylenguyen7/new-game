@@ -29,7 +29,7 @@ public class StateMachine {
 
     public void Tick() {
         // Check if transitions happened
-        Transition transition = getTransition();
+        Transition transition = GetTransition();
         if (transition != null) {
             SetState(transition.To);
         }
@@ -42,7 +42,7 @@ public class StateMachine {
         _currentState.FixedTick();
     }
 
-    private Transition getTransition() {
+    private Transition GetTransition() {
         // Any transitions are checked before state-specific transitions
         foreach (Transition t in _anyTransitions) {
             if (t.Condition()) {

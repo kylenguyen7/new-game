@@ -9,7 +9,7 @@ public class BountyMenuManager : MonoBehaviour {
     [SerializeField] private GameObject bountyCardPrefab;
     [SerializeField] private Transform bountyCardParentInScene;
     [SerializeField] private int numDailyBounties;
-    private bool menuActive;
+    private bool _menuActive;
 
     public void Awake() {
         if (Instance != null) {
@@ -34,14 +34,14 @@ public class BountyMenuManager : MonoBehaviour {
     public void ActivateMenu() {
         shopMenu.SetActive(true);
         Time.timeScale = 0f;
-        menuActive = true;
+        _menuActive = true;
     }
 
     public void DeactivateMenu() {
-        if (!menuActive) return;
+        if (!_menuActive) return;
         shopMenu.SetActive(false);
         Time.timeScale = 1f;
-        menuActive = false;
+        _menuActive = false;
     }
 
     /**

@@ -23,20 +23,6 @@ public class BountyManager : MonoBehaviour {
 
     public void Update() {
         _tmp.text = GetBountyMessage();
-
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            _bounties.Add(new Bounty(EnemyType.SHOOTER, Random.Range(5, 10)));
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            _bounties.Add(new Bounty(EnemyType.DASHER, Random.Range(5, 10)));
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            _bounties.Add(new Bounty(EnemyType.MUSHROOM, Random.Range(5, 10)));
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Alpha4)) {
-            _bounties.Add(new Bounty(EnemyType.CHERRY, Random.Range(5, 10)));
-        }
     }
 
     private String GetBountyMessage() {

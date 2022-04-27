@@ -24,10 +24,15 @@ public class TransitionHandler : MonoBehaviour {
         }
 
         Instance = this;
+        
+        if (!blackScreen.gameObject.activeSelf) {
+            blackScreen.gameObject.SetActive(true);
+        }
 
         if (!blackScreen.enabled) {
             blackScreen.enabled = true;
         }
+        
         Color col = blackScreen.color;
         col.a = 0;
         blackScreen.color = col;
@@ -57,6 +62,8 @@ public class TransitionHandler : MonoBehaviour {
             blackScreen.color = col;
             yield return new WaitForSecondsRealtime(secondsPerFadeTick);
         }
+        col.a = 1;
+        blackScreen.color = col;
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(sceneName);
@@ -68,6 +75,8 @@ public class TransitionHandler : MonoBehaviour {
             yield return new WaitForSecondsRealtime(secondsPerFadeTick);
         }
         
+        col.a = 0;
+        blackScreen.color = col;
         Time.timeScale = 1;
         _currentTransition = null;
     }

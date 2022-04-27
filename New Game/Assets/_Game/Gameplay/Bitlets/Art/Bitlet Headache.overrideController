@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bitlet Headache
+  m_Controller: {fileID: 9100000, guid: d65c9a8d55fc9c24fa1b2709503e4261, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 995d82660b70cfa48ac5e6e3bf664f5d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a5fb39af3a927fe4f8ca9d92a855e0e7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 62a8f6492fb26c742986e22e32e9ab02, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 55352916e996bc0488e09ff4cda253a3, type: 2}

@@ -14,4 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/HouseScene.unity
     guid: 4061ee1564899d4468fa1783e40d1106
+  - enabled: 1
+    path: Assets/_Game/Scenes/ForestScene.unity
+    guid: a7f1d54cdeae629498e85b7fe698c854
+  - enabled: 1
+    path: Assets/_Game/Scenes/ForestScene 2.unity
+    guid: 6c379666f792c9b40bb41ec8d64c5a76
+  - enabled: 1
+    path: Assets/_Game/Scenes/ForestScene 3.unity
+    guid: e32effc992403d44f82bf491c51b64bc
+  - enabled: 1
+    path: Assets/_Game/Scenes/ShopScene.unity
+    guid: c834b96b37e978646820c119e9dadcab
   m_configObjects: {}

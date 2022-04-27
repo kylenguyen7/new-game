@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour {
     [SerializeField] private float maxSpeed;
     private Rigidbody2D _rb;
 
-    private Vector2 _center = Vector2.zero;
+    [SerializeField] private Vector2 _center = Vector2.zero;
     // TODO: remove SerializeField
     [SerializeField] private Vector2 bounds;
     [SerializeField] private bool inCombatRoom;     // Uses room bounds if in combat room
@@ -49,14 +49,21 @@ public class CameraController : MonoBehaviour {
         
         Vector2 projectedFollowTargetPosition = followTarget.position + followTarget.velocity * Time.fixedDeltaTime;
         Vector2 targetPos = projectedFollowTargetPosition + new Vector2(h * _cameraWidthUnityUnits, v * _cameraHeightUnityUnits) * mouseTracking;
-        targetPos = ClampToBounds(targetPos);
+        Vector2 clampedTargetPos = ClampToBounds(targetPos);
+        
+        // Flip the hotbar at the bottom of a level
+        if (clampedTargetPos.y > targetPos.y && Math.Abs(clampedTargetPos.y - _center.y) > 0.01f) {
+            HotbarController.Instance.SetPosition(HotbarController.HotbarPosition.TOP);
+        } else {
+            HotbarController.Instance.SetPosition(HotbarController.HotbarPosition.BOTTOM);
+        }
         
         Vector2 currentPosition = transform.position;
         Vector2 newPos;
-        if (((targetPos - currentPosition) * followSpeed).magnitude > maxSpeed) {
-            newPos = currentPosition + (targetPos - currentPosition).normalized * maxSpeed;
+        if (((clampedTargetPos - currentPosition) * followSpeed).magnitude > maxSpeed) {
+            newPos = currentPosition + (clampedTargetPos - currentPosition).normalized * maxSpeed;
         } else {
-            newPos = Vector2.Lerp(currentPosition, targetPos, followSpeed);
+            newPos = Vector2.Lerp(currentPosition, clampedTargetPos, followSpeed);
         }
         
         _rb.MovePosition(new Vector3(newPos.x, newPos.y, -10));

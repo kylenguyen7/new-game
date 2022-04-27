@@ -40,6 +40,11 @@ public class PlayerController : Damageable {
 
     [HideInInspector] public float _attackCooldownTimer;
     
+    // Working
+    private Workable _currentlyWorking;
+    private Workable _closestWorkable;
+    public Workable ClosestWorkable => _closestWorkable;
+    
     public bool Attacking { get; set; }
 
     // Cardinal direction (up, left, right, down)
@@ -96,21 +101,34 @@ public class PlayerController : Damageable {
 
     private new void Update() {
         base.Update();
-        _stateMachine.Tick();
+
+        if (_currentlyWorking == null) {
+            _stateMachine.Tick();
+        }
         
         // Set Collided to false if it wasn't culled by state machine's tick
         Collided = false;
         _attackCooldownTimer -= Time.deltaTime;
+
+        _closestWorkable = GetClosestWorkableInRange();
         
         // Interact
         if (Input.GetKeyDown(KeyCode.E)) {
             Interact();
+            Pick();
+        }
+
+        if (Input.GetKeyUp(KeyCode.E)) {
+            StopWorking();
         }
     }
 
     private new void FixedUpdate() {
         base.FixedUpdate();
-        _stateMachine.FixedTick();
+        
+        if (_currentlyWorking == null) {
+            _stateMachine.FixedTick();
+        }
     }
 
     public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
@@ -131,5 +149,46 @@ public class PlayerController : Damageable {
                 interactable.Interact();
             }
         }
+    }
+
+    private void Pick() {
+        if (_closestWorkable == null) return;
+
+        if (!_closestWorkable.CanWork()) {
+            TextRise.Instance.CreateText(_closestWorkable.GetErrorMessage(), transform.position);
+            return;
+        }
+        
+        Velocity = Vector2.zero;
+        _closestWorkable.StartWorking();
+        _closestWorkable.OnWorkFinishCallback += StopWorking;
+        _currentlyWorking = _closestWorkable;
+        _playerSpriteAnimator.SetTrigger("foraging");
+    }
+
+    private void StopWorking() {
+        if (_currentlyWorking != null) {
+            _currentlyWorking.StopWorking();
+            _currentlyWorking = null;
+            _playerSpriteAnimator.SetTrigger("idle");
+        }
+    }
+    
+    private Workable GetClosestWorkableInRange() {
+        var hits = Physics2D.OverlapCircleAll(transform.position, 0.8f);
+
+        Workable closestWorkable = null;
+        float minDistance = 100f;
+        foreach(var hit in hits) {
+            var workable = hit.gameObject.GetComponent<Workable>();
+            if (workable != null) {
+                float distance = Vector2.Distance(transform.position, workable.transform.position);
+                if (distance < minDistance) {
+                    closestWorkable = workable;
+                    minDistance = distance;
+                }
+            }
+        }
+        return closestWorkable;
     }
 }

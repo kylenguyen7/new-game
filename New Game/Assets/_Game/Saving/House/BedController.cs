@@ -23,6 +23,7 @@ public class BedController : MonoBehaviour {
         Inventory.Instance.Save();
         BountyMenuManager.Instance.RandomizeBounties();
         SaveData.Instance.ManualSave();
+        StaminaBar.Instance.ResetStamina();
         TransitionHandler.Instance.SaveSceneAndLoadNewScene("HouseScene", new Vector2(3, 0), new Vector2(-1, 0));
     }
 
