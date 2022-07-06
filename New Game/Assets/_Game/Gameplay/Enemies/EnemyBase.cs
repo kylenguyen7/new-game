@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public abstract class EnemyBase : Damageable {
+public abstract class EnemyBase : ColorFlashDamageable {
 
     public abstract EnemyType Type { get; }
     protected StateMachine _stateMachine = new StateMachine();

@@ -42,6 +42,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -256,6 +257,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Bitlet Sad Idle_0: -7447051432967706122
+      Bitlet Sad Idle_1: -496282830160190411
+      Bitlet Sad Idle_2: -6768821572201979296
+      Bitlet Sad Idle_4: 9012978950609105275
+      Bitlet Sad Idle_5: 3757454948950489445
+      Bitlet Sad Idle_3: 372040196143075446
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

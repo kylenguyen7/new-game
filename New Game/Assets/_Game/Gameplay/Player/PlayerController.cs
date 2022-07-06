@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Common;
 using _Game.Player.PlayerStates;
 using UnityEngine;
 
-public class PlayerController : Damageable {
+public class PlayerController : ColorFlashDamageable {
     private StateMachine _stateMachine = new StateMachine();
 
     [SerializeField] public AudioSource _audioSource;
@@ -32,8 +33,7 @@ public class PlayerController : Damageable {
     [SerializeField] public float _attackDisplacementDecel;         // How fast the dash decelerates
     [SerializeField] public float _attackOffset;                    // Distance to center of attack hitbox
     [SerializeField] public float _attackWidth;                     // Width of attack hitbox
-    
-    
+
     [SerializeField] public float _attackCooldown;
     [SerializeField] public float _attackComboResetTime;
     [SerializeField] public AudioClip _attackSfx;
@@ -44,6 +44,9 @@ public class PlayerController : Damageable {
     private Workable _currentlyWorking;
     private Workable _closestWorkable;
     public Workable ClosestWorkable => _closestWorkable;
+    
+    // Placing Bitlets
+    [SerializeField] private bool canPlaceBitlets;
     
     public bool Attacking { get; set; }
 
@@ -73,7 +76,7 @@ public class PlayerController : Damageable {
         IState idle = new PlayerStateIdle(this, _playerSpriteAnimator);
         IState move = new PlayerStateMoving(this, _playerSpriteAnimator);
         IState dash = new PlayerStateDashing(this, _playerSpriteAnimator);
-        IState melee = new PlayerStateMelee(this, _playerSpriteAnimator);
+        // IState melee = new PlayerStateMelee(this, _playerSpriteAnimator);
         
         _stateMachine.AddTransition(idle, move,
             () => Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0);
@@ -91,17 +94,18 @@ public class PlayerController : Damageable {
                 }
                 return false;
             });
-        _stateMachine.AddAnyTransition(melee, 
-            () => Input.GetMouseButtonDown(0) && _attackCooldownTimer < 0 && _canAttack);
-        _stateMachine.AddTransition(melee, idle, 
-            () => !Attacking);
-        
+        // _stateMachine.AddAnyTransition(melee, 
+        //     () => Input.GetMouseButtonDown(0) && _attackCooldownTimer < 0 && _canAttack);
+        // _stateMachine.AddTransition(melee, idle, 
+        //     () => !Attacking);
         _stateMachine.Init(idle);
     }
 
     private new void Update() {
         base.Update();
 
+        if (Time.timeScale == 0) return;
+        
         if (_currentlyWorking == null) {
             _stateMachine.Tick();
         }
@@ -111,15 +115,25 @@ public class PlayerController : Damageable {
         _attackCooldownTimer -= Time.deltaTime;
 
         _closestWorkable = GetClosestWorkableInRange();
-        
+
         // Interact
         if (Input.GetKeyDown(KeyCode.E)) {
             Interact();
-            Pick();
+            Work();
         }
 
         if (Input.GetKeyUp(KeyCode.E)) {
             StopWorking();
+        }
+
+        if (canPlaceBitlets && Input.GetMouseButtonDown(0)) {
+            var currentItem = HotbarController.Instance.SelectedItem;
+            if (currentItem != null && currentItem.Type == Item.ItemType.BITLET) {
+                var bitlet = Instantiate(currentItem.WorldObjectPrefab, KaleUtils.GetMousePosWorldCoordinates(), Quaternion.identity)
+                    .GetComponent<BitletRanchController>();
+                bitlet.Init(BitletConstants.GetRandomName(), 0, GlobalTime.Date - 1);
+                HotbarController.Instance.RemoveOneFromActiveSlot();
+            }
         }
     }
 
@@ -151,7 +165,7 @@ public class PlayerController : Damageable {
         }
     }
 
-    private void Pick() {
+    private void Work() {
         if (_closestWorkable == null) return;
 
         if (!_closestWorkable.CanWork()) {

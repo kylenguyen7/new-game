@@ -42,6 +42,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -256,6 +257,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Snail Idle_1: 5256556958345671159
+      Snail Idle_4: 7285199123438616235
+      Snail Idle_2: 9071608048870095302
+      Snail Idle_0: 4551051809167023754
+      Snail Idle_3: -662827759274633712
+      Snail Idle_5: 1418008632577009611
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

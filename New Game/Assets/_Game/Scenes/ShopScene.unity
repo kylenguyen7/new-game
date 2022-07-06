@@ -761,7 +761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &697528738
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8900,7 +8900,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Egg Shop
+  m_text: Shop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 11b2386a40c27bc43b75ecee7c1753c0, type: 2}
   m_sharedMaterial: {fileID: 1226073194393447623, guid: 11b2386a40c27bc43b75ecee7c1753c0, type: 2}

@@ -17,3 +17,5 @@ MonoBehaviour:
   MaxStackSize: 20
   WorldObjectPrefab: {fileID: 0}
   Type: 1
+  Tags:
+  - active

@@ -21,7 +21,7 @@ public class PenController : WorldObjectController {
     
     private void OnMouseDown() {
         if (IsEmpty() && HotbarController.Instance.SelectedItem != null && 
-            HotbarController.Instance.SelectedItem.Type == Item.ItemType.FAUNA) {
+            HotbarController.Instance.SelectedItem.Type == Item.ItemType.BITLET) {
             Item fauna = HotbarController.Instance.RemoveOneFromActiveSlot();
             AddFauna(fauna,0, 0, GlobalTime.Instance.CurrentDateTime.Date - 1);
         }

@@ -135,4 +135,6 @@ public class GlobalTime : Saveable {
     public override void Save() {
         SaveData.Instance.SavedGlobalTimeData = new SaveData.GlobalTimeData(_dateTime.Date);
     }
+
+    public static int Date => Instance.CurrentDateTime.Date;
 }

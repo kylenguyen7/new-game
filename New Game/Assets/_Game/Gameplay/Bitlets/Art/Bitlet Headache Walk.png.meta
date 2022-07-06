@@ -42,6 +42,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -256,6 +257,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Bitlet Headache Idle_5: 7673291895683116387
+      Bitlet Headache Idle_3: 4426988106983219590
+      Bitlet Headache Idle_2: -9002610488535917347
+      Bitlet Headache Idle_4: -7910963795664915882
+      Bitlet Headache Idle_0: 1129898611085845801
+      Bitlet Headache Idle_1: 632210428107051741
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

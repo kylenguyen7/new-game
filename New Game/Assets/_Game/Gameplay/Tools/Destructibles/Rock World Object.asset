@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd99d77ddaff494bbeaaf8eb9abf06b, type: 3}
+  m_Name: Rock World Object
+  m_EditorClassIdentifier: 
+  Id: rock_wo
+  Sprite: {fileID: 21300000, guid: 385bcb0f9c9fdae4abbac707ac9a7089, type: 3}
+  MaxStackSize: 64
+  WorldObjectPrefab: {fileID: 1394183220437225764, guid: 848e9e419678e0f469879d1ddcd43255, type: 3}
+  Type: 3
+  Tags: []

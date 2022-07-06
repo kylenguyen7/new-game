@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd99d77ddaff494bbeaaf8eb9abf06b, type: 3}
+  m_Name: Tilled Land
+  m_EditorClassIdentifier: 
+  Id: tilled_land
+  Sprite: {fileID: -831311414, guid: 66b8aba81fd06f24a891c740568255a7, type: 3}
+  MaxStackSize: 0
+  WorldObjectPrefab: {fileID: 4078299727123787778, guid: ae2cea5b772ded544b743c246e05af6e, type: 3}
+  Type: 3
+  Tags: []

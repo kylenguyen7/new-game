@@ -126,6 +126,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -916,6 +917,41 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      New Char Melee Right_10: 2301083515365279287
+      New Char Melee Right_7: -6300811280571074763
+      New Char Melee Right_8: 6602721568892901428
+      New Char Melee Right_28: -8895331705887885433
+      New Char Melee Right_5: -5778934890897122735
+      New Char Melee Right_25: 5616239439045097474
+      New Char Melee Right_4: -1070028624999213079
+      New Char Melee Right_31: -7495430474977494318
+      New Char Melee Right_14: 9197291832117829614
+      New Char Melee Right_19: -1152020898210554077
+      New Char Melee Right_13: 378967823749729939
+      New Char Melee Right_2: -7761902772612161167
+      New Char Melee Right_9: 4457105021334936741
+      New Char Melee Right_21: 3067758250883747534
+      New Char Melee Right_0: 7857769371905706746
+      New Char Melee Right_27: 217573101679634782
+      New Char Melee Right_6: -8686511338219356063
+      New Char Melee Right_20: -548673229602253106
+      New Char Melee Right_30: -5579960996226964973
+      New Char Melee Right_33: 4333332831817335934
+      New Char Melee Right_1: -7102699262639443968
+      New Char Melee Right_12: 1985061699449227501
+      New Char Melee Right_23: 5385453721435493768
+      New Char Melee Right_22: 3424102997641680090
+      New Char Melee Right_15: -1273360761148719100
+      New Char Melee Right_24: -5927248376572741676
+      New Char Melee Right_16: -4331850974003800413
+      New Char Melee Right_26: -7316678585455294008
+      New Char Melee Right_3: 4509898098059840764
+      New Char Melee Right_29: 3606394196100366562
+      New Char Melee Right_18: 4284334787105666106
+      New Char Melee Right_17: 6625846734893854593
+      New Char Melee Right_11: -5043741551803284540
+      New Char Melee Right_32: 888771869776286857
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

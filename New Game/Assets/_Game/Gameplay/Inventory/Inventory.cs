@@ -5,17 +5,6 @@ using UnityEngine;
 public class Inventory : Saveable {
     public static Inventory Instance;
     [SerializeField] List<ItemSlotController> inventorySlots;
-
-    [SerializeField] private Item honeyItem;
-    [SerializeField] private Item leafItem;
-    [SerializeField] private Item fenceItem;
-    [SerializeField] private Item leafFactoryItem;
-    [SerializeField] private Item honeyFactoryItem;
-    [SerializeField] private Item whiteLilyItem;
-    [SerializeField] private Item smallPenItem;
-    [SerializeField] private Item snailItem;
-    [SerializeField] private Item fernItem;
-    [SerializeField] private Item snailFoodItem;
     
     private void Awake() {
         if (Instance != null) {
@@ -25,32 +14,6 @@ public class Inventory : Saveable {
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-    }
-
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            TryAddOne(whiteLilyItem);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            TryAddOne(honeyItem);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            TryAddOne(leafItem);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4)) {
-            TryAddOne(smallPenItem);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Alpha5)) {
-            TryAddOne(snailItem);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.T)) {
-            TryAddOne(Input.GetKey(KeyCode.LeftControl) ? leafFactoryItem : honeyFactoryItem);
-        }
     }
 
     public bool TryAddOne(Item item) {
@@ -98,7 +61,8 @@ public class Inventory : Saveable {
         var slotData = data.SlotData;
         for (int i = 0; i < slotData.Count; i++) {
             var slot = slotData[i];
-            inventorySlots[i].CurrentItem = ItemIdToScriptableObject(slot.Id);
+            if (slot.Id == "") continue;
+            inventorySlots[i].CurrentItem = ItemConstants.ItemIdToScriptableObject(slot.Id);
             inventorySlots[i].Quantity = slot.Quantity;
         }
     }
@@ -109,46 +73,5 @@ public class Inventory : Saveable {
             slots.Add(new SaveData.SlotData(slot.CurrentItem == null ? null : slot.CurrentItem.Id, slot.Quantity));
         }
         SaveData.Instance.SavedInventoryData = new SaveData.InventoryData(slots);
-    }
-    
-    public Item ItemIdToScriptableObject(String id) {
-        switch (id) {
-            case "honey": {
-                return honeyItem;
-            }
-            case "leaf": {
-                return leafItem;
-            }
-            case "fence": {
-                return fenceItem;
-            }
-            case "leaf_factory": {
-                return leafFactoryItem;
-            }
-            case "honey_factory": {
-                return honeyFactoryItem;
-            }
-            case "white_lily": {
-                return whiteLilyItem;
-            }
-            case "small_pen": {
-                return smallPenItem;
-            }
-            case "snail": {
-                return snailItem;
-            }
-            case "fern": {
-                return fernItem;
-            }
-            case "snail_food": {
-                return snailFoodItem;
-            }
-            case "": {
-                return null;
-            }
-        }
-        
-        Debug.LogError($"Inventory was unable to load item with id {id}!");
-        return null;
     }
 }

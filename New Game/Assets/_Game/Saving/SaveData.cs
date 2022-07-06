@@ -42,6 +42,52 @@ public class SaveData : MonoBehaviour {
     //         this.factoryType = factoryType;
     //     }
     // }
+    
+    [SerializeField] private List<BitletData> townBitletData;
+
+    public List<BitletData> TownBitletData {
+        get => townBitletData;
+        set => townBitletData = value;
+    }
+
+    [Serializable]
+    public struct BitletRoomData {
+        [SerializeField] private List<BitletData> bitlets;
+        public List<BitletData> Bitlets => bitlets;
+        
+        public BitletRoomData(List<BitletData> bitlets) {
+            this.bitlets = bitlets;
+        }
+    }
+
+    [Serializable]
+    public struct BitletData {
+        [SerializeField] private BitletType type;
+        public BitletType Type => type;
+        
+        [SerializeField] private String name;
+        public String Name => name;
+        
+        [SerializeField] private float x;
+        public float X => x;
+        [SerializeField] private float y;
+        public float Y => y;
+
+        [SerializeField] private int treatmentProgress;
+        public int TreatmentProgress => treatmentProgress;
+
+        [SerializeField] private int lastDayTreated;
+        public int LastDayTreated => lastDayTreated;
+        
+        public BitletData(BitletType type, String name, float x, float y, int treatmentProgress, int lastDayTreated) {
+            this.type = type;
+            this.name = name;
+            this.x = x;
+            this.y = y;
+            this.treatmentProgress = treatmentProgress;
+            this.lastDayTreated = lastDayTreated;
+        }
+    }
 
     [Serializable]
     public struct GlobalTimeData {
@@ -92,10 +138,13 @@ public class SaveData : MonoBehaviour {
     [Serializable]
     public struct WorldObjectsData {
         [SerializeField] private List<WorldObjectData> worldObjects;
+        [SerializeField] private bool generatedDebris;
         public List<WorldObjectData> WorldObjects => worldObjects;
+        public bool GeneratedDebris => generatedDebris;
         
-        public WorldObjectsData(List<WorldObjectData> worldObjects) {
+        public WorldObjectsData(List<WorldObjectData> worldObjects, bool generatedDebris) {
             this.worldObjects = worldObjects;
+            this.generatedDebris = generatedDebris;
         }
     }
 

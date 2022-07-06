@@ -18,7 +18,9 @@ public class BitletStateIdle : BitletState {
     }
 
     public override void OnEnter() {
-        Bitlet.Animator.SetTrigger("idle");
+        if (Bitlet.Animator != null) {
+            Bitlet.Animator.SetTrigger("idle");
+        }
         Bitlet.Idling = true;
         _timer = Random.Range(3f, 5f);
     }

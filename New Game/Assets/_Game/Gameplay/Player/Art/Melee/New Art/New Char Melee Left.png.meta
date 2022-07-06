@@ -126,6 +126,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -916,6 +917,41 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      New Char Melee Left_30: -3081003209524219963
+      New Char Melee Left_0: 3686986582448274265
+      New Char Melee Left_5: 5241969966635500202
+      New Char Melee Left_6: 7470888975971226997
+      New Char Melee Left_22: 8196372576512722597
+      New Char Melee Left_20: 8736846090825520972
+      New Char Melee Left_24: 2107299636876012422
+      New Char Melee Left_33: -3928135577631656036
+      New Char Melee Left_18: 1747847175073028226
+      New Char Melee Left_31: -3662212384746953011
+      New Char Melee Left_8: 42152111149373002
+      New Char Melee Left_15: -234709578132939822
+      New Char Melee Left_11: 3903380380781801577
+      New Char Melee Left_29: -2068124912789121018
+      New Char Melee Left_32: -1289230586447210522
+      New Char Melee Left_10: 4670449906040707513
+      New Char Melee Left_23: -5623977060951205293
+      New Char Melee Left_2: -3248418307597549198
+      New Char Melee Left_3: -7092850279664806618
+      New Char Melee Left_14: 3680573316902374189
+      New Char Melee Left_27: 8646597509305422326
+      New Char Melee Left_7: -2921127746492851108
+      New Char Melee Left_25: -2013735962682072220
+      New Char Melee Left_21: 2710235439092897815
+      New Char Melee Left_26: -5535297746531542457
+      New Char Melee Left_1: 4586885768993625008
+      New Char Melee Left_12: -2389374695394131393
+      New Char Melee Left_28: 5196572684875441447
+      New Char Melee Left_17: -5936637544815230420
+      New Char Melee Left_19: -1516290356234605834
+      New Char Melee Left_9: 3003154174730386359
+      New Char Melee Left_13: 6843437302168207008
+      New Char Melee Left_16: -6582464792936766942
+      New Char Melee Left_4: -5392142784659743490
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

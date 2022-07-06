@@ -22,7 +22,7 @@ public class WorldObjectController : MonoBehaviour {
         return;
     }
 
-    public void OnMouseOver() {
+    public virtual void OnMouseOver() {
         if (itemScriptableObject != null && Input.GetMouseButtonDown(2)) {
             DestroyMe();
         }

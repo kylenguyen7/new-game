@@ -30,6 +30,13 @@ public class HotbarController : MonoBehaviour {
 
     public Item SelectedItem => hotbarSlots[SelectedIndex].CurrentItem;
 
+    public Item.ItemType SelectedItemType {
+        get {
+            if (SelectedItem == null) return Item.ItemType.NULL;
+            return SelectedItem.Type;
+        }
+    }
+
     /**
      * Reacts to an item in the hotbar being selected; e.g. when selecting objects of type WORLD_OBJECT
      * notify the WorldObjectGrid to show placement indicators.
@@ -39,12 +46,13 @@ public class HotbarController : MonoBehaviour {
      */
     private void UpdateItemActions(Item item) {
         if (item == null || item.Type != Item.ItemType.WORLD_OBJECT) {
-            if (WorldObjectGrid.Instance == null) return;
-            WorldObjectGrid.Instance.StopPlacing();
-            return;
+            if (WorldObjectGrid.Instance != null)
+                WorldObjectGrid.Instance.StopPlacing(); 
         }
         
-        if (item.Type == Item.ItemType.WORLD_OBJECT) {
+        ToolManager.Instance.UpdateTool(item == null ? "" : item.Id);
+
+        if (item != null && item.Type == Item.ItemType.WORLD_OBJECT) {
             if (WorldObjectGrid.Instance == null) return;
             WorldObjectGrid.Instance.StartPlacing(item);
         }

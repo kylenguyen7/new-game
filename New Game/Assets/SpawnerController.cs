@@ -52,7 +52,7 @@ public class SpawnerController : MonoBehaviour {
         for (int i = 0; i < count; i++) {
             var enemy = Random.value < 0.5f ? _dasherPrefab : _shooterPrefab;
             var damageable = Instantiate(enemy, new Vector2(Random.Range(-_spawnWidth/2, _spawnWidth/2), Random.Range(-_spawnHeight/2, _spawnHeight/2)), Quaternion.identity)
-                .GetComponent<Damageable>();
+                .GetComponent<ColorFlashDamageable>();
             damageable.OnDeathCallback += DecreaseCounter;
             damageable.gameObject.layer = ApothecaryConstants.LAYER_ENEMIES;
             _enemyCount += 1;

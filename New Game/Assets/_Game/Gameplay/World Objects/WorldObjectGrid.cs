@@ -4,18 +4,16 @@ using System.Collections.Generic;
 using _Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class WorldObjectGrid : Saveable {
     [SerializeField] private int width;
     [SerializeField] private int height;
     [SerializeField] private GameObject indicatorPrefab;
     
-    [SerializeField] private Item fenceItem;
-    [SerializeField] private Item leafFactoryItem;
-    [SerializeField] private Item honeyFactoryItem;
-    [SerializeField] private Item smallPenItem;
-    [SerializeField] private Item snailItem;
-
+    [SerializeField] private List<GameObject> debrisPrefabs;
+    [SerializeField] private float debrisSpawnChance;
+    
     private WorldObjectController[,] _world;
     private IndicatorController[,] _indicators;
 
@@ -129,9 +127,12 @@ public class WorldObjectGrid : Saveable {
             }
         }
 
-        if (Input.GetMouseButton(0) && placementValid) {
+        if (Input.GetMouseButtonDown(0) && placementValid) {
             PlaceWorldObject(_currentPlacing, objectOriginX, objectOriginY, "");
-            HotbarController.Instance.RemoveOneFromActiveSlot();
+            
+            // Tools don't disappear, e.g. hoe
+            if(HotbarController.Instance.SelectedItem.Type != Item.ItemType.TOOL) 
+                HotbarController.Instance.RemoveOneFromActiveSlot();
         }
     }
     
@@ -163,6 +164,14 @@ public class WorldObjectGrid : Saveable {
         float centerX = transform.position.x + width / 2f - 0.5f;
         float centerY = transform.position.y + height / 2f - 0.5f;
         Gizmos.DrawWireCube(new Vector3(centerX, centerY, 0), new Vector3(width, height, 1));
+    }
+
+    public void PlaceWorldObjectWorldCoords(WorldObjectController worldObjectController, float worldX, float worldY,
+        String metadata) {
+        PlaceWorldObject(worldObjectController, 
+            Mathf.FloorToInt(worldX - transform.position.x), 
+            Mathf.FloorToInt(worldY - transform.position.y),
+            metadata);
     }
 
     public void PlaceWorldObject(WorldObjectController worldObjectController, int x, int y, String metadata) {
@@ -201,39 +210,33 @@ public class WorldObjectGrid : Saveable {
             worldObjects.Add(new SaveData.WorldObjectData(worldObject.Id, worldObject.OriginX, worldObject.OriginY, worldObject.GetMetaData()));
             added.Add(worldObject);
         }
-        SaveData.Instance.SavedTownWorldObjectsData = new SaveData.WorldObjectsData(worldObjects);
+        SaveData.Instance.SavedTownWorldObjectsData = new SaveData.WorldObjectsData(worldObjects, true);
     }
     
     protected override void Load() {
         var data = SaveData.Instance.SavedTownWorldObjectsData;
         var worldObjects = data.WorldObjects;
         foreach (var worldObjectData in worldObjects) {
-            var item = ItemIdToScriptableObject(worldObjectData.Id);
+            var item = ItemConstants.ItemIdToScriptableObject(worldObjectData.Id);
             var prefab = item.WorldObjectPrefab;
             PlaceWorldObject(prefab.GetComponent<WorldObjectController>(), worldObjectData.X, worldObjectData.Y, worldObjectData.Metadata);
         }
+
+        Debug.Log($"Loaded world object grid data with generatedDebris: {data.GeneratedDebris}");
+        if (!data.GeneratedDebris) {
+            GenerateDebris();
+        }
     }
-    
-    public Item ItemIdToScriptableObject(String id) {
-        switch (id) {
-            case "leaf_factory": {
-                return leafFactoryItem;
-            }
-            case "honey_factory": {
-                return honeyFactoryItem;
-            }
-            case "fence": {
-                return fenceItem;
-            }
-            case "small_pen": {
-                return smallPenItem;
-            }
-            case "snail": {
-                return snailItem;
+
+    private void GenerateDebris() {
+        for (int y = height - 1; y >= 0; y--) {
+            for (int x = 0; x < width; x++) {
+                if (_world[x, y] == null && Random.value < debrisSpawnChance) {
+                    int index = Random.Range(0, debrisPrefabs.Count);
+                    var worldObjectController = debrisPrefabs[index].GetComponent<WorldObjectController>();
+                    PlaceWorldObject(worldObjectController, x, y, "");
+                }
             }
         }
-        
-        Debug.LogError($"World Object Grid was unable to load item with id {id}!");
-        return null;
     }
 }

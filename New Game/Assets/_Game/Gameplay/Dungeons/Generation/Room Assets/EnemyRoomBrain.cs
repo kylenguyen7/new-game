@@ -38,7 +38,7 @@ public class EnemyRoomBrain : RoomBrain {
             var damageable = Instantiate(enemy, 
                     (Vector2)transform.position + new Vector2(Random.Range(-Bounds.x/2, Bounds.x/2), Random.Range(-Bounds.y/2, Bounds.y/2)),
                     Quaternion.identity)
-                .GetComponent<Damageable>();
+                .GetComponent<ColorFlashDamageable>();
             _enemyCount += 1;
             damageable.OnDeathCallback += () => _enemyCount -= 1;
             yield return new WaitForSecondsRealtime(Random.Range(0.10f, 0.5f));

@@ -48,6 +48,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -304,6 +305,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Mushroom_3: 2509030704489203561
+      Mushroom_6: 8178941927038248183
+      Mushroom_4: 9138273002793795528
+      Mushroom_1: -8641565482479284267
+      Mushroom_2: -2042072573829909366
+      Mushroom_5: -453006153571329579
+      Mushroom_7: -5591924671554089184
+      Mushroom_0: 4315506946141470425
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

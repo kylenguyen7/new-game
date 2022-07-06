@@ -101,7 +101,7 @@ public class PlayerStateMelee : IState {
             1 << ApothecaryConstants.LAYER_ENEMIES);
 
         foreach (Collider2D hit in hits) {
-            var damageable = hit.gameObject.GetComponent<Damageable>();
+            var damageable = hit.gameObject.GetComponent<ColorFlashDamageable>();
             damageable.TakeDamage(1f, dir, 0);
         }
     }

@@ -63,9 +63,9 @@ public class FaunaController : WorldObjectController {
         IsMature = stage == myInfo.XpStages.Length - 1;
         
         if (IsMature) {
-            reactionController.React(ReactionController.Reaction.MONEY, false);
+            reactionController.React(Reaction.MONEY, false);
         } else if (!FedToday) {
-            reactionController.React(ReactionController.Reaction.SAD, false);
+            reactionController.React(Reaction.SAD, false);
         }
     }
 
@@ -90,7 +90,7 @@ public class FaunaController : WorldObjectController {
         if (IsMature || FedToday) return;
 
         var item = HotbarController.Instance.SelectedItem;
-        if (item != null && item.Type == Item.ItemType.FOOD) {
+        if (item != null && item.Type == Item.ItemType.TINCTURE) {
 
             bool found = false;
             for (int i = 0; i < myInfo.FoodList.Length; i++) {
@@ -114,7 +114,7 @@ public class FaunaController : WorldObjectController {
 
     public void Eat(Item foodItem) {
         sNsAnimator.SetTrigger("squash");
-        reactionController.React(ReactionController.Reaction.HEART, true);
+        reactionController.React(Reaction.HEART, true);
         
         _xpGain = 0;
         for (int i = 0; i < myInfo.FoodList.Length; i++) {

@@ -80,7 +80,7 @@ public class ItemSlotController : MonoBehaviour, IPointerClickHandler {
     public int Quantity {
         get => _quantity;
         set {
-            quantityLabel.text = value == 0 ? "" : $"{value}";
+            quantityLabel.text = value == 0 || CurrentItem.MaxStackSize == 1 ? "" : $"{value}";
             _quantity = value;
         }
     }
@@ -147,7 +147,7 @@ public class ItemSlotController : MonoBehaviour, IPointerClickHandler {
         return CurrentItem.MaxStackSize - Quantity;
     }
     
-    private bool IsFull() {
+    protected bool IsFull() {
         return CurrentItem != null && GetRemainingSpace() == 0;
     }
 

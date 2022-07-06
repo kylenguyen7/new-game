@@ -19,7 +19,9 @@ public class BitletStateRoaming : BitletState {
 
     public override void OnEnter() {
         Bitlet.Roaming = true;
-        Bitlet.Animator.SetTrigger("roaming");
+        if (Bitlet.Animator != null) {
+            Bitlet.Animator.SetTrigger("roaming");
+        }
         _timer = Random.Range(0.8f, 1.2f) * Bitlet.RoamTime;
         _direction = Random.insideUnitCircle.normalized;
     }

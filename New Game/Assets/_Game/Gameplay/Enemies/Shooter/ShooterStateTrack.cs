@@ -21,7 +21,7 @@ public class ShooterStateTrack : IState {
                 yield return new WaitForSeconds(0.5f);
                 var shuriken =
                     GameObject.Instantiate(_shurikenPrefab, _shooter.transform.position, Quaternion.identity)
-                        .GetComponent<ShurikenController>();
+                        .GetComponent<EnemyProjectileController>();
                 shuriken.Init(_shooter.GetDirectionToTarget());
             }
             yield return new WaitForSeconds(0.25f);

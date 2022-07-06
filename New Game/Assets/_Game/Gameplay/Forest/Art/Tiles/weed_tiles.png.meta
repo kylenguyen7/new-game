@@ -72,6 +72,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -496,6 +497,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      weed_tiles_4: 8526015980936057172
+      weed_tiles_12: 7291628970094846658
+      weed_tiles_10: 7810845990508006440
+      weed_tiles_14: 4221611118570553685
+      weed_tiles_1: 1342573150747863315
+      weed_tiles_8: -8873135910646938424
+      weed_tiles_6: -4964295558991080306
+      weed_tiles_5: -3635025417517438254
+      weed_tiles_11: -1743085415999460615
+      weed_tiles_13: -7388296162023265495
+      weed_tiles_15: 8087701434699669057
+      weed_tiles_9: -1453233197129577015
+      weed_tiles_7: 8290342548587263860
+      weed_tiles_3: 6195432897693758472
+      weed_tiles_0: 981450041430903193
+      weed_tiles_2: -5770441553932440256
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

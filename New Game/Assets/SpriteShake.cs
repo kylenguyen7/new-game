@@ -31,7 +31,6 @@ public class SpriteShake : MonoBehaviour {
         } else {
             transform.localPosition = Vector2.zero;
         }
-        Debug.Log(_shaking);
     }
 
     private void AddShake() {

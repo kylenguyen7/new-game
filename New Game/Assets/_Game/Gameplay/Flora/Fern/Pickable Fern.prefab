@@ -47,9 +47,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 3367752873864824942}
   workTime: 1
+  outlineThickness: 0.05
   spriteShake: {fileID: 3367752873864824928}
   floraItem: {fileID: 11400000, guid: 8b1a15bee397c044e8e14fed20ed8723, type: 2}
   itemPrefab: {fileID: 1574369818119889862, guid: b90ed28199d714142a1efb6e0f799643, type: 3}
+  minItems: 3
+  maxItems: 5
 --- !u!58 &3367752873436946556
 CircleCollider2D:
   m_ObjectHideFlags: 0

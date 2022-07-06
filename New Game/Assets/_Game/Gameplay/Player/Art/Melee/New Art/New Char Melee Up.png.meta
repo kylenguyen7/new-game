@@ -81,6 +81,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -556,6 +557,26 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      New Char Melee Up_12: -8038160885842157844
+      New Char Melee Up_1: 4252608723794219451
+      New Char Melee Up_7: -8413576321679788070
+      New Char Melee Up_9: -1912282270452832040
+      New Char Melee Up_13: -7390270823569782964
+      New Char Melee Up_18: 7660584521253887268
+      New Char Melee Up_15: -8709134292123815643
+      New Char Melee Up_17: -2204135533473588415
+      New Char Melee Up_2: -3898151735105165629
+      New Char Melee Up_11: -1573567180243325018
+      New Char Melee Up_16: 3044339457595843720
+      New Char Melee Up_4: 9206662615851241363
+      New Char Melee Up_5: 4492288489984444802
+      New Char Melee Up_8: 1052042574771927574
+      New Char Melee Up_6: -3120141913071568730
+      New Char Melee Up_10: 6640205840145237336
+      New Char Melee Up_0: 4979209512801416546
+      New Char Melee Up_3: -2305111778862031302
+      New Char Melee Up_14: 1704300242446896872
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

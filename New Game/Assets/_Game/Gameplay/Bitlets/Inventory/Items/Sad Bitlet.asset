@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd99d77ddaff494bbeaaf8eb9abf06b, type: 3}
+  m_Name: Sad Bitlet
+  m_EditorClassIdentifier: 
+  Id: sad_bitlet
+  Sprite: {fileID: 21300000, guid: ca1a8ea48469dd340bb906b146dfcb4e, type: 3}
+  MaxStackSize: 1
+  WorldObjectPrefab: {fileID: 5733412783879483395, guid: 524921bae8cc4b74e860503f3b6d31c0, type: 3}
+  Type: 4
+  Tags: []

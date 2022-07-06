@@ -69,6 +69,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -472,6 +473,22 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      CANOPY 3_10: -2916248499053786776
+      CANOPY 3_1: 3390635385766505092
+      CANOPY 3_6: -344477122199124727
+      CANOPY 3_7: -3494923085499861248
+      CANOPY 3_0: 6193090167879632559
+      CANOPY 3_14: 4970132760655018225
+      CANOPY 3_2: 2994627710884140361
+      CANOPY 3_13: -2154293020880039199
+      CANOPY 3_3: 1663165240730584711
+      CANOPY 3_12: -7593221698216045322
+      CANOPY 3_4: -1026623789849306029
+      CANOPY 3_8: 4224634766045148441
+      CANOPY 3_11: -1414503535937272231
+      CANOPY 3_5: -5554205545543624581
+      CANOPY 3_9: -4586981493618455029
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

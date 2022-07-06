@@ -42,6 +42,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -256,6 +257,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Cherry Idle_0: -4925575377373493384
+      Cherry Idle_5: -3450637599916066266
+      Cherry Idle_4: -6554051943853775170
+      Cherry Idle_1: 2961923973179581137
+      Cherry Idle_2: 7825796077700759236
+      Cherry Idle_3: -3031484921465731912
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

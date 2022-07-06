@@ -93,6 +93,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -652,6 +653,30 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      New Char Melee Down_0: 1389206084576261561
+      New Char Melee Down_7: 8517938363096356950
+      New Char Melee Down_10: 1924438455721347969
+      New Char Melee Down_20: 5930017249702981859
+      New Char Melee Down_6: -1783882008954243574
+      New Char Melee Down_13: -2788019294462712475
+      New Char Melee Down_9: -3368295965822158054
+      New Char Melee Down_17: -4604025252859926151
+      New Char Melee Down_14: 7100361658278758660
+      New Char Melee Down_4: 2357195718514055422
+      New Char Melee Down_1: -7292035832795049309
+      New Char Melee Down_15: -5011066788486227033
+      New Char Melee Down_11: 3677579049491330471
+      New Char Melee Down_5: -9145593386418788529
+      New Char Melee Down_21: -5798418468335110648
+      New Char Melee Down_12: 5988350185254345922
+      New Char Melee Down_3: 7485490893289330883
+      New Char Melee Down_22: 1606874338288231530
+      New Char Melee Down_8: -6155303400941055081
+      New Char Melee Down_18: -2437767616012910509
+      New Char Melee Down_16: 2845193890498585252
+      New Char Melee Down_2: 7615305393650145473
+      New Char Melee Down_19: -5845500708591150041
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

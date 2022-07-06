@@ -16,7 +16,7 @@ public abstract class Damageable : MonoBehaviour {
     
     [SerializeField] private float _hp;
     private Vector2 _knockback;
-    private Coroutine _damageCoroutine;
+    protected Coroutine _damageCoroutine;
     protected Rigidbody2D _rb;
     
     public float StartingHp { private set; get; }
@@ -28,26 +28,19 @@ public abstract class Damageable : MonoBehaviour {
     [SerializeField] private Item _itemScriptableObject;
     [SerializeField] float _knockbackDecay;
     private bool Dead;
-    
-    // Taking damage
-    [SerializeField] protected SpriteRenderer _spriteRenderer;
-    private Color _initialColor = Color.white;
-    private Color _damagedColor = Color.red;
-    private float _damagedColorFadeTime = 0.25f;
-    
+
     public Vector2 Velocity { get; set; }
     
     protected void Awake() {
-        _rb = GetComponent<Rigidbody2D>();
-        _spriteRenderer.color = _initialColor;
+        _rb = GetComponent<Rigidbody2D>(); 
         StartingHp = _hp;
     }
 
     protected void Update() { }
 
     protected void FixedUpdate() {
-        _rb.velocity = Velocity + _knockback;
         DecayKnockback();
+        _rb.velocity = Velocity + _knockback;
     }
 
     public virtual void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
@@ -59,7 +52,11 @@ public abstract class Damageable : MonoBehaviour {
         if (_damageCoroutine != null) {
             StopCoroutine(_damageCoroutine);
         }
-        _damageCoroutine = StartCoroutine(DamageCoroutine());
+
+        var coroutine = DamageCoroutine();
+        if (coroutine != null) {
+            _damageCoroutine = StartCoroutine(coroutine);
+        }
     }
     
     // BEGIN PRIVATE HELPER FUNCTIONS
@@ -69,22 +66,8 @@ public abstract class Damageable : MonoBehaviour {
             Die();
         }
     }
-    
-    private IEnumerator DamageCoroutine() {
-        _spriteRenderer.color = _damagedColor;
-        float time = 0;
-        float lastTime = Time.time;
-        yield return new WaitForEndOfFrame();
-        
-        while (time < _damagedColorFadeTime) {
-            time += (Time.time - lastTime);
-            lastTime = Time.time;
-            
-            _spriteRenderer.color = Color.Lerp(_damagedColor, _initialColor, time / _damagedColorFadeTime);
-            yield return new WaitForEndOfFrame();
-        }
-        _spriteRenderer.color = _initialColor;
-    }
+
+    protected abstract IEnumerator DamageCoroutine();
 
     #region Dying
     private void SpawnItem() {

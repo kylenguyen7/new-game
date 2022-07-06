@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd99d77ddaff494bbeaaf8eb9abf06b, type: 3}
+  m_Name: Headache Bitlet
+  m_EditorClassIdentifier: 
+  Id: headache_bitlet
+  Sprite: {fileID: 21300000, guid: f07f00450745c1847888f9adf48578a2, type: 3}
+  MaxStackSize: 1
+  WorldObjectPrefab: {fileID: 4148125152300099928, guid: 629c7428913a11c41b2854899f59bb75, type: 3}
+  Type: 4
+  Tags: []
