@@ -49,8 +49,10 @@ public class HotbarController : MonoBehaviour {
             if (WorldObjectGrid.Instance != null)
                 WorldObjectGrid.Instance.StopPlacing(); 
         }
-        
-        ToolManager.Instance.UpdateTool(item == null ? "" : item.Id);
+
+        if (ToolManager.Instance != null) {
+            ToolManager.Instance.UpdateTool(item == null ? "" : item.Id);
+        }
 
         if (item != null && item.Type == Item.ItemType.WORLD_OBJECT) {
             if (WorldObjectGrid.Instance == null) return;

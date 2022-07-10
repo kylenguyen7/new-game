@@ -782,6 +782,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4079198608855358079}
     m_Modifications:
+    - target: {fileID: 890203382, guid: 78d92cd5bb0491f48af15287a3d966e5, type: 3}
+      propertyPath: attackCooldown
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 1318873104471661731, guid: 78d92cd5bb0491f48af15287a3d966e5, type: 3}
       propertyPath: m_Name
       value: Pickaxe
