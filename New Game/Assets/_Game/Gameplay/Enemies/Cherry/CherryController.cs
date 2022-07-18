@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,8 +37,8 @@ public class CherryController : EnemyBase {
         _stateMachine.Init(active);
     }
     
-    public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
-        base.TakeDamage(damage, kbDirection, kbMagnitude);
+    public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude, String uuid) {
+        base.TakeDamage(damage, kbDirection, kbMagnitude, uuid);
         _damaged = true;
     }
 

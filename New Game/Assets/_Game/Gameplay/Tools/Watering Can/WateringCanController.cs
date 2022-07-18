@@ -9,7 +9,7 @@ public class WateringCanController : ToolBase {
     protected override bool InputTrigger => Input.GetMouseButton(0);
     
     protected override void Fire() {
-        var water = Instantiate(waterPrefab, transform.position, Quaternion.identity).GetComponent<LaunchProjectile>();
+        var water = Instantiate(waterPrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
         water.Init(KaleUtils.GetMousePosWorldCoordinates());
     }
 }

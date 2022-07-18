@@ -5135,9 +5135,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91def3442d84232bc1bf893d766bd8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  knockback: 0
+  damageableTagsList: []
   rb: {fileID: 902804236933802523}
-  maxRange: 4
-  launchedProjectile: {fileID: 1649184348060945496}
-  maxHeight: 1
   travelTime: 0.8
+  maxRange: 4
+  maxHeight: 1
+  launchedProjectile: {fileID: 1649184348060945496}
   waterSplashEffect: {fileID: 3355573421072395797, guid: 08d1a889a1c38484dba6824df1f461b7, type: 3}

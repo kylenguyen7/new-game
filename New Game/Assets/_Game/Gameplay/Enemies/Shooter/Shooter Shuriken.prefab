@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3016903211322276302}
   - component: {fileID: 3016903211322276301}
   - component: {fileID: 3823690149964488834}
-  - component: {fileID: 8402066592941258487}
+  - component: {fileID: 6847593227330517526}
   m_Layer: 0
   m_Name: Shooter Shuriken
   m_TagString: Untagged
@@ -72,7 +72,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.27
---- !u!114 &8402066592941258487
+--- !u!114 &6847593227330517526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,13 +81,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3016903211322276300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6e81f09a315fbf4b9e5727cc0e95439, type: 3}
+  m_Script: {fileID: 11500000, guid: 917afb31360b4e78bb4d08b7675c250d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 3016903211322276301}
-  _initialSpeed: 8
-  _destorySelfTime: 1
-  _damage: 1
+  damage: 1
+  knockback: 1
+  damageableTagsList:
+  - Player
+  rb: {fileID: 3016903211322276301}
+  travelTime: 2
+  destroyOnCollideWithTerrain: 1
+  _initialSpeed: 1
 --- !u!1 &3016903212393832044
 GameObject:
   m_ObjectHideFlags: 0

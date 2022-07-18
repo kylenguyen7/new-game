@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CameraController : MonoBehaviour {
     [SerializeField] private Rigidbody2D followTarget;
@@ -18,6 +19,9 @@ public class CameraController : MonoBehaviour {
 
     public static CameraController Instance;
     
+    // Shake
+    private float shakeTimeRemaining, shakePower, shakeFadeRate;
+    
     private void Awake() {
         if (Instance != null) {
             Destroy(gameObject);
@@ -35,6 +39,13 @@ public class CameraController : MonoBehaviour {
             _center = DungeonProceduralGenerator.GetCurrentBrain().gameObject.transform.position;
             bounds = DungeonProceduralGenerator.GetCurrentBrain().Bounds;
         }
+    }
+
+    public void StartShake(float duration, float magnitude) {
+        shakeTimeRemaining = duration;
+        shakePower = magnitude;
+
+        shakeFadeRate = shakePower / shakeTimeRemaining;
     }
 
     private void FixedUpdate() {
@@ -66,7 +77,23 @@ public class CameraController : MonoBehaviour {
             newPos = Vector2.Lerp(currentPosition, clampedTargetPos, followSpeed);
         }
         
+        
+        
+        
+        if (shakeTimeRemaining > 0) {
+            float xAmount = shakePower * Random.Range(-1f, 1f);
+            float yAmount = shakePower * Random.Range(-1f, 1f);
+
+            newPos.x += xAmount;
+            newPos.y += yAmount;
+
+            shakePower = Mathf.MoveTowards(shakePower, 0f, shakeFadeRate * Time.deltaTime);
+        }
+        
         _rb.MovePosition(new Vector3(newPos.x, newPos.y, -10));
+        //
+        // // Weird bug where velocity accumulates due to shaking
+        // _rb.velocity = Vector2.zero;
     }
 
     /**

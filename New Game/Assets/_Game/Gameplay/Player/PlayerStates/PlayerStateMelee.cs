@@ -102,7 +102,7 @@ public class PlayerStateMelee : IState {
 
         foreach (Collider2D hit in hits) {
             var damageable = hit.gameObject.GetComponent<ColorFlashDamageable>();
-            damageable.TakeDamage(1f, dir, 0);
+            damageable.TakeDamage(1f, dir, 0, Guid.NewGuid().ToString());
         }
     }
 

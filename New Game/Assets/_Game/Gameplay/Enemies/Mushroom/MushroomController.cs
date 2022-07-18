@@ -36,8 +36,8 @@ public class MushroomController : EnemyBase {
         _stateMachine.Init(chase);
     }
 
-    public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
-        base.TakeDamage(damage, kbDirection, kbMagnitude);
+    public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude, String uuid) {
+        base.TakeDamage(damage, kbDirection, kbMagnitude, uuid);
         _damaged = true;
     }
 }

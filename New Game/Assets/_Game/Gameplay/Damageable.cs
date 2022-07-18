@@ -19,6 +19,9 @@ public abstract class Damageable : MonoBehaviour {
     protected Coroutine _damageCoroutine;
     protected Rigidbody2D _rb;
     
+    // Unique damage source enforcement
+    private HashSet<String> previousDamageSourceUuids;
+    
     public float StartingHp { private set; get; }
     public float Hp => _hp;
     
@@ -32,7 +35,8 @@ public abstract class Damageable : MonoBehaviour {
     public Vector2 Velocity { get; set; }
     
     protected void Awake() {
-        _rb = GetComponent<Rigidbody2D>(); 
+        _rb = GetComponent<Rigidbody2D>();
+        previousDamageSourceUuids = new HashSet<String>();
         StartingHp = _hp;
     }
 
@@ -43,7 +47,10 @@ public abstract class Damageable : MonoBehaviour {
         _rb.velocity = Velocity + _knockback;
     }
 
-    public virtual void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
+    public virtual void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude, String uuid) {
+        if (previousDamageSourceUuids.Contains(uuid)) return;
+        previousDamageSourceUuids.Add(uuid);
+        
         OnDamagedCallback?.Invoke();
         DepleteHealth(damage);
         AddKnockback(kbDirection, kbMagnitude);

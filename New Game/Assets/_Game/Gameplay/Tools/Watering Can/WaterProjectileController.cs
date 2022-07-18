@@ -1,11 +1,11 @@
 ﻿
+using System;
 using UnityEngine;
 
 public class WaterProjectileController : LaunchProjectile {
     [SerializeField] private GameObject waterSplashEffect;
     
-    protected override void OnReachDestination() {
+    private void OnDestroy() {
         Instantiate(waterSplashEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
     }
 }

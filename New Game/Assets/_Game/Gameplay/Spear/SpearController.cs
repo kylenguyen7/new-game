@@ -72,7 +72,7 @@ public class SpearController : MonoBehaviour {
 
         if (other.gameObject.layer == ApothecaryConstants.LAYER_ENEMIES) {
             ColorFlashDamageable enemy = other.GetComponent<ColorFlashDamageable>();
-            enemy.TakeDamage(_damage, transform.right, _kbMagnitude);
+            enemy.TakeDamage(_damage, transform.right, _kbMagnitude, Guid.NewGuid().ToString());
             
             Instantiate(hitEffect, other.ClosestPoint(transform.position), Quaternion.identity);
         }

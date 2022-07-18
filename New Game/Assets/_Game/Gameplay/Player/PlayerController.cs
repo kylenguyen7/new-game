@@ -40,14 +40,16 @@ public class PlayerController : ColorFlashDamageable {
 
     [HideInInspector] public float _attackCooldownTimer;
     
+    // New attacking
+    [SerializeField] public float attackTime;
+    [SerializeField] public float attackMoveSpeed;
+    public Vector2 AttackDirection { get; set; }
+    
     // Working
     private Workable _currentlyWorking;
     private Workable _closestWorkable;
     public Workable ClosestWorkable => _closestWorkable;
-    
-    // Placing Bitlets
-    [SerializeField] private bool canPlaceBitlets;
-    
+
     public bool Attacking { get; set; }
 
     // Cardinal direction (up, left, right, down)
@@ -76,7 +78,7 @@ public class PlayerController : ColorFlashDamageable {
         IState idle = new PlayerStateIdle(this, _playerSpriteAnimator);
         IState move = new PlayerStateMoving(this, _playerSpriteAnimator);
         IState dash = new PlayerStateDashing(this, _playerSpriteAnimator);
-        // IState melee = new PlayerStateMelee(this, _playerSpriteAnimator);
+        IState melee = new PlayerStateMeleeNew(this, _playerSpriteAnimator);
         
         _stateMachine.AddTransition(idle, move,
             () => Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0);
@@ -94,10 +96,10 @@ public class PlayerController : ColorFlashDamageable {
                 }
                 return false;
             });
-        // _stateMachine.AddAnyTransition(melee, 
-        //     () => Input.GetMouseButtonDown(0) && _attackCooldownTimer < 0 && _canAttack);
-        // _stateMachine.AddTransition(melee, idle, 
-        //     () => !Attacking);
+        _stateMachine.AddAnyTransition(melee, 
+            () => Attacking);
+        _stateMachine.AddTransition(melee, idle, 
+            () => !Attacking);
         _stateMachine.Init(idle);
     }
 
@@ -113,7 +115,6 @@ public class PlayerController : ColorFlashDamageable {
         // Set Collided to false if it wasn't culled by state machine's tick
         Collided = false;
         _attackCooldownTimer -= Time.deltaTime;
-
         _closestWorkable = GetClosestWorkableInRange();
 
         // Interact
@@ -125,16 +126,6 @@ public class PlayerController : ColorFlashDamageable {
         if (Input.GetKeyUp(KeyCode.E)) {
             StopWorking();
         }
-
-        if (canPlaceBitlets && Input.GetMouseButtonDown(0)) {
-            var currentItem = HotbarController.Instance.SelectedItem;
-            if (currentItem != null && currentItem.Type == Item.ItemType.BITLET) {
-                var bitlet = Instantiate(currentItem.WorldObjectPrefab, KaleUtils.GetMousePosWorldCoordinates(), Quaternion.identity)
-                    .GetComponent<BitletRanchController>();
-                bitlet.Init(BitletConstants.GetRandomName(), 0, GlobalTime.Date - 1);
-                HotbarController.Instance.RemoveOneFromActiveSlot();
-            }
-        }
     }
 
     private new void FixedUpdate() {
@@ -145,8 +136,8 @@ public class PlayerController : ColorFlashDamageable {
         }
     }
 
-    public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
-        base.TakeDamage(damage, kbDirection, kbMagnitude);
+    public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude, String uuid) {
+        base.TakeDamage(damage, kbDirection, kbMagnitude, uuid);
         TimeStop._instance.StopTime();
     }
 
@@ -186,6 +177,16 @@ public class PlayerController : ColorFlashDamageable {
             _currentlyWorking = null;
             _playerSpriteAnimator.SetTrigger("idle");
         }
+    }
+
+    /**
+     * Initiates an attack state by setting a flag to be culled by state machine.
+     * Separated like this to allow attacks to be initiated by separate controller
+     * like a ToolController.
+     */
+    public void StartAttacking(Vector2 direction) {
+        Attacking = true;
+        AttackDirection = direction;
     }
     
     private Workable GetClosestWorkableInRange() {

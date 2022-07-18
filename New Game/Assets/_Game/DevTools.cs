@@ -26,7 +26,11 @@ public class DevTools : MonoBehaviour {
         }
         
         if (Input.GetKeyDown(KeyCode.R)) {
-            SceneManager.LoadScene("HouseScene");
+            if (Input.GetKey(KeyCode.LeftShift)) {
+                SceneManager.LoadScene("HouseScene");
+            } else {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
 
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S)) {
@@ -38,7 +42,11 @@ public class DevTools : MonoBehaviour {
         }
         
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            Inventory.Instance.TryAddOne(ItemConstants.ItemIdToScriptableObject("lasso"));
+            Inventory.Instance.TryAddOne(ItemConstants.ItemIdToScriptableObject("nest"));
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            Inventory.Instance.TryAddOne(ItemConstants.ItemIdToScriptableObject("slime2"));
         }
     }
 }

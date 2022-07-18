@@ -36,4 +36,9 @@ public class Item : ScriptableObject {
 
         return false;
     }
+
+    public virtual void OnSelect() { }
+    public virtual void OnDeselect() { }
+    
+    public virtual void OnClick() { }
 }

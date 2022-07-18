@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/ShopScene.unity
     guid: c834b96b37e978646820c119e9dadcab
+  - enabled: 1
+    path: Assets/_Game/Scenes/Sandbox.unity
+    guid: ffb072f25e62d044c9ae74e74371c917
   m_configObjects: {}

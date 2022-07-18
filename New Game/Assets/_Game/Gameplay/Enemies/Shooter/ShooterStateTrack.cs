@@ -21,8 +21,8 @@ public class ShooterStateTrack : IState {
                 yield return new WaitForSeconds(0.5f);
                 var shuriken =
                     GameObject.Instantiate(_shurikenPrefab, _shooter.transform.position, Quaternion.identity)
-                        .GetComponent<EnemyProjectileController>();
-                shuriken.Init(_shooter.GetDirectionToTarget());
+                        .GetComponent<Projectile>();
+                shuriken.Init(_shooter.Target.position);
             }
             yield return new WaitForSeconds(0.25f);
             _spriteRenderer.color = Color.white;

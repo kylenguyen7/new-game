@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using _Common;
 
 public class PickaxeController : ToolBase {
@@ -7,20 +10,44 @@ public class PickaxeController : ToolBase {
     [SerializeField] private GameObject bigSlashPrefab;
     [SerializeField] private float bigSlashOffset;
 
+    [SerializeField] private float shakePower;
+    [SerializeField] private float shakeDuration;
+
+    [SerializeField] private PlayerController owner;
+    [SerializeField] private float projectileCreationDelay;
+
     protected override bool InputTrigger => Input.GetMouseButton(0);
 
-    protected override void Fire() {
-        var toMouse = KaleUtils.GetMousePosWorldCoordinates() - (Vector2) transform.position;
+    protected override void Fire()
+    {
+        var mousePos = KaleUtils.GetMousePosWorldCoordinates();
+        var toMouse = (mousePos - (Vector2)transform.position).normalized;
 
-        // Create projectile
-        var projectile = Instantiate(projectilePrefab, (Vector2) transform.position + toMouse * projectileOffset,
-                Quaternion.identity)
-            .GetComponent<LinearProjectile>();
-        projectile.Init(toMouse);
+        String groupUuid = Guid.NewGuid().ToString();
+        
+        // // Create projectile
+        // var projectile = Instantiate(projectilePrefab, (Vector2) transform.position + toMouse * projectileOffset,
+        //         Quaternion.identity)
+        //     .GetComponent<LinearProjectileController>();
+        // projectile.Init(mousePos);
 
-        // Create big slash
-        var bigSlash = Instantiate(bigSlashPrefab, (Vector2) transform.position + toMouse * bigSlashOffset,
-            Quaternion.identity);
-        bigSlash.transform.right = toMouse;
+        StartCoroutine(CreateProjectile(projectileCreationDelay, toMouse, mousePos));
+        
+        
+        // Associate projectiles to same projectile group
+        // projectile.Uuid = groupUuid;
+        // bigSlash.Uuid = groupUuid;
+        
+        CameraController.Instance.StartShake(shakeDuration, shakePower);
+        
+        owner.StartAttacking(toMouse);
+    }
+
+    private IEnumerator CreateProjectile(float delay, Vector2 direction, Vector2 mousePosition) {
+        yield return new WaitForSeconds(delay);
+        
+        var bigSlash = Instantiate(bigSlashPrefab, transform, false).GetComponent<LinearProjectileController>();
+        bigSlash.transform.localPosition = direction * bigSlashOffset;
+        bigSlash.Init(mousePosition);
     }
 }

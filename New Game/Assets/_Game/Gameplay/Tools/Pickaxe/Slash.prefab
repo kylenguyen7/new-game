@@ -131,11 +131,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 917afb31360b4e78bb4d08b7675c250d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 5803181689654422885}
-  _initialSpeed: 12
-  _destorySelfTime: 0.4
   damage: 1
   knockback: 1
+  damageableTagsList:
+  - Destructible
+  - Enemy
+  rb: {fileID: 5803181689654422885}
+  travelTime: 0.25
+  destroyOnCollision: 1
+  _initialSpeed: 12
 --- !u!50 &5803181689654422885
 Rigidbody2D:
   serializedVersion: 4

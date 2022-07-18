@@ -63,7 +63,7 @@ public class CherryStemController : MonoBehaviour {
             //Get the component for EnemyHealth
             var player = collider.gameObject.GetComponent<PlayerController>();
             var dir = collider.transform.position - transform.position;
-            player.TakeDamage(damage, dir, knockbackMagnitude);
+            player.TakeDamage(damage, dir, knockbackMagnitude, Guid.NewGuid().ToString());
         }
 
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);

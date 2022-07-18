@@ -222,9 +222,15 @@ public class WorldObjectGrid : Saveable {
             PlaceWorldObject(prefab.GetComponent<WorldObjectController>(), worldObjectData.X, worldObjectData.Y, worldObjectData.Metadata);
         }
 
+        // Generate debris
         Debug.Log($"Loaded world object grid data with generatedDebris: {data.GeneratedDebris}");
         if (!data.GeneratedDebris) {
             GenerateDebris();
+        }
+        
+        // Load monsters (has to be done after nests are created)
+        if (MonsterManager.Instance != null) {
+            MonsterManager.Instance.ManualLoad();
         }
     }
 

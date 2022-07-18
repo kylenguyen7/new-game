@@ -10,7 +10,7 @@ public class ItemSlotController : MonoBehaviour, IPointerClickHandler {
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI quantityLabel;
     
-    public delegate void OnItemChanged(Item item);
+    public delegate void OnItemChanged(Item previousItem, Item newItem);
 
     public OnItemChanged OnItemChangedCallback;
 
@@ -71,7 +71,7 @@ public class ItemSlotController : MonoBehaviour, IPointerClickHandler {
                 itemImage.sprite = value.Sprite;
             }
             
-            OnItemChangedCallback?.Invoke(value);
+            OnItemChangedCallback?.Invoke(_currentItem, value);
             _currentItem = value;
         }
     }

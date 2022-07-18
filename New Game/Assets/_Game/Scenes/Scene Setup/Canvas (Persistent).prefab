@@ -1486,6 +1486,7 @@ GameObject:
   - component: {fileID: 83496927}
   - component: {fileID: 83496928}
   - component: {fileID: 995484048}
+  - component: {fileID: 6096357216701247826}
   m_Layer: 5
   m_Name: Canvas (Persistent)
   m_TagString: Untagged
@@ -1682,6 +1683,8 @@ MonoBehaviour:
     worldObjects: []
     generatedDebris: 0
   gold: 0
+  ranchMonstersData:
+    monsters: []
 --- !u!114 &25169481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1811,6 +1814,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 31f6d174b9de0fe47b9f7e80de45815b, type: 2}
   - {fileID: 11400000, guid: a3d47be5cc2d2a34888872797b3b75d8, type: 2}
   - {fileID: 11400000, guid: d618dca8c7d8a0546ace7299635f89fc, type: 2}
+  - {fileID: 11400000, guid: e8661813ed23b45ee924b6d431266f52, type: 2}
 --- !u!114 &995484048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1826,6 +1830,20 @@ MonoBehaviour:
   happyBitletAnimator: {fileID: 9100000, guid: d65c9a8d55fc9c24fa1b2709503e4261, type: 2}
   sadBitletAnimator: {fileID: 22100000, guid: f7a9af8ad6329f3449f6fb85980bc497, type: 2}
   headacheBitletAnimator: {fileID: 22100000, guid: 203530e1bee14514da96d3754f94de8a, type: 2}
+--- !u!114 &6096357216701247826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4246190029941693004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a751a219b02cb43bfb78c9811a7cebac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allMonsterPrefabs:
+  - {fileID: 5262325066626685476, guid: 44e2107a46fdd4798a161001d376ef6a, type: 3}
 --- !u!1 &4256664845115355551
 GameObject:
   m_ObjectHideFlags: 0

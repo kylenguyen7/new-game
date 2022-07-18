@@ -175,6 +175,36 @@ public class SaveData : MonoBehaviour {
         set => gold = value;
     }
 
+    [Serializable]
+    public struct MonstersData {
+        [SerializeField] private List<MonsterData> monsters;
+        public List<MonsterData> Monsters => monsters;
+
+        public MonstersData(List<MonsterData> monsters) {
+            this.monsters = monsters;
+        }
+    }
+
+    [Serializable]
+    public struct MonsterData {
+        [SerializeField] private String speciesName;
+        [SerializeField] private String nestId;
+
+        public String SpeciesName => speciesName;
+        public String NestId => nestId;
+
+        public MonsterData(String speciesName, String nestId) {
+            this.speciesName = speciesName;
+            this.nestId = nestId;
+        }
+    }
+
+    [SerializeField] private MonstersData ranchMonstersData;
+    public MonstersData RanchMonstersData {
+        get => ranchMonstersData;
+        set => ranchMonstersData = value;
+    }
+
     private void Awake() {
         if (Instance != null) {
             Destroy(gameObject);

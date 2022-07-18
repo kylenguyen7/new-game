@@ -104,13 +104,13 @@ public class DasherController : EnemyBase {
         if (other.gameObject.CompareTag("Player")) {
             Vector2 dir = other.transform.position - transform.position;
             PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
-            playerController.TakeDamage(_damage, dir, _kbMagnitude);
+            playerController.TakeDamage(_damage, dir, _kbMagnitude, Guid.NewGuid().ToString());
         }
         Collided = true;
     }
 
-    public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude) {
-        base.TakeDamage(damage, kbDirection, kbMagnitude);
+    public override void TakeDamage(float damage, Vector2 kbDirection, float kbMagnitude, String uuid) {
+        base.TakeDamage(damage, kbDirection, kbMagnitude, uuid);
         Damaged = true;
     }
 }
