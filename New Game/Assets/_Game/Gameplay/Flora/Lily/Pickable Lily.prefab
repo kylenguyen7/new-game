@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3367752873864824943}
   m_Father: {fileID: 0}
@@ -47,9 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 3367752873864824942}
   workTime: 1
+  outlineThickness: 0.05
   spriteShake: {fileID: 3367752873864824928}
   floraItem: {fileID: 11400000, guid: 1634410e465cc674aa8b8e74773cca30, type: 2}
   itemPrefab: {fileID: 1574369818119889862, guid: b90ed28199d714142a1efb6e0f799643, type: 3}
+  minItems: 1
+  maxItems: 1
 --- !u!58 &3367752873436946556
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -94,6 +98,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3367752873436946558}
   m_RootOrder: 0
@@ -109,6 +114,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -138,7 +144,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a6daf9a0032f9f540969dad7d87029f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fac4e65c3dd4d49bd94ea5b1ceceb97f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3353668232875474057}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.051, y: -0.352, z: 0}
+  m_LocalPosition: {x: 0.012, y: -0.347, z: 0}
   m_LocalScale: {x: 1.46, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: c1a183ce657b32d42a80053e2b0518f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5045146049348856135}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -157,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: c7366e1c667e62e41974444263052402, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fac4e65c3dd4d49bd94ea5b1ceceb97f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -193,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5783764711300639735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -271,12 +271,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 5
-  _deathParticlesPrefab: {fileID: 0}
+  _deathParticlesPrefab: {fileID: 6047499179202196775, guid: 36d6bead2b9a64cf68d1095e85a72245, type: 3}
   _itemPrefab: {fileID: 1574369818119889862, guid: b90ed28199d714142a1efb6e0f799643, type: 3}
   _itemScriptableObject: {fileID: 11400000, guid: 3cc58ff0099f50f40ae50620c5180552, type: 2}
   _knockbackDecay: 1
   hitSparkPrefab: {fileID: 7496672462464412524, guid: f9784c47ff9f44c568b36d64bf45264e, type: 3}
   sNsAnimator: {fileID: 3727309244758911622}
+  shakeDuration: 0.04
+  shakePower: 0.075
 --- !u!61 &5792215582511443048
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -337,5 +339,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coordinates: 0 0
-  itemScriptableObject: {fileID: 11400000, guid: 8d6a5c8898bd21e4293b2eb80b36b684, type: 2}
+  itemScriptableObject: {fileID: 11400000, guid: 3cc58ff0099f50f40ae50620c5180552, type: 2}
   itemPrefab: {fileID: 0}
